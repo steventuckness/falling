@@ -8,11 +8,21 @@ public class Player : Node2D {
     public Gliding stateGliding = new Gliding();
     public Falling stateFalling = new Falling();
 
+    public enum ANIMATION {
+        WALKING
+    };
+
     public override void _Ready() {
         this.sm.Init(this.stateIdle);
+        this.playAnimation(ANIMATION.WALKING);
     }
 
-    public override void _PhysicsProcess(float delta) {
-        this.sm.Update(delta, this);
+    public void playAnimation(ANIMATION animation) {
+        AnimationPlayer player = (AnimationPlayer) this.GetNode("animation");
+        switch (animation) {
+            case ANIMATION.WALKING:
+                player.Play("walking");
+                break;
+        }
     }
 }
