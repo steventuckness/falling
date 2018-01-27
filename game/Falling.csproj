@@ -49,6 +49,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="mainScene\MainScene.cs" />
     <Compile Include="player\Player.cs" />
     <Compile Include="player\states\Falling.cs" />
     <Compile Include="player\states\Gliding.cs" />

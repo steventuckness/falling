@@ -29,13 +29,12 @@ script = ExtResource( 1 )
 [node name="spritesheet" type="Sprite" parent="." index="0"]
 
 position = Vector2( -0.0637817, -1.51505 )
-scale = Vector2( 2.10323, 2.10323 )
 texture = ExtResource( 2 )
 vframes = 7
 hframes = 10
 frame = 3
 region_rect = Rect2( 576, 179, 1, 0 )
-_sections_unfolded = [ "Animation" ]
+_sections_unfolded = [ "Animation", "Transform" ]
 
 [node name="animation" type="AnimationPlayer" parent="." index="1"]
 
