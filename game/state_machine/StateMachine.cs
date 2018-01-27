@@ -13,9 +13,10 @@ public class StateMachine<T> {
 
     public void Update(float delta, T owner) {
         // Handle the first time entering a state
-        if(this.currentState == null) {
+        if(this.currentState == null && this.initialState != null) {
             this.currentState = this.initialState;
-            this.initialState.OnEnter(delta, owner);
+            this.initialState = null;
+            this.currentState.OnEnter(delta, owner);
         }
 
         if(this.currentState != null) {
