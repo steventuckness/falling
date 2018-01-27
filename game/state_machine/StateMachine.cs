@@ -20,7 +20,8 @@ public class StateMachine<T> {
 
         if(this.currentState != null) {
             State<T> next = this.currentState.Update(delta, owner, this.currentStateTime);
-            if(next != null) {
+            if(next != null && next != this.currentState) {
+                this.currentStateTime = 0;
                 this.currentState.OnExit(delta, owner);
                 next.OnEnter(delta, owner);
                 this.currentState = next;
