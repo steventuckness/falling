@@ -2,7 +2,7 @@
 
 [ext_resource path="res://level/brickTiles.res" type="TileSet" id=1]
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="BrickLevel" type="Node2D" index="0"]
 
 [node name="BrickTileMap" type="TileMap" parent="." index="0" groups=[
 "bricks",
