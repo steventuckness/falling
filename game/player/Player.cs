@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 public class Player : KinematicBody2D {
-    // STATE
+    // State ///////////////////////////////////////////////////////////////////
     private StateMachine<Player> sm = new StateMachine<Player>();
     public Idle    stateIdle = new Idle();
     public Gliding stateGliding = new Gliding();
@@ -21,7 +21,7 @@ public class Player : KinematicBody2D {
     [Export]
     public float groundMaxSpeed         = 400.0f; // px / sec
 
-    // Physics /////////////////////////////////////////////////////////////////
+    // Collision ///////////////////////////////////////////////////////////////
     public PlayerCollision collision; // Mostly for storing pre-move collision checks
 
     public enum Direction {
@@ -37,6 +37,16 @@ public class Player : KinematicBody2D {
         this.collision = new PlayerCollision(this);
         this.sm.Init(this.stateIdle);
         this.playAnimation(Animation.Walking);
+
+        // Create custom collision shape
+        RectangleShape2D r = new RectangleShape2D();
+        r.SetExtents(new Vector2(8 - 0.001f, 16 - 0.001f));
+
+        CollisionShape2D c = (CollisionShape2D) this.GetNode("CollisionShape2D");
+        GD.Print(this.GetSafeMargin());
+        c.SetShape(r);
+
+         this.SetSafeMargin(0.001f);
     }
 
     public void playAnimation(Animation animation) {

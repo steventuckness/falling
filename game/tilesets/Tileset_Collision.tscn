@@ -31,7 +31,6 @@ polygon = PoolVector2Array( -8, -8, -8, 8, 8, 8, 8, -8 )
 
 [node name="Collision_Slope_45_R" type="Sprite" parent="." index="1"]
 
-editor/display_folded = true
 position = Vector2( 40, 8 )
 texture = ExtResource( 1 )
 region_enabled = true

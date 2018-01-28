@@ -4,7 +4,6 @@ using Godot;
 public class Walking : State<Player> {
     public override void OnEnter(float delta, Player owner) {
         GD.Print("Walking:OnEnter()");
-        GD.Print(owner.groundAcceleration);
     }
 
     public override void OnExit(float delta, Player owner) {
@@ -29,14 +28,17 @@ public class Walking : State<Player> {
             return player.stateGliding;
         }
         // Apply acceleration
-        v = v + a;
+        v = new Vector2(64f * dir, 0);
         // Max speed
-        v[0] = Math.Min(v[0], player.groundMaxSpeed);
+        v.x = Math.Min(v.x, player.groundMaxSpeed);
 
+        // Move and collide
+        v = v * delta;
+        
         // TODO: Going to need to get a lot smarter about handling the collition
         // For example, we'll need a floor check to see if we need to enter
         // the falling state.
-        KinematicCollision2D coll = player.MoveAndCollide(v * delta);
+        KinematicCollision2D coll = player.MoveAndCollide(v);
 
         // TODO: This is very primitive.
         // We should really be checking the collision to see
