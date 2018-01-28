@@ -48,4 +48,10 @@ public class Player : KinematicBody2D {
     public override void _PhysicsProcess(float delta) {
         this.sm.Update(delta, this);
     }
+
+    public void applyGravity(float delta, float terminalVelocity) {
+        if (this.velocity.y < terminalVelocity) {
+            this.velocity = new Vector2(this.velocity.x, this.velocity.y + (delta * this.gravity));
+        }
+    }
 }
