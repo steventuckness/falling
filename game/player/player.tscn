@@ -26,7 +26,7 @@ tracks/0/keys = {
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[node name="player" type="KinematicBody2D" index="0"]
+[node name="player" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 1
@@ -58,16 +58,7 @@ anims/walking = SubResource( 2 )
 blend_times = [  ]
 autoplay = ""
 
-[node name="RayCast2D" type="RayCast2D" parent="." index="2"]
-
-position = Vector2( 0, 8 )
-enabled = true
-exclude_parent = true
-cast_to = Vector2( 0, 8 )
-collision_mask = 1
-_sections_unfolded = [ "Transform" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
 
 shape = SubResource( 3 )
 _sections_unfolded = [ "Visibility" ]

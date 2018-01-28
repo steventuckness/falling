@@ -11,7 +11,7 @@ public class Player : KinematicBody2D {
 
     // Physics /////////////////////////////////////////////////////////////////
     public Vector2 velocity = new Vector2(0, 0);
-    public float gravity = 10.0f;
+    public float gravity = 400.0f;
 
     // Ground
     [Export]
@@ -23,6 +23,10 @@ public class Player : KinematicBody2D {
 
     // Collision ///////////////////////////////////////////////////////////////
     public PlayerCollision collision; // Mostly for storing pre-move collision checks
+    private float skinWidth = 0.001f;
+
+    // MISC ////////////////////////////////////////////////////////////////////
+    public Vector2 carry = new Vector2(0, 0);
 
     public enum Direction {
         Left,
@@ -40,13 +44,12 @@ public class Player : KinematicBody2D {
 
         // Create custom collision shape
         RectangleShape2D r = new RectangleShape2D();
-        r.SetExtents(new Vector2(8 - 0.001f, 16 - 0.001f));
+        r.SetExtents(new Vector2(8 - this.skinWidth, 16 - this.skinWidth));
 
         CollisionShape2D c = (CollisionShape2D) this.GetNode("CollisionShape2D");
-        GD.Print(this.GetSafeMargin());
         c.SetShape(r);
 
-         this.SetSafeMargin(0.001f);
+         this.SetSafeMargin(this.skinWidth);
     }
 
     public void playAnimation(Animation animation) {
