@@ -54,6 +54,7 @@
     <Compile Include="player\states\Falling.cs" />
     <Compile Include="player\states\Gliding.cs" />
     <Compile Include="player\states\Idle.cs" />
+    <Compile Include="player\states\Walking.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="state_machine\StateMachine.cs" />
     <Compile Include="state_machine\State.cs" />
