@@ -24,12 +24,27 @@ public class Walking : State<Player> {
         if(dir == 0) {
             return player.stateIdle;
         }
-
+        // Apply acceleration
         v = v + a;
+        // Max speed
         v[0] = Math.Min(v[0], player.groundMaxSpeed);
-        player.velocity = v;
 
-        player.MoveAndCollide(player.velocity * delta);
+        // TODO: Going to need to get a lot smarter about handling the collition
+        // For example, we'll need a floor check to see if we need to enter
+        // the falling state.
+        KinematicCollision2D coll = player.MoveAndCollide(v * delta);
+
+        // We have a collision
+        if(coll != null) {
+            GD.Print(coll.Collider);
+            GD.Print(coll.ColliderId);
+            GD.Print(coll.Normal);
+            GD.Print("We have a collision!");
+            v *= new Vector2(0, 1);
+        }
+
+        player.velocity = v;
+        
         return null;
     }
 }
