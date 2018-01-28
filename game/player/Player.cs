@@ -21,19 +21,25 @@ public class Player : KinematicBody2D {
     [Export]
     public float groundMaxSpeed         = 400.0f; // px / sec
 
-    public enum ANIMATION {
-        WALKING
+
+    public enum Direction {
+        Left,
+        Right
+    }    
+
+    public enum Animation {
+        Walking
     };
 
     public override void _Ready() {
         this.sm.Init(this.stateIdle);
-        this.playAnimation(ANIMATION.WALKING);
+        this.playAnimation(Animation.Walking);
     }
 
-    public void playAnimation(ANIMATION animation) {
+    public void playAnimation(Animation animation) {
         AnimationPlayer player = (AnimationPlayer) this.GetNode("animation");
         switch (animation) {
-            case ANIMATION.WALKING:
+            case Animation.Walking:
                 player.Play("walking");
                 break;
         }
