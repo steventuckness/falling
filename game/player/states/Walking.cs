@@ -12,6 +12,7 @@ public class Walking : State<Player> {
     }
 
     public override State<Player> Update(float delta, Player player, float timeInState) {
+        bool isGrounded = player.collision.isOnGround;
         Vector2 v = player.velocity;
         Vector2 a = new Vector2(player.groundAcceleration * delta, 0);
         int isLeft = Input.IsActionPressed("key_left") ? 1 : 0;
@@ -24,6 +25,9 @@ public class Walking : State<Player> {
         if(dir == 0) {
             return player.stateIdle;
         }
+        if(isGrounded && Input.IsActionJustPressed("key_jump")) {
+            return player.stateGliding;
+        }
         // Apply acceleration
         v = v + a;
         // Max speed
@@ -34,13 +38,14 @@ public class Walking : State<Player> {
         // the falling state.
         KinematicCollision2D coll = player.MoveAndCollide(v * delta);
 
-        // We have a collision
+        // TODO: This is very primitive.
+        // We should really be checking the collision to see
+        // if it's a collision tile
         if(coll != null) {
-            GD.Print(coll.Collider);
-            GD.Print(coll.ColliderId);
-            GD.Print(coll.Normal);
-            GD.Print("We have a collision!");
-            v *= new Vector2(0, 1);
+            // We've gone directly against a wall
+            if(Math.Abs(coll.Normal.x) == 1) {
+                v *= new Vector2(0, 1);
+            }
         }
 
         player.velocity = v;

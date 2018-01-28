@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="mainScene\MainScene.cs" />
     <Compile Include="player\Player.cs" />
+    <Compile Include="player\collision\PlayerCollision.cs" />
     <Compile Include="player\states\Falling.cs" />
     <Compile Include="player\states\Gliding.cs" />
     <Compile Include="player\states\Idle.cs" />

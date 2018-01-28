@@ -21,6 +21,8 @@ public class Player : KinematicBody2D {
     [Export]
     public float groundMaxSpeed         = 400.0f; // px / sec
 
+    // Physics /////////////////////////////////////////////////////////////////
+    public PlayerCollision collision; // Mostly for storing pre-move collision checks
 
     public enum Direction {
         Left,
@@ -32,6 +34,7 @@ public class Player : KinematicBody2D {
     };
 
     public override void _Ready() {
+        this.collision = new PlayerCollision(this);
         this.sm.Init(this.stateIdle);
         this.playAnimation(Animation.Walking);
     }
@@ -46,6 +49,7 @@ public class Player : KinematicBody2D {
     }
 
     public override void _PhysicsProcess(float delta) {
+        this.collision.Update();
         this.sm.Update(delta, this);
     }
 
