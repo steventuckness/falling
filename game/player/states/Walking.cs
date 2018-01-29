@@ -2,9 +2,9 @@ using System;
 using Godot;
 
 public class Walking : State<Player> {
-    public override void OnEnter(float delta, Player owner) {
+    public override void OnEnter(float delta, Player player) {
         GD.Print("Walking:OnEnter()");
-        GD.Print(owner.groundAcceleration);
+        player.velocity *= new Vector2(1, 0);
     }
 
     public override void OnExit(float delta, Player owner) {
@@ -22,6 +22,9 @@ public class Walking : State<Player> {
         a = a * dir;
 
         // If no input, we'll transition to the idle state
+        if(!isGrounded) {
+            return player.stateFalling;
+        }
         if(dir == 0) {
             return player.stateIdle;
         }
@@ -29,11 +32,14 @@ public class Walking : State<Player> {
             return player.stateGliding;
         }
         // Apply acceleration
-        v = v + a;
+        v += a;
+        // v.x = (dir * 32.0f);
         // Max speed
-        v[0] = Math.Min(v[0], player.groundMaxSpeed);
+        v.x = Math.Min(v.x, player.groundMaxSpeed);
 
-        // TODO: Going to need to get a lot smarter about handling the collition
+        // GD.Print(integrated);
+        // Move and collide
+        // TODO: Going to need to get a lot smarter about handling the collision
         // For example, we'll need a floor check to see if we need to enter
         // the falling state.
         KinematicCollision2D coll = player.MoveAndCollide(v * delta);

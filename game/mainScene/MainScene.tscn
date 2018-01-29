@@ -10,7 +10,9 @@ script = ExtResource( 1 )
 
 [node name="player" parent="." index="0" instance=ExtResource( 2 )]
 
-position = Vector2( 54, 22 )
+position = Vector2( 16, 0 )
+groundFriction = 300.0
+groundAcceleration = 200.0
 
 [node name="Level_Sandbox" parent="." index="1" instance=ExtResource( 3 )]
 
