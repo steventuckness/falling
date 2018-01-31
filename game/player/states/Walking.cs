@@ -29,7 +29,7 @@ public class Walking : State<Player> {
             return player.stateIdle;
         }
         if(isGrounded && Input.IsActionJustPressed("key_jump")) {
-            return player.stateGliding;
+            return player.stateJumping;
         }
         // Apply acceleration
         v += a;

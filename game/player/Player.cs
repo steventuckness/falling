@@ -8,10 +8,14 @@ public class Player : KinematicBody2D {
     public Gliding stateGliding = new Gliding();
     public Falling stateFalling = new Falling();
     public Walking stateWalking = new Walking();
+    public Jumping stateJumping = new Jumping();
 
     // Physics /////////////////////////////////////////////////////////////////
     public Vector2 velocity = new Vector2(0, 0);
     public float gravity = 400.0f;
+
+    [Export]
+    public float  jumpSpeed = 200f; // px / sec
 
     // Ground
     [Export]

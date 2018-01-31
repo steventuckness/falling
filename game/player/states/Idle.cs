@@ -17,10 +17,15 @@ public class Idle : State<Player> {
         int vDir = Math.Sign(v[0]);
         int isLeft = Input.IsActionPressed("key_left") ? 1 : 0;
         int isRight = Input.IsActionPressed("key_right") ? 1 : 0;
+        int isJump = Input.IsActionJustPressed("key_jump") ? 1: 0;
         int dir = isRight - isLeft;
 
         if(!isGrounded) {
             return player.stateFalling;
+        }
+
+        if (isJump != 0) {
+            return player.stateJumping;
         }
 
         // Ground friction
