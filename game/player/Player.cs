@@ -66,8 +66,13 @@ public class Player : KinematicBody2D {
     }
 
     public override void _PhysicsProcess(float delta) {
-        this.collision.Update();
+        // this.collision.Update();
         this.sm.Update(delta, this);
+    }
+
+    public Vector2 Move(float slopeStop) {
+        this.velocity = this.MoveAndSlide(this.velocity, new Vector2(0, -1), slopeStop, 4, 1.06f);
+        return this.velocity;
     }
 
     public void applyGravity(float delta, float terminalVelocity) {
