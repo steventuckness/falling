@@ -17,8 +17,12 @@ public class Falling : State<Player> {
             return player.stateIdle;
         }
 
-        player.applyGravity(delta, 200.0f);
+        player.applyGravity(delta, 400.0f);
         player.Move(25.0f);
+
+        if (player.velocity.y >= 400.0f) {
+            GD.Print("player dead");
+        }
 
         return null;
     }
