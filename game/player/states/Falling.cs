@@ -11,12 +11,18 @@ public class Falling : State<Player> {
     }
 
     public override State<Player> Update(float delta, Player player, float timeInState) {
+        Vector2 a = new Vector2(player.groundAcceleration * delta, 0);
         bool isGrounded = player.IsOnFloor();
+        int isLeft = Input.IsActionPressed("key_left") ? 1 : 0;
+        int isRight = Input.IsActionPressed("key_right") ? 1 : 0;
+        int dir = isRight - isLeft;
 
         if(isGrounded) {
             return player.stateIdle;
         }
 
+        player.velocity = player.velocity + (a * dir);
+        player.velocity.x = Math.Min(player.velocity.x, player.groundMaxSpeed);
         player.applyGravity(delta, 400.0f);
         player.Move(25.0f);
 
