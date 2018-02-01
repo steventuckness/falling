@@ -11,14 +11,14 @@ public class Falling : State<Player> {
     }
 
     public override State<Player> Update(float delta, Player player, float timeInState) {
-        bool isGrounded = player.collision.isOnGround;
+        bool isGrounded = player.IsOnFloor();
 
         if(isGrounded) {
             return player.stateIdle;
         }
 
         player.applyGravity(delta, 200.0f);
-        player.MoveAndCollide(player.velocity * delta);
+        player.Move(25.0f);
 
         return null;
     }

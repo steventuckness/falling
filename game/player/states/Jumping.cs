@@ -19,6 +19,10 @@ public class Jumping : State<Player>
         Vector2 v = player.velocity;
         Vector2 a = new Vector2(player.groundAcceleration * delta, 0);
 
+        if (v.y >= 0) {
+            return player.stateFalling;
+        }
+
         int vDir = Math.Sign(v[0]);
         int isLeft = Input.IsActionPressed("key_left") ? 1 : 0;
         int isRight = Input.IsActionPressed("key_right") ? 1 : 0;
@@ -37,11 +41,7 @@ public class Jumping : State<Player>
         // Allow to move left and right while jumping
         player.velocity.x = Math.Min(v.x, player.groundMaxSpeed);
         player.applyGravity(delta, 200.0f);
-        player.MoveAndCollide(player.velocity * delta);
-
-        if (v.y >= 0) {
-            return player.stateFalling;
-        }
+        player.Move(0f);
 
         return null;
     }
