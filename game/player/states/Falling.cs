@@ -4,6 +4,7 @@ using Godot;
 public class Falling : State<Player> {
     public override void OnEnter(float delta, Player owner) {
         GD.Print("Falling:OnEnter()");
+        owner.PlayAnimation(Player.Animation.Walking);
     }
 
     public override void OnExit(float delta, Player owner) {
@@ -26,6 +27,9 @@ public class Falling : State<Player> {
         player.applyGravity(delta, 400.0f);
         player.Move(25.0f);
 
+        if (Input.IsActionPressed("key_jump")) {
+            return player.stateGliding;
+        }
         if (player.velocity.y >= 400.0f) {
             GD.Print("player dead");
         }
