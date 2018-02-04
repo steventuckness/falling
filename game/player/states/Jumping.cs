@@ -28,12 +28,6 @@ public class Jumping : State<Player>
         int isRight = Input.IsActionPressed("key_right") ? 1 : 0;
         int dir = isRight - isLeft;
 
-        // allow slightly higher jump
-        if (Input.IsActionPressed("key_jump")) {
-            // slow down gravity effect
-            player.velocity.y -= 3.5f;
-        }
- 
         // Apply acceleration
         a = a * dir;
         v += a;

@@ -15,7 +15,9 @@ position = Vector2( 64.7458, 30.1882 )
 [node name="player" parent="." index="1" instance=ExtResource( 3 )]
 
 position = Vector2( 232, 21 )
+jumpSpeed = 50.0
 groundAcceleration = 400.0
 groundMaxSpeed = 100.0
+impactDeadSpeed = 50.0
 
 
