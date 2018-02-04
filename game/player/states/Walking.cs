@@ -2,6 +2,8 @@ using System;
 using Godot;
 
 public class Walking : State<Player> {
+    public override String GetName() { return "Walking"; }
+
     public override void OnEnter(float delta, Player player) {
         GD.Print("Walking:OnEnter()");
         player.velocity *= new Vector2(1, 0);

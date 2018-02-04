@@ -57,11 +57,14 @@
     <Compile Include="player\states\Gliding.cs" />
     <Compile Include="player\states\Idle.cs" />
     <Compile Include="player\states\Jumping.cs" />
+    <Compile Include="player\states\Respawn.cs" />
     <Compile Include="player\states\Walking.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="state_machine\StateMachine.cs" />
     <Compile Include="state_machine\State.cs" />
     <Compile Include="math\Acceleration.cs" />
+    <Compile Include="world\forest\forest_act_01\ForestAct01.cs" />
+    <Compile Include="world\hazards\Spike.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
