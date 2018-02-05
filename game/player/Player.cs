@@ -14,18 +14,21 @@ public class Player : KinematicBody2D {
 
     // Physics /////////////////////////////////////////////////////////////////
     public Vector2 velocity = new Vector2(0, 0);
-    public float gravity = 10.0f;
+
+    [Export]
+    public float gravity = 200.0f;
+
     public Direction direction = Direction.Right;
     private Animation animation;
 
     [Export]
-    public float  jumpSpeed = 200f; // px / sec
+    public float  jumpSpeed = 120f; // px / sec
 
     // Ground
     [Export]
-    public float groundFriction         = 100.0f; // px / sec
+    public float groundFriction         = 200.0f; // px / sec
     [Export]
-    public float groundAcceleration     = 100.0f; // px / sec
+    public float groundAcceleration     = 150.0f; // px / sec
     [Export]
     public float groundMaxSpeed         = 400.0f; // px / sec
 
@@ -35,25 +38,21 @@ public class Player : KinematicBody2D {
 
     // Falling
     [Export]
-    public float fallingMaxSpeed = 20.0f;
+    public float fallingMaxSpeed = 50.0f;
 
     [Export]
     public float impactDeadSpeed = 30.0f;
 	
-    // MISC //////////////////////////////////////////////////////////////////// 
-    public Vector2 carry = new Vector2(0, 0); 
-
     // Gliding ////////////////////////////////////////////////////////////////
     [Export]
     public float glideGravity = 5.0f;
 
-    [Export]
-    // How much of a "jolt" the bump will create
-    public float glideBumpFactor = -10.0f;
 
     [Export]
-    // How long will the bump acceleration will remain
-    public float glideBumpTime = 1.0f;
+    public float glideBumpAcceleration = 20.0f;
+
+    [Export]
+    public float glideTopBumpVelocity = 100.0f;
 
     [Export]
     public Vector2 glideMaxSpeed = new Vector2(10.0f, 10.0f);
@@ -68,7 +67,10 @@ public class Player : KinematicBody2D {
 
     public enum Animation {
         Walking,
-        Gliding
+        Gliding,
+        Jumping,
+        Falling,
+        Idle
     };
 
     public override void _Ready() {
@@ -77,15 +79,6 @@ public class Player : KinematicBody2D {
         this.collision = new PlayerCollision(this); 
         this.sm.Init(this.stateIdle);
         this.PlayAnimation(Animation.Walking);
-		
-		// Create custom collision shape 
-        RectangleShape2D r = new RectangleShape2D(); 
-        r.SetExtents(new Vector2(8 - this.skinWidth, 16 - this.skinWidth)); 
- 
-        CollisionShape2D c = (CollisionShape2D) this.GetNode("CollisionShape2D"); 
-        c.SetShape(r); 
- 
-        this.SetSafeMargin(this.skinWidth); 
     }
 
     public void PlayAnimation(Animation animation) {
@@ -98,6 +91,15 @@ public class Player : KinematicBody2D {
                 break;
             case Animation.Gliding:
                 player.Play("gliding_" + directionStr);
+                break;
+            case Animation.Jumping:
+                player.Play("jumping_" + directionStr);
+                break;
+            case Animation.Falling:
+                player.Play("falling_" + directionStr);
+                break;
+            case Animation.Idle:
+                player.Play("idle_" + directionStr);
                 break;
         }
     }
@@ -112,7 +114,7 @@ public class Player : KinematicBody2D {
         return this.velocity; 
 	}
 
-    public void applyGravity(float delta, float terminalVelocity) {
+    public void ApplyGravity(float delta, float terminalVelocity) {
         this.velocity = Acceleration.ApplyTerminalY(terminalVelocity, this.gravity, delta, this.velocity);
     }
 
@@ -127,5 +129,9 @@ public class Player : KinematicBody2D {
             this.direction = Direction.Right;
             this.PlayAnimation(this.animation);
         }
+    }
+
+    public int GetDirectionMultiplier() {
+        return this.direction == Direction.Left ? -1 : 1;
     }
 }

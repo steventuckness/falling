@@ -4,7 +4,8 @@ using Godot;
 public class Idle : State<Player> {
     public override void OnEnter(float delta, Player player) {
         GD.Print("Idle:OnEnter()");
-        player.velocity *= new Vector2(1, 0);
+        player.velocity = new Vector2(0, 0);
+        player.PlayAnimation(Player.Animation.Idle);
     }
 
     public override void OnExit(float delta, Player owner) {
@@ -43,7 +44,7 @@ public class Idle : State<Player> {
         }
 
         player.velocity = v;
-        player.applyGravity(delta, 200f);
+        player.ApplyGravity(delta, 200f);
         player.Move(25f);
         return null;
     }

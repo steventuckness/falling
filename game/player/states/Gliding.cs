@@ -4,14 +4,12 @@ using Godot;
 public class Gliding : State<Player> {
 
     bool isBumping = false;
-    float bumpTime = 0.0f;
-    float bumpAcceleration = 0.0f;
+    float startYVelocity = 0.0f;
 
     public override void OnEnter(float delta, Player owner) {
         GD.Print("Gliding:OnEnter()");
         isBumping = true;
-        bumpTime = 0.0f;
-        bumpAcceleration = owner.glideBumpFactor * owner.velocity.y;
+        startYVelocity = owner.velocity.y;
         owner.PlayAnimation(Player.Animation.Gliding);
     }
 
@@ -27,55 +25,43 @@ public class Gliding : State<Player> {
         player.DetectDirectionChange();
         this.CalculateVerticalVelocity(delta, player);
         this.CalculateHorizontalVelocity(delta, player);
-        KinematicCollision2D collision = player.MoveAndCollide(player.velocity);
+        player.MoveAndSlide(player.velocity);
 
-        if (collision != null) {
-            GD.Print("Wall hit");
-            player.velocity = new Vector2(0,0);
-            return player.stateFalling;
+        if (player.IsOnFloor()) {
+            return player.stateIdle;
         }
         return null;
     }
 
     private void CalculateHorizontalVelocity(float delta, Player player) {
-        switch (player.direction) {
-            case Player.Direction.Right:
-                player.velocity =
-                    Acceleration.ApplyTerminalX(
-                        player.glideMaxSpeed.x,
-                        player.glideHorizontalAcceleration,
-                        delta,
-                        player.velocity
-                    );
-                break;
-            case Player.Direction.Left:
-                player.velocity =
-                    Acceleration.ApplyTerminalX(
-                        player.glideMaxSpeed.x,
-                        player.glideHorizontalAcceleration * -1,
-                        delta,
-                        player.velocity
-                    );
-                break;
-        }
+        player.velocity = 
+            Acceleration.ApplyTerminalX(
+                player.glideMaxSpeed.x,
+                player.glideHorizontalAcceleration * player.GetDirectionMultiplier(),
+                delta,
+                player.velocity
+            );
     }
 
     private void CalculateVerticalVelocity(float delta, Player player) {
         if (isBumping) {
-            player.velocity = 
-                Acceleration.ApplyY(bumpAcceleration, delta, player.velocity);
-            bumpTime += delta;
-            if (bumpTime > player.glideBumpTime) {
+            GD.Print("bumping!");
+            player.velocity = Acceleration.ApplyY(player.glideBumpAcceleration * startYVelocity, delta, player.velocity);
+            if (Math.Abs(player.velocity.y) > player.glideTopBumpVelocity) {
                 isBumping = false;
-            }
+            } 
         } else {
-            player.velocity = 
-                Acceleration.ApplyTerminalY(
+            player.velocity = GetGlideVelocityWithGravity(player, delta);
+        }
+        
+    }
+
+    private Vector2 GetGlideVelocityWithGravity(Player player, float delta) {
+        return Acceleration.ApplyTerminalY(
                     player.glideMaxSpeed.y, 
                     player.glideGravity, 
                     delta, 
                     player.velocity
                 );
-        }
     }
 }

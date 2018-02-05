@@ -6,6 +6,7 @@ public class Jumping : State<Player>
     public override void OnEnter(float delta, Player player) {
         GD.Print("Jumping:OnEnter()");
         player.velocity = new Vector2(player.velocity.x, player.velocity.y - player.jumpSpeed);
+        player.PlayAnimation(Player.Animation.Jumping);
     }
 
     public override void OnExit(float delta, Player owner) {
@@ -13,28 +14,26 @@ public class Jumping : State<Player>
     }
 
     public override State<Player> Update(float delta, Player player, float timeInState) {
-        // TODO: dry up. Copy and pasted alot of code from walking state. Refactor 
-        bool isGrounded = player.collision.isOnGround;
-        
-        Vector2 v = player.velocity;
-        Vector2 a = new Vector2(player.groundAcceleration * delta, 0);
 
-        if (v.y >= 0) {
+        if (player.velocity.y >= 0) {
             return player.stateFalling;
         }
 
-        int vDir = Math.Sign(v[0]);
-        int isLeft = Input.IsActionPressed("key_left") ? 1 : 0;
-        int isRight = Input.IsActionPressed("key_right") ? 1 : 0;
-        int dir = isRight - isLeft;
-
-        // Apply acceleration
-        a = a * dir;
-        v += a;
-    
+        player.DetectDirectionChange();
+        // allow slightly higher jump
+        /* if (Input.IsActionPressed("key_jump")) {
+            // slow down gravity effect
+            player.velocity.y -= 3.5f;
+        } */
+ 
         // Allow to move left and right while jumping
-        player.velocity.x = Math.Min(v.x, player.groundMaxSpeed);
-        player.applyGravity(delta, 200.0f);
+        player.velocity = Acceleration.ApplyTerminalX(
+            player.groundMaxSpeed, 
+            player.groundAcceleration * player.GetDirectionMultiplier(), 
+            delta, 
+            player.velocity
+        );
+        player.ApplyGravity(delta, 1000.0f);
         player.Move(0f);
 
         return null;
