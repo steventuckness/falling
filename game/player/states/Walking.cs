@@ -5,6 +5,7 @@ public class Walking : State<Player> {
     public override void OnEnter(float delta, Player player) {
         GD.Print("Walking:OnEnter()");
         player.velocity *= new Vector2(1, 0);
+        player.PlayAnimation(Player.Animation.Walking);
     }
 
     public override void OnExit(float delta, Player owner) {
@@ -12,6 +13,7 @@ public class Walking : State<Player> {
     }
 
     public override State<Player> Update(float delta, Player player, float timeInState) {
+        player.DetectDirectionChange();
         Vector2 a = new Vector2(player.groundAcceleration * delta, 0);
         bool isGrounded = player.IsOnFloor();
         int isLeft = Input.IsActionPressed("key_left") ? 1 : 0;
@@ -27,7 +29,7 @@ public class Walking : State<Player> {
 
         player.velocity = player.velocity + (a * dir);
         player.velocity.x = Math.Min(player.velocity.x, player.groundMaxSpeed);
-        player.applyGravity(delta, 200f);
+        player.ApplyGravity(delta, 200f);
         player.Move(0f);
         return null;
     }

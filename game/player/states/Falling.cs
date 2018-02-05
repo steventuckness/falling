@@ -7,7 +7,7 @@ public class Falling : State<Player> {
     
     public override void OnEnter(float delta, Player owner) {
         GD.Print("Falling:OnEnter()");
-        owner.PlayAnimation(Player.Animation.Walking);
+        owner.PlayAnimation(Player.Animation.Falling);
     }
 
     public override void OnExit(float delta, Player owner) {
@@ -15,6 +15,7 @@ public class Falling : State<Player> {
     }
 
     public override State<Player> Update(float delta, Player player, float timeInState) {        
+        player.DetectDirectionChange();
         Vector2 a = new Vector2(player.groundAcceleration * delta, 0);
         int isLeft = Input.IsActionPressed("key_left") ? 1 : 0;
         int isRight = Input.IsActionPressed("key_right") ? 1 : 0;
@@ -22,7 +23,7 @@ public class Falling : State<Player> {
 
         player.velocity = player.velocity + (a * dir);
         player.velocity.x = Math.Min(player.velocity.x, player.groundMaxSpeed);
-        player.applyGravity(delta, player.fallingMaxSpeed);
+        player.ApplyGravity(delta, player.fallingMaxSpeed);
         player.Move(25.0f);
         bool isGrounded = player.IsOnFloor();
 
