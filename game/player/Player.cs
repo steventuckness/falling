@@ -10,6 +10,8 @@ public class Player : KinematicBody2D {
     public Walking stateWalking = new Walking();
     public Jumping stateJumping = new Jumping();
 
+    public Dead stateDead = new Dead();
+
     // Physics /////////////////////////////////////////////////////////////////
     public Vector2 velocity = new Vector2(0, 0);
     public float gravity = 10.0f;
@@ -34,6 +36,9 @@ public class Player : KinematicBody2D {
     // Falling
     [Export]
     public float fallingMaxSpeed = 20.0f;
+
+    [Export]
+    public float impactDeadSpeed = 30.0f;
 	
     // MISC //////////////////////////////////////////////////////////////////// 
     public Vector2 carry = new Vector2(0, 0); 
@@ -67,7 +72,9 @@ public class Player : KinematicBody2D {
     };
 
     public override void _Ready() {
-		this.collision = new PlayerCollision(this); 
+        this.AddUserSignal("playerDied");
+        
+        this.collision = new PlayerCollision(this); 
         this.sm.Init(this.stateIdle);
         this.PlayAnimation(Animation.Walking);
 		

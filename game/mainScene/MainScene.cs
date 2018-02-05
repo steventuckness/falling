@@ -19,5 +19,16 @@ public class MainScene : Node2D
        if(Input.IsActionPressed("key_restart")) {
            this.GetTree().ReloadCurrentScene();
        }
+
+       // Configure custom signal the only way possible in C# right now.
+       // https://github.com/godotengine/godot/issues/11956. (3.1 milestone) 
+       if (GetNode("player").HasUserSignal("playerDied") && 
+        !GetNode("player").IsConnected("playerDied", this, "died")) {
+            GetNode("player").Connect("playerDied", this, "died");
+       }       
+   }
+
+   public void died() {
+       GD.Print("MainScene->playerDied signal recieved!");
    }
 }
