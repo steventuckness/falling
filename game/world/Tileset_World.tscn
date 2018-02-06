@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://world/spike.png" type="Texture" id=1]
+
+[node name="Tileset_World" type="Node2D"]
+
+[node name="Spike" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 1 )
+
+

@@ -4,13 +4,13 @@ using System;
 public class Player : KinematicBody2D {
     // State ///////////////////////////////////////////////////////////////////
     private StateMachine<Player> sm = new StateMachine<Player>();
-    public Idle    stateIdle = new Idle();
-    public Gliding stateGliding = new Gliding();
-    public Falling stateFalling = new Falling();
-    public Walking stateWalking = new Walking();
-    public Jumping stateJumping = new Jumping();
-
-    public Dead stateDead = new Dead();
+    public Idle     stateIdle       = new Idle();
+    public Gliding  stateGliding    = new Gliding();
+    public Falling  stateFalling    = new Falling();
+    public Walking  stateWalking    = new Walking();
+    public Jumping  stateJumping    = new Jumping();
+    public Dead     stateDead       = new Dead();
+    public Respawn  stateRespawn    = new Respawn();
 
     // Physics /////////////////////////////////////////////////////////////////
     public Vector2 velocity = new Vector2(0, 0);
@@ -60,6 +60,11 @@ public class Player : KinematicBody2D {
     [Export]
     public float glideHorizontalAcceleration = 3.0f;
 
+    // MISC ////////////////////////////////////////////////////////////////////
+    public Vector2 carry = new Vector2(0, 0);
+    [Export]
+    public float respawnTime           = 2.0f;  // Seconds
+
     public enum Direction {
         Left,
         Right
@@ -79,6 +84,22 @@ public class Player : KinematicBody2D {
         this.collision = new PlayerCollision(this); 
         this.sm.Init(this.stateIdle);
         this.PlayAnimation(Animation.Walking);
+    }
+
+    public bool IsDead() {
+        return this.sm.GetCurrentState() == this.stateDead;
+    }
+
+    public bool CanBeKilled() {
+        return this.sm.GetCurrentState() != this.stateRespawn && !this.IsDead();
+    }
+
+    public void Kill() {
+        // Player cannot be killed while respawning or is already dead
+        if(!this.CanBeKilled()) {
+            return;
+        }
+        this.sm.TransitionState(this.stateDead);
     }
 
     public void PlayAnimation(Animation animation) {

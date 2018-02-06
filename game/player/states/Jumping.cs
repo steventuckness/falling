@@ -1,8 +1,7 @@
 using Godot;
 using System;
 
-public class Jumping : State<Player>
-{
+public class Jumping : State<Player> {
     public override void OnEnter(float delta, Player player) {
         GD.Print("Jumping:OnEnter()");
         player.velocity = new Vector2(player.velocity.x, player.velocity.y - player.jumpSpeed);
@@ -25,12 +24,12 @@ public class Jumping : State<Player>
             // slow down gravity effect
             player.velocity.y -= 3.5f;
         } */
- 
+
         // Allow to move left and right while jumping
         player.velocity = Acceleration.ApplyTerminalX(
-            player.groundMaxSpeed, 
-            player.groundAcceleration * player.GetDirectionMultiplier(), 
-            delta, 
+            player.groundMaxSpeed,
+            player.groundAcceleration * player.GetDirectionMultiplier(),
+            delta,
             player.velocity
         );
         player.ApplyGravity(delta, 1000.0f);

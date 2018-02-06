@@ -2,6 +2,8 @@ using System;
 using Godot;
 
 public class Idle : State<Player> {
+    public override String GetName() { return "Idle"; }
+
     public override void OnEnter(float delta, Player player) {
         GD.Print("Idle:OnEnter()");
         player.velocity = new Vector2(0, 0);
