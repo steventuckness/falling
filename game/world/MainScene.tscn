@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://mainScene/MainScene.cs" type="Script" id=1]
-[ext_resource path="res://level/sandbox/sandbox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://world/MainScene.cs" type="Script" id=1]
+[ext_resource path="res://world/areas/sandbox/sandbox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=3]
 
 [node name="MainScene" type="Node2D" index="0"]
@@ -20,5 +20,6 @@ glideBumpAcceleration = -2.0
 glideTopBumpVelocity = 10.0
 glideMaxSpeed = Vector2( 1000, 1000 )
 glideHorizontalAcceleration = 100.0
+respawnTime = 2.0
 
 

@@ -1,15 +1,19 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://world/forest/forest_act_01/ForestAct01.cs" type="Script" id=1]
-[ext_resource path="res://world/forest/Tileset_Forest.res" type="TileSet" id=2]
-[ext_resource path="res://world/Tileset_World.res" type="TileSet" id=3]
-[ext_resource path="res://tilesets/Tileset_Collision.res" type="TileSet" id=4]
+[ext_resource path="res://world/areas/forest/forest_act_01/ForestAct01.cs" type="Script" id=1]
+[ext_resource path="res://world/areas/forest/tilesets/Tileset_Forest.res" type="TileSet" id=2]
+[ext_resource path="res://world/tilesets/Tileset_World.res" type="TileSet" id=3]
+[ext_resource path="res://world/tilesets/Tileset_Collision.res" type="TileSet" id=4]
 [ext_resource path="res://world/hazards/Spike.tscn" type="PackedScene" id=5]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://world/spawn/Spawn.tscn" type="PackedScene" id=7]
 [ext_resource path="res://world/spawn/SpawnCam.tscn" type="PackedScene" id=8]
 
-[node name="ForestAct01" type="Node2D" index="0"]
+
+
+
+
+[node name="ForestAct01" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -104,6 +108,7 @@ position = Vector2( 72, 136 )
 
 position = Vector2( 28, -11 )
 groundFriction = 500.0
+impactDeadSpeed = 30.0
 respawnTime = 2.0
 
 [node name="Spawn" parent="." index="5" instance=ExtResource( 7 )]

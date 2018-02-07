@@ -1,6 +1,8 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://tilesets/Tileset_Collision.res" type="TileSet" id=1]
+[ext_resource path="res://world/tilesets/Tileset_Collision.res" type="TileSet" id=1]
+
+
 
 [node name="Level_Sandbox" type="Node2D" index="0"]
 

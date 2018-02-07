@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/forest_tileset.png-2a431916a0953ede14a9e3271f74275d.stex"
+path="res://.import/spike_collision.png-324d7db0241380119a210e2075a0ad11.stex"
 
 [deps]
 
-source_file="res://world/forest/forest_tileset.png"
-source_md5="98a89c7de81d2c9e91ffd59ea2fb55ee"
+source_file="res://world/assets/sprites/spike_collision.png"
+source_md5="ab83bb46b7e1d79f583f35974101909d"
 
-dest_files=[ "res://.import/forest_tileset.png-2a431916a0953ede14a9e3271f74275d.stex" ]
-dest_md5="bd6f165076f10d4c09bf630ac55691ba"
+dest_files=[ "res://.import/spike_collision.png-324d7db0241380119a210e2075a0ad11.stex" ]
+dest_md5="3453f15b166b7a0315e367fa81424874"
 
 [params]
 
