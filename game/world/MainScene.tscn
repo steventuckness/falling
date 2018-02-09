@@ -14,12 +14,8 @@ position = Vector2( 64.8882, 31.2689 )
 
 [node name="player" parent="." index="1" instance=ExtResource( 3 )]
 
-position = Vector2( 189.852, -37.0463 )
-impactDeadSpeed = 200.0
-glideBumpAcceleration = -2.0
-glideTopBumpVelocity = 10.0
-glideMaxSpeed = Vector2( 1000, 1000 )
-glideHorizontalAcceleration = 100.0
+position = Vector2( 77.0211, 53.6287 )
+impactDeadSpeed = 30.0
 respawnTime = 2.0
 
 
