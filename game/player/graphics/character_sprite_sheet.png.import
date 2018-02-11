@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/character_idle.png-d1d58cd606a431624b066caaada31d0a.stex"
+path="res://.import/character_sprite_sheet.png-dd327703b6e4832724c8213be4e50593.stex"
 
 [deps]
 
-source_file="res://player/graphics/character_idle.png"
-source_md5="f07ce0fc6ab2d2a5e94382d2fbf94e3a"
+source_file="res://player/graphics/character_sprite_sheet.png"
+source_md5="cb93154a34c42ebc2123150d53fc07b3"
 
-dest_files=[ "res://.import/character_idle.png-d1d58cd606a431624b066caaada31d0a.stex" ]
-dest_md5="273b1d8a50347f40af4439c7bb2d633d"
+dest_files=[ "res://.import/character_sprite_sheet.png-dd327703b6e4832724c8213be4e50593.stex" ]
+dest_md5="55b99a054b7d9d7a781d631f4e8a1149"
 
 [params]
 

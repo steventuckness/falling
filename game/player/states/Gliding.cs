@@ -7,14 +7,12 @@ public class Gliding : State<Player> {
     float startYVelocity = 0.0f;
 
     public override void OnEnter(float delta, Player owner) {
-        GD.Print("Gliding:OnEnter()");
         isBumping = true;
         startYVelocity = owner.velocity.y;
         owner.PlayAnimation(Player.Animation.Gliding);
     }
 
     public override void OnExit(float delta, Player owner) {
-        GD.Print("Gliding:OnExit()");
     }
 
     public override State<Player> Update(float delta, Player player, float timeInState) {

@@ -3,13 +3,11 @@ using System;
 
 public class Jumping : State<Player> {
     public override void OnEnter(float delta, Player player) {
-        GD.Print("Jumping:OnEnter()");
         player.velocity = new Vector2(player.velocity.x, player.velocity.y - player.jumpSpeed);
         player.PlayAnimation(Player.Animation.Jumping);
     }
 
     public override void OnExit(float delta, Player owner) {
-        GD.Print("Jumping:OnExit()");
     }
 
     public override State<Player> Update(float delta, Player player, float timeInState) {
