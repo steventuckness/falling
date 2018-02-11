@@ -5,13 +5,11 @@ public class Idle : State<Player> {
     public override String GetName() { return "Idle"; }
 
     public override void OnEnter(float delta, Player player) {
-        GD.Print("Idle:OnEnter()");
         player.velocity = new Vector2(0, 0);
         player.PlayAnimation(Player.Animation.Idle);
     }
 
     public override void OnExit(float delta, Player owner) {
-        GD.Print("Idle:OnExit()");
     }
 
     public override State<Player> Update(float delta, Player player, float timeInState) {
