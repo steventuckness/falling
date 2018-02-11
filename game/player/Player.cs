@@ -12,8 +12,12 @@ public class Player : KinematicBody2D {
     public Dead     stateDead       = new Dead();
     public Respawn  stateRespawn    = new Respawn();
 
+    public Knockback stateKnockback = new Knockback();
+
     // Physics /////////////////////////////////////////////////////////////////
     public Vector2 velocity = new Vector2(0, 0);
+
+    private float groundImpactSpeed = 0.0f; // px / sec
 
     [Export]
     public float gravity = 200.0f;
@@ -54,20 +58,16 @@ public class Player : KinematicBody2D {
 	
     // Gliding ////////////////////////////////////////////////////////////////
     [Export]
-    public float glideGravity = 5.0f;
+    public float glideMaxYSpeed = 10.0f;
+    //public float glideMinXSpeed = 10.0f;
 
 
     [Export]
-    public float glideBumpAcceleration = 20.0f;
+    public float glideDrag = 10.0f;
 
     [Export]
-    public float glideTopBumpVelocity = 100.0f;
+    public float glideLift = 20.0f;
 
-    [Export]
-    public Vector2 glideMaxSpeed = new Vector2(10.0f, 10.0f);
-
-    [Export]
-    public float glideHorizontalAcceleration = 3.0f;
 
     // MISC ////////////////////////////////////////////////////////////////////
     public Vector2 carry = new Vector2(0, 0);
@@ -144,8 +144,8 @@ public class Player : KinematicBody2D {
         return this.velocity; 
 	}
 
-    public void ApplyGravity(float delta, float terminalVelocity) {
-        this.velocity = Acceleration.ApplyTerminalY(terminalVelocity, this.gravity, delta, this.velocity);
+    public void ApplyGravity(float delta) {
+        this.velocity = Acceleration.ApplyTerminalY(this.fallingMaxSpeed, this.gravity, delta, this.velocity);
     }
 
     public void DetectDirectionChange() {
@@ -184,6 +184,23 @@ public class Player : KinematicBody2D {
             delta,
             this.velocity
         );
+    }
+
+    public State<Player> DetectDeathByFalling() {
+        bool isGrounded = this.IsOnFloor();
+
+        if (!isGrounded) {
+            groundImpactSpeed = this.velocity.y;
+        }
+
+        if (groundImpactSpeed >= this.impactDeadSpeed && isGrounded) {
+            return this.stateDead; 
+        }
+
+        if (isGrounded) {
+            return this.stateIdle;
+        }
+        return null;
     }
 
     public int GetDirectionMultiplier() {

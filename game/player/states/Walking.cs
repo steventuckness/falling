@@ -197,7 +197,7 @@ public class Walking : State<Player> {
             delta,
             player.velocity
         );
-        player.ApplyGravity(delta, 200f);
+        player.ApplyGravity(delta);
 
         bool enteringDown = this.DetectDownSlope(feet, player);
         bool enteringUp = this.DetectUpSlope(feet, player);

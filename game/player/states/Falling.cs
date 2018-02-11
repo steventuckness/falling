@@ -23,23 +23,16 @@ public class Falling : State<Player> {
 
         bool isGrounded = player.IsOnFloor();
 
-        if (!isGrounded) {
-            groundImpactSpeed = player.velocity.y;
-        }
-
-        if (groundImpactSpeed >= player.impactDeadSpeed && isGrounded) {
-            return player.stateDead; 
-        }
-
-        if (isGrounded) {
-            return player.stateIdle;
+        State<Player> landedState = player.DetectDeathByFalling();
+        if (landedState != null) {
+            return landedState;
         }
 
         if (Input.IsActionJustPressed("key_jump")) {
             return player.stateGliding;
         }
         player.AirControl(delta);
-        player.ApplyGravity(delta, player.fallingMaxSpeed);
+        player.ApplyGravity(delta);
         player.Move(0f);
 
         return null;

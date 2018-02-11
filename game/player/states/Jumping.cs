@@ -23,7 +23,7 @@ public class Jumping : State<Player> {
             player.velocity.y *= 0.5f;
         }
         player.AirControl(delta);
-        player.ApplyGravity(delta, float.MaxValue);
+        player.ApplyGravity(delta);
         player.Move(0f);
 
         return null;
