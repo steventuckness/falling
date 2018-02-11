@@ -23,15 +23,23 @@ public class Player : KinematicBody2D {
 
     // Air
     [Export]
-    public float  jumpHeight = 56f; // px
+    public float  jumpHeight            = 56f;
+    [Export]
+    public float airAcceleration        = 100f;
+    [Export]
+    public float airFriction            = 50f;
+    [Export]
+    public float airMaxSpeed            = 200f;
 
     // Ground
     [Export]
-    public float groundFriction         = 200.0f; // px / sec
+    public float groundFriction         = 200.0f;
     [Export]
-    public float groundAcceleration     = 150.0f; // px / sec
+    public float groundAcceleration     = 150.0f;
     [Export]
-    public float groundMaxSpeed         = 400.0f; // px / sec
+    public float groundMaxSpeed         = 400.0f;
+    [Export]
+    public float groundSprintMaxSpeed   = 500.0f;
 
     // Collision /////////////////////////////////////////////////////////////// 
     public PlayerCollision collision; // Mostly for storing pre-move collision checks 
@@ -151,6 +159,31 @@ public class Player : KinematicBody2D {
             this.direction = Direction.Right;
             this.PlayAnimation(this.animation);
         }
+    }
+
+    public int GetInputDirection() {
+        int isLeft = Input.IsActionPressed("key_left") ? 1 : 0;
+        int isRight = Input.IsActionPressed("key_right") ? 1 : 0;
+
+        return isRight - isLeft;
+    }
+
+    public void AirControl(float delta) {
+        int dir = this.GetInputDirection();
+        // Air friction
+        if(this.velocity.x != 0) {
+            this.velocity = Acceleration.ApproachX(
+                0f, this.airFriction, delta, this.velocity
+            );
+        }
+
+        // Air control
+        this.velocity = Acceleration.ApplyTerminalX(
+            float.MaxValue,
+            this.airAcceleration * dir,
+            delta,
+            this.velocity
+        );
     }
 
     public int GetDirectionMultiplier() {

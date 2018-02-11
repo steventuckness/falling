@@ -5,7 +5,7 @@ public class Idle : State<Player> {
     public override String GetName() { return "Idle"; }
 
     public override void OnEnter(float delta, Player player) {
-        player.velocity = new Vector2(0, 0);
+        // player.velocity = new Vector2(0, 0);
         player.PlayAnimation(Player.Animation.Idle);
     }
 

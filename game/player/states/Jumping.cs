@@ -11,25 +11,18 @@ public class Jumping : State<Player> {
     }
 
     public override State<Player> Update(float delta, Player player, float timeInState) {
-
+        int dir = player.GetInputDirection();
         if (player.velocity.y >= 0) {
             return player.stateFalling;
         }
 
         player.DetectDirectionChange();
-        // allow slightly higher jump
-        /* if (Input.IsActionPressed("key_jump")) {
-            // slow down gravity effect
-            player.velocity.y -= 3.5f;
-        } */
 
-        // Allow to move left and right while jumping
-        // player.velocity = Acceleration.ApplyTerminalX(
-        //     player.groundMaxSpeed,
-        //     player.groundAcceleration * player.GetDirectionMultiplier(),
-        //     delta,
-        //     player.velocity
-        // );
+        // Slow down the jump (variable jump height)
+        if(Input.IsActionJustReleased("key_jump")) {
+            player.velocity.y *= 0.5f;
+        }
+        player.AirControl(delta);
         player.ApplyGravity(delta, float.MaxValue);
         player.Move(0f);
 

@@ -176,6 +176,7 @@ public class Walking : State<Player> {
         Vector2 floor = new Vector2(0, -1);
         RayCast2D[] feet = this.GetFeet(player);
         bool onFloor = player.IsOnFloor();
+        bool isSprinting = Input.IsActionPressed("key_sprint");
         player.DetectDirectionChange();
         Vector2 a = new Vector2(player.groundAcceleration * delta, 0);
         int isLeft = Input.IsActionPressed("key_left") ? 1 : 0;
@@ -189,11 +190,11 @@ public class Walking : State<Player> {
             return player.stateJumping;
         }
 
-        // player.velocity = player.velocity + (a * dir);
-        player.velocity = Acceleration.ApplyTerminalX(
-            player.groundMaxSpeed, 
-            player.groundAcceleration * dir, 
-            delta, 
+        float approachSpeed = dir * (isSprinting ? player.groundSprintMaxSpeed : player.groundMaxSpeed);
+        player.velocity = Acceleration.ApproachX(
+            approachSpeed,
+            player.groundAcceleration,
+            delta,
             player.velocity
         );
         player.ApplyGravity(delta, 200f);

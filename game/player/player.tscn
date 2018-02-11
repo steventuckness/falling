@@ -170,7 +170,7 @@ tracks/1/keys = {
 custom_solver_bias = 0.0
 extents = Vector2( 8, 22 )
 
-[node name="Player" type="KinematicBody2D" index="0"]
+[node name="Player" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 1
@@ -180,9 +180,13 @@ script = ExtResource( 1 )
 _sections_unfolded = [ "Angular", "Linear", "Z Index" ]
 gravity = 200.0
 jumpHeight = 56.0
+airAcceleration = 100.0
+airFriction = 50.0
+airMaxSpeed = 200.0
 groundFriction = 200.0
 groundAcceleration = 150.0
 groundMaxSpeed = 400.0
+groundSprintMaxSpeed = 500.0
 fallingMaxSpeed = 50.0
 impactDeadSpeed = 30.0
 glideGravity = 5.0
@@ -220,10 +224,9 @@ editor_draw_drag_margin = false
 [node name="Spritesheet" type="Sprite" parent="." index="1"]
 
 texture = ExtResource( 2 )
-flip_h = true
 vframes = 2
 hframes = 20
-frame = 6
+frame = 21
 _sections_unfolded = [ "Animation", "Offset", "Region", "Transform" ]
 
 [node name="Animation" type="AnimationPlayer" parent="." index="2"]
@@ -247,7 +250,6 @@ blend_times = [  ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
 
-position = Vector2( 0, 3 )
 shape = SubResource( 11 )
 _sections_unfolded = [ "Transform", "Visibility" ]
 
