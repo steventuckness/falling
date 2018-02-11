@@ -189,11 +189,9 @@ groundMaxSpeed = 400.0
 groundSprintMaxSpeed = 500.0
 fallingMaxSpeed = 50.0
 impactDeadSpeed = 30.0
-glideGravity = 5.0
-glideBumpAcceleration = 20.0
-glideTopBumpVelocity = 100.0
-glideMaxSpeed = Vector2( 10, 10 )
-glideHorizontalAcceleration = 3.0
+glideMaxYSpeed = 10.0
+glideDrag = 10.0
+glideLift = 20.0
 respawnTime = 2.0
 
 [node name="Camera2D" type="Camera2D" parent="." index="0"]
@@ -224,9 +222,10 @@ editor_draw_drag_margin = false
 [node name="Spritesheet" type="Sprite" parent="." index="1"]
 
 texture = ExtResource( 2 )
+offset = Vector2( 0, -3 )
+flip_h = true
 vframes = 2
 hframes = 20
-frame = 21
 _sections_unfolded = [ "Animation", "Offset", "Region", "Transform" ]
 
 [node name="Animation" type="AnimationPlayer" parent="." index="2"]

@@ -14,11 +14,12 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Player" parent="." index="1" instance=ExtResource( 3 )]
 
-position = Vector2( 451, 314 )
+position = Vector2( 40, -29 )
 _sections_unfolded = [ "Angular", "Linear", "Transform", "Z Index" ]
 gravity = 900.0
-airAcceleration = 400.0
+airAcceleration = 600.0
 airFriction = 300.0
+groundFriction = 600.0
 groundAcceleration = 300.0
 groundMaxSpeed = 100.0
 groundSprintMaxSpeed = 200.0
