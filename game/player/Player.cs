@@ -21,8 +21,9 @@ public class Player : KinematicBody2D {
     public Direction direction = Direction.Right;
     private Animation animation;
 
+    // Air
     [Export]
-    public float  jumpSpeed = 120f; // px / sec
+    public float  jumpHeight = 56f; // px
 
     // Ground
     [Export]
@@ -103,7 +104,7 @@ public class Player : KinematicBody2D {
     }
 
     public void PlayAnimation(Animation animation) {
-        AnimationPlayer player = (AnimationPlayer) this.GetNode("animation");
+        AnimationPlayer player = (AnimationPlayer) this.GetNode("Animation");
         string directionStr = (direction == Direction.Left ? "left" : "right");
         this.animation = animation;
         switch (animation) {

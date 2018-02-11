@@ -4,7 +4,7 @@
 [ext_resource path="res://world/areas/sandbox/sandbox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=3]
 
-[node name="MainScene" type="Node2D" index="0"]
+[node name="MainScene" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -14,10 +14,12 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Player" parent="." index="1" instance=ExtResource( 3 )]
 
-position = Vector2( 432, 309 )
+position = Vector2( 38.6306, -26.8908 )
 _sections_unfolded = [ "Angular", "Linear", "Transform", "Z Index" ]
 gravity = 900.0
+groundAcceleration = 300.0
 groundMaxSpeed = 150.0
-impactDeadSpeed = 200.0
+fallingMaxSpeed = 500.0
+impactDeadSpeed = 500.0
 
 
