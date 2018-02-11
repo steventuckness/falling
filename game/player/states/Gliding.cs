@@ -10,9 +10,16 @@ public class Gliding : State<Player> {
         isBumping = true;
         startYVelocity = owner.velocity.y;
         owner.PlayAnimation(Player.Animation.Gliding);
+        if (owner.direction == Player.Direction.Left) {
+            owner.SetRotation(-1.5708f); // -90 deg
+ 
+        } else {
+            owner.SetRotation(1.5708f); // 90 deg
+        }
     }
 
     public override void OnExit(float delta, Player owner) {
+        owner.SetRotation(0);
     }
 
     public override State<Player> Update(float delta, Player player, float timeInState) {
