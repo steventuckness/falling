@@ -4,9 +4,11 @@ using Godot;
 public class Falling : State<Player> {
     
     private float groundImpactSpeed = 0.0f; // px / sec
+    private bool heldJumpWhileEntering = false;
     
     public override void OnEnter(float delta, Player owner) {
         owner.PlayAnimation(Player.Animation.Falling);
+        this.heldJumpWhileEntering = Input.IsActionPressed("key_jump");
     }
 
     public override void OnExit(float delta, Player owner) {
@@ -19,10 +21,6 @@ public class Falling : State<Player> {
         int isRight = Input.IsActionPressed("key_right") ? 1 : 0;
         int dir = isRight - isLeft;
 
-        player.velocity = player.velocity + (a * dir);
-        player.velocity.x = Math.Min(player.velocity.x, player.groundMaxSpeed);
-        player.ApplyGravity(delta, player.fallingMaxSpeed);
-        player.Move(25.0f);
         bool isGrounded = player.IsOnFloor();
 
         if (!isGrounded) {
@@ -37,9 +35,12 @@ public class Falling : State<Player> {
             return player.stateIdle;
         }
 
-        if (Input.IsActionPressed("key_jump")) {
+        if (Input.IsActionJustPressed("key_jump")) {
             return player.stateGliding;
         }
+        player.AirControl(delta);
+        player.ApplyGravity(delta, player.fallingMaxSpeed);
+        player.Move(0f);
 
         return null;
     }
