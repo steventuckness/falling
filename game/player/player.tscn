@@ -254,18 +254,6 @@ tracks/5/keys = {
 "update": 1,
 "values": [  ]
 }
-tracks/6/type = "value"
-tracks/6/path = NodePath("CollisionShape2D:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 3.81332, 0.332355 ) ]
-}
 
 [sub_resource type="Animation" id=6]
 
@@ -332,18 +320,6 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("CollisionShape2D:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -4.11201, 0.546986 ) ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -517,17 +493,16 @@ tracks/2/keys = {
 [sub_resource type="RectangleShape2D" id=11]
 
 custom_solver_bias = 0.0
-extents = Vector2( 11.2296, 10 )
+extents = Vector2( 4, 12 )
 
-[node name="player" type="KinematicBody2D" index="0"]
+[node name="player" type="KinematicBody2D"]
 
-position = Vector2( 0.255413, -10.1534 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.001
 script = ExtResource( 1 )
-_sections_unfolded = [ "Angular", "Linear", "Transform", "Z Index" ]
+_sections_unfolded = [ "Angular", "Linear", "Z Index" ]
 gravity = 200.0
 jumpSpeed = 120.0
 groundFriction = 200.0
@@ -545,14 +520,16 @@ respawnTime = 2.0
 [node name="spritesheet" type="Sprite" parent="." index="0"]
 
 visible = false
-position = Vector2( 6, -2 )
+position = Vector2( -9, -2 )
 texture = ExtResource( 2 )
+flip_h = true
 vframes = 7
 hframes = 10
+frame = 3
 region_rect = Rect2( 576, 179, 1, 0 )
 _sections_unfolded = [ "Animation", "Offset", "Transform", "Visibility", "Z Index" ]
 
-[node name="Camera2D2" type="Camera2D" parent="." index="1"]
+[node name="Camera2D" type="Camera2D" parent="." index="1"]
 
 anchor_mode = 1
 rotating = false
@@ -579,11 +556,11 @@ editor_draw_drag_margin = false
 
 [node name="newSpritesheet" type="Sprite" parent="." index="2"]
 
-position = Vector2( 5.96046e-08, -0.0944672 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 hframes = 20
-frame = 1
-_sections_unfolded = [ "Animation", "Offset", "Region" ]
+frame = 6
+_sections_unfolded = [ "Animation", "Offset", "Region", "Transform" ]
 
 [node name="animation" type="AnimationPlayer" parent="." index="3"]
 
@@ -603,40 +580,41 @@ anims/jumping_right = SubResource( 8 )
 anims/walking_left = SubResource( 9 )
 anims/walking_right = SubResource( 10 )
 blend_times = [  ]
+autoplay = ""
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="4"]
 
-position = Vector2( -4.11201, 0.546986 )
-scale = Vector2( 1.67159, 2.57178 )
+visible = false
 shape = SubResource( 11 )
 _sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="Camera2D" type="Camera2D" parent="." index="5"]
+[node name="BL" type="RayCast2D" parent="." index="5"]
 
 visible = false
-position = Vector2( 1.04282, 0 )
-anchor_mode = 1
-rotating = false
-current = true
-zoom = Vector2( 1, 1 )
-limit_left = -10000000
-limit_top = -10000000
-limit_right = 10000000
-limit_bottom = 10000000
-limit_smoothed = false
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-smoothing_enabled = false
-smoothing_speed = 5.0
-offset_v = 0.0
-offset_h = 0.0
-drag_margin_left = 0.2
-drag_margin_top = 0.2
-drag_margin_right = 0.2
-drag_margin_bottom = 0.2
-editor_draw_screen = true
-editor_draw_limits = false
-editor_draw_drag_margin = false
-_sections_unfolded = [ "Limit", "Offset", "Smoothing", "Transform" ]
+position = Vector2( -4, 0 )
+enabled = true
+exclude_parent = true
+cast_to = Vector2( 0, 42 )
+collision_mask = 1
+_sections_unfolded = [ "Transform" ]
+
+[node name="BC" type="RayCast2D" parent="." index="6"]
+
+visible = false
+enabled = true
+exclude_parent = true
+cast_to = Vector2( 0, 42 )
+collision_mask = 1
+_sections_unfolded = [ "Transform" ]
+
+[node name="BR" type="RayCast2D" parent="." index="7"]
+
+visible = false
+position = Vector2( 4, 0 )
+enabled = true
+exclude_parent = true
+cast_to = Vector2( 0, 42 )
+collision_mask = 1
+_sections_unfolded = [ "Transform" ]
 
 

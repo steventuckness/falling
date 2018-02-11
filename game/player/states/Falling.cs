@@ -6,12 +6,10 @@ public class Falling : State<Player> {
     private float groundImpactSpeed = 0.0f; // px / sec
     
     public override void OnEnter(float delta, Player owner) {
-        GD.Print("Falling:OnEnter()");
         owner.PlayAnimation(Player.Animation.Falling);
     }
 
     public override void OnExit(float delta, Player owner) {
-        GD.Print("Falling:OnExit()");
     }
 
     public override State<Player> Update(float delta, Player player, float timeInState) {        
