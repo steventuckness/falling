@@ -58,6 +58,7 @@
     <Compile Include="player\states\Jumping.cs" />
     <Compile Include="player\states\Respawn.cs" />
     <Compile Include="player\states\Walking.cs" />
+    <Compile Include="player\states\Knockback.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="engine\state_machine\StateMachine.cs" />
     <Compile Include="engine\state_machine\State.cs" />

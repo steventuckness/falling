@@ -44,7 +44,7 @@ public class Idle : State<Player> {
         }
 
         player.velocity = v;
-        player.ApplyGravity(delta, 200f);
+        player.ApplyGravity(delta);
         player.Move(25f);
         return null;
     }

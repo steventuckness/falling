@@ -3,23 +3,30 @@ using Godot;
 
 public class Gliding : State<Player> {
 
-    bool isBumping = false;
-    float startYVelocity = 0.0f;
-
     public override void OnEnter(float delta, Player owner) {
-        isBumping = true;
-        startYVelocity = owner.velocity.y;
         owner.PlayAnimation(Player.Animation.Gliding);
-        if (owner.direction == Player.Direction.Left) {
-            owner.SetRotation(-1.5708f); // -90 deg
- 
-        } else {
-            owner.SetRotation(1.5708f); // 90 deg
-        }
     }
 
-    public override void OnExit(float delta, Player owner) {
-        owner.SetRotation(0);
+    public override void OnExit(float delta, Player player) {
+        Sprite playerSprite = (Sprite)player.GetNode("Spritesheet");
+        playerSprite.SetRotation(0);
+
+    }
+
+    private Vector2 AddLift(Player player, float delta) {
+        return Acceleration.ApplyY(
+            player.glideLift * Math.Abs(player.velocity.x),
+            delta,
+            player.velocity
+        );
+    }
+
+    private Vector2 AddDrag(Player player, float delta) {
+        return Acceleration.ApplyX(
+            player.glideDrag * player.GetDirectionMultiplier() * -1,
+            delta,
+            player.velocity
+        );
     }
 
     public override State<Player> Update(float delta, Player player, float timeInState) {
@@ -27,46 +34,37 @@ public class Gliding : State<Player> {
             player.velocity = new Vector2(0,0);
             return player.stateFalling;
         }
+
         player.DetectDirectionChange();
-        this.CalculateVerticalVelocity(delta, player);
-        this.CalculateHorizontalVelocity(delta, player);
+
+        // TEMPORARY UNTIL WE HAVE REAL SPRITES
+        Sprite playerSprite = (Sprite)player.GetNode("Spritesheet");
+        if (player.direction == Player.Direction.Left) {
+            playerSprite.SetRotation(-1.5708f); // -90 deg
+ 
+        } else {
+            playerSprite.SetRotation(1.5708f); // 90 deg
+        }
+        player.velocity.x = Math.Abs(player.velocity.x) * player.GetDirectionMultiplier();
+
+        player.velocity = AddLift(player, delta);
+        player.velocity = AddDrag(player, delta);
+        player.ApplyGravity(delta);
+        player.velocity.y = Math.Min(player.glideMaxYSpeed, player.velocity.y);
+
+        /*if (Math.Abs(player.velocity.x) <= player.glideMinXSpeed) {
+            player.velocity.x = player.glideMinXSpeed * player.GetDirectionMultiplier();
+        } */  
+
         player.MoveAndSlide(player.velocity);
 
         if (player.IsOnFloor()) {
             return player.stateIdle;
         }
+        if (player.IsOnWall()) {
+            return player.stateKnockback;
+        }
         return null;
     }
 
-    private void CalculateHorizontalVelocity(float delta, Player player) {
-        player.velocity = 
-            Acceleration.ApplyTerminalX(
-                player.glideMaxSpeed.x,
-                player.glideHorizontalAcceleration * player.GetDirectionMultiplier(),
-                delta,
-                player.velocity
-            );
-    }
-
-    private void CalculateVerticalVelocity(float delta, Player player) {
-        if (isBumping) {
-            GD.Print("bumping!");
-            player.velocity = Acceleration.ApplyY(player.glideBumpAcceleration * startYVelocity, delta, player.velocity);
-            if (Math.Abs(player.velocity.y) > player.glideTopBumpVelocity) {
-                isBumping = false;
-            } 
-        } else {
-            player.velocity = GetGlideVelocityWithGravity(player, delta);
-        }
-        
-    }
-
-    private Vector2 GetGlideVelocityWithGravity(Player player, float delta) {
-        return Acceleration.ApplyTerminalY(
-                    player.glideMaxSpeed.y, 
-                    player.glideGravity, 
-                    delta, 
-                    player.velocity
-                );
-    }
 }
