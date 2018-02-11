@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://player/Player.cs" type="Script" id=1]
-[ext_resource path="res://player/megaman.png" type="Texture" id=2]
-[ext_resource path="res://player/graphics/character_sprite_sheet.png" type="Texture" id=3]
+[ext_resource path="res://player/graphics/character_sprite_sheet.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=1]
 
@@ -10,42 +9,6 @@ resource_name = "falling_left"
 length = 0.44
 loop = true
 step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("spritesheet:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 6 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("spritesheet:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("spritesheet:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -4, -8 ) ]
-}
 
 [sub_resource type="Animation" id=2]
 
@@ -53,42 +16,6 @@ resource_name = "falling_right"
 length = 0.44
 loop = true
 step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("spritesheet:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 6 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("spritesheet:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("spritesheet:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 6, -8 ) ]
-}
 
 [sub_resource type="Animation" id=3]
 
@@ -96,42 +23,6 @@ resource_name = "gliding_left"
 length = 0.44
 loop = true
 step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("spritesheet:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 7 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("spritesheet:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("spritesheet:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -12, -3 ) ]
-}
 
 [sub_resource type="Animation" id=4]
 
@@ -139,42 +30,6 @@ resource_name = "gliding_right"
 length = 0.44
 loop = true
 step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("spritesheet:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 7 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("spritesheet:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("spritesheet:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 10, -3 ) ]
-}
 
 [sub_resource type="Animation" id=5]
 
@@ -183,19 +38,19 @@ length = 1.8
 loop = true
 step = 0.13
 tracks/0/type = "value"
-tracks/0/path = NodePath("spritesheet:frame")
+tracks/0/path = NodePath("Spritesheet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.13, 0.26, 0.39, 0.52, 0.65, 0.78, 0.91, 1.04, 1.17, 1.3, 1.43, 1.56, 1.69, 1.82 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("spritesheet:flip_h")
+tracks/1/path = NodePath("Spritesheet:flip_h")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -205,54 +60,6 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("spritesheet:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("newSpritesheet:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.13, 0.26, 0.39, 0.52, 0.65, 0.78, 0.91, 1.04, 1.17, 1.3, 1.43, 1.56, 1.69, 1.82 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("newSpritesheet:flip_h")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("spritesheet:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"update": 1,
-"values": [  ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -262,60 +69,24 @@ length = 1.8
 loop = true
 step = 0.13
 tracks/0/type = "value"
-tracks/0/path = NodePath("spritesheet:frame")
+tracks/0/path = NodePath("Spritesheet:flip_h")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [  ]
+"values": [ false ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("spritesheet:flip_h")
+tracks/1/path = NodePath("Spritesheet:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("spritesheet:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 6, -2 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("newSpritesheet:flip_h")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("newSpritesheet:frame")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
 "times": PoolRealArray( 0, 0.13, 0.26, 0.39, 0.52, 0.65, 0.78, 0.91, 1.04, 1.17, 1.3, 1.43, 1.56, 1.69 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
@@ -327,84 +98,12 @@ tracks/4/keys = {
 length = 0.44
 loop = true
 step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("spritesheet:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 36 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("spritesheet:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("spritesheet:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -4, -8 ) ]
-}
 
 [sub_resource type="Animation" id=8]
 
 length = 0.44
 loop = true
 step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("spritesheet:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 36 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("spritesheet:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("spritesheet:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 6, -8 ) ]
-}
 
 [sub_resource type="Animation" id=9]
 
@@ -412,60 +111,24 @@ length = 0.25
 loop = true
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("spritesheet:frame")
+tracks/0/path = NodePath("Spritesheet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 3, 5 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("spritesheet:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("spritesheet:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -9, -2 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("newSpritesheet:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
 "times": PoolRealArray( 0, 0.063, 0.126, 0.189, 0.252 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 23, 24, 25, 26, 27 ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("newSpritesheet:flip_h")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
+tracks/1/type = "value"
+tracks/1/path = NodePath("Spritesheet:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -478,60 +141,24 @@ length = 0.25
 loop = true
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("spritesheet:frame")
+tracks/0/path = NodePath("Spritesheet:flip_h")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 3, 5 ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("spritesheet:flip_h")
+tracks/1/path = NodePath("Spritesheet:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("spritesheet:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 6, -2 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("newSpritesheet:flip_h")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("newSpritesheet:frame")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
 "times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
@@ -541,9 +168,9 @@ tracks/4/keys = {
 [sub_resource type="RectangleShape2D" id=11]
 
 custom_solver_bias = 0.0
-extents = Vector2( 4, 12 )
+extents = Vector2( 8, 22 )
 
-[node name="player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 1
@@ -552,7 +179,7 @@ collision/safe_margin = 0.001
 script = ExtResource( 1 )
 _sections_unfolded = [ "Angular", "Linear", "Z Index" ]
 gravity = 200.0
-jumpSpeed = 120.0
+jumpHeight = 56.0
 groundFriction = 200.0
 groundAcceleration = 150.0
 groundMaxSpeed = 400.0
@@ -565,19 +192,7 @@ glideMaxSpeed = Vector2( 10, 10 )
 glideHorizontalAcceleration = 3.0
 respawnTime = 2.0
 
-[node name="spritesheet" type="Sprite" parent="." index="0"]
-
-visible = false
-position = Vector2( -9, -2 )
-texture = ExtResource( 2 )
-flip_h = true
-vframes = 7
-hframes = 10
-frame = 3
-region_rect = Rect2( 576, 179, 1, 0 )
-_sections_unfolded = [ "Animation", "Offset", "Transform", "Visibility", "Z Index" ]
-
-[node name="Camera2D" type="Camera2D" parent="." index="1"]
+[node name="Camera2D" type="Camera2D" parent="." index="0"]
 
 anchor_mode = 1
 rotating = false
@@ -602,17 +217,16 @@ editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
 
-[node name="newSpritesheet" type="Sprite" parent="." index="2"]
+[node name="Spritesheet" type="Sprite" parent="." index="1"]
 
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 flip_h = true
 vframes = 2
 hframes = 20
 frame = 6
 _sections_unfolded = [ "Animation", "Offset", "Region", "Transform" ]
 
-[node name="animation" type="AnimationPlayer" parent="." index="3"]
+[node name="Animation" type="AnimationPlayer" parent="." index="2"]
 
 root_node = NodePath("..")
 autoplay = ""
@@ -630,41 +244,37 @@ anims/jumping_right = SubResource( 8 )
 anims/walking_left = SubResource( 9 )
 anims/walking_right = SubResource( 10 )
 blend_times = [  ]
-autoplay = ""
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
 
-visible = false
+position = Vector2( 0, 3 )
 shape = SubResource( 11 )
 _sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="BL" type="RayCast2D" parent="." index="5"]
+[node name="BL" type="RayCast2D" parent="." index="4"]
 
-visible = false
-position = Vector2( -4, 0 )
+position = Vector2( -8, 0 )
 enabled = true
 exclude_parent = true
 cast_to = Vector2( 0, 42 )
 collision_mask = 1
 _sections_unfolded = [ "Transform" ]
 
-[node name="BC" type="RayCast2D" parent="." index="6"]
+[node name="BC" type="RayCast2D" parent="." index="5"]
 
-visible = false
 enabled = true
 exclude_parent = true
 cast_to = Vector2( 0, 42 )
 collision_mask = 1
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="BR" type="RayCast2D" parent="." index="7"]
+[node name="BR" type="RayCast2D" parent="." index="6"]
 
-visible = false
-position = Vector2( 4, 0 )
+position = Vector2( 8, 0 )
 enabled = true
 exclude_parent = true
 cast_to = Vector2( 0, 42 )
 collision_mask = 1
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
 
 
