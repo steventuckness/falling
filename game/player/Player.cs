@@ -11,8 +11,10 @@ public class Player : KinematicBody2D {
     public Jumping  stateJumping    = new Jumping();
     public Dead     stateDead       = new Dead();
     public Respawn  stateRespawn    = new Respawn();
-
     public Knockback stateKnockback = new Knockback();
+
+    // Signals /////////////////////////////////////////////////////////////////
+    public static String SIGNAL_DIED = "Player::died";
 
     // Physics /////////////////////////////////////////////////////////////////
     public Vector2 velocity = new Vector2(0, 0);
@@ -88,7 +90,7 @@ public class Player : KinematicBody2D {
     };
 
     public override void _Ready() {
-        this.AddUserSignal("playerDied");
+        this.AddUserSignal(Player.SIGNAL_DIED);
         
         this.collision = new PlayerCollision(this); 
         this.sm.Init(this.stateIdle);

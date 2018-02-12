@@ -6,7 +6,7 @@ public class Dead : State<Player> {
     public override String GetName() { return "Dead"; }
     public override void OnEnter(float delta, Player player) {
         player.Hide();
-        player.EmitSignal("playerDied");
+        player.EmitSignal(Player.SIGNAL_DIED);
     }
 
     public override void OnExit(float delta, Player player) {
