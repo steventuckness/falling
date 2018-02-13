@@ -1,13 +1,20 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://world/act/Act.cs" type="Script" id=1]
 [ext_resource path="res://world/areas/sandbox/sandbox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://world/areas/forest/forestParallaxBackground.tscn" type="PackedScene" id=4]
+[ext_resource path="res://world/spawn/Spawn.tscn" type="PackedScene" id=5]
 
 [node name="MainScene" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
+cameraSpeed = 1.0
+respawnTime = 2.0
 
 [node name="Level_Sandbox" parent="." index="0" instance=ExtResource( 2 )]
 
@@ -23,12 +30,16 @@ groundFriction = 600.0
 groundAcceleration = 300.0
 groundMaxSpeed = 100.0
 fallingMaxSpeed = 500.0
-impactDeadSpeed = 500.0
+impactDeadSpeed = 1000.0
 
-[node name="Spawn" type="Node2D" parent="." index="2"]
+[node name="Finish" type="Node2D" parent="." index="2"]
 
-[node name="Finish" type="Node2D" parent="." index="3"]
+position = Vector2( -75, -123 )
 
-[node name="ParallaxBackgroundCanvas" parent="." index="4" instance=ExtResource( 4 )]
+[node name="ParallaxBackgroundCanvas" parent="." index="3" instance=ExtResource( 4 )]
+
+[node name="Spawn" parent="." index="4" instance=ExtResource( 5 )]
+
+position = Vector2( -107, -32 )
 
 

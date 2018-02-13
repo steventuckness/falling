@@ -12,9 +12,11 @@ public class Player : KinematicBody2D {
     public Dead     stateDead       = new Dead();
     public Respawn  stateRespawn    = new Respawn();
     public Knockback stateKnockback = new Knockback();
+    public bool paused = false;
 
     // Signals /////////////////////////////////////////////////////////////////
     public static String SIGNAL_DIED = "Player::died";
+    public static String SIGNAL_RESPAWN = "Player::respawn";
 
     // Physics /////////////////////////////////////////////////////////////////
     public Vector2 velocity = new Vector2(0, 0);
@@ -48,8 +50,7 @@ public class Player : KinematicBody2D {
     public float groundSprintMaxSpeed   = 500.0f;
 
     // Collision /////////////////////////////////////////////////////////////// 
-    public PlayerCollision collision; // Mostly for storing pre-move collision checks 
-    private float skinWidth = 0.001f; 
+    public PlayerCollision collision; // Mostly for storing pre-move collision checks
 
     // Falling
     [Export]
@@ -113,6 +114,10 @@ public class Player : KinematicBody2D {
         this.sm.TransitionState(this.stateDead);
     }
 
+    public void Respawn() {
+        this.sm.TransitionState(this.stateRespawn);
+    }
+
     public void PlayAnimation(Animation animation) {
         AnimationPlayer player = (AnimationPlayer) this.GetNode("Animation");
         string directionStr = (direction == Direction.Left ? "left" : "right");
@@ -137,6 +142,9 @@ public class Player : KinematicBody2D {
     }
 
     public override void _PhysicsProcess(float delta) {
+        if(this.paused) {
+            return;
+        }
         // this.collision.Update();
         this.sm.Update(delta, this);
     }
