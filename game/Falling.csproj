@@ -49,6 +49,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="engine\Debug.cs" />
     <Compile Include="player\Player.cs" />
     <Compile Include="player\collision\PlayerCollision.cs" />
     <Compile Include="player\states\Dead.cs" />

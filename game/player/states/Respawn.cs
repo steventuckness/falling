@@ -11,6 +11,6 @@ public class Respawn : State<Player> {
     }
     
     public override State<Player> Update(float delta, Player player, float timeInState) {
-        return null;
+        return player.stateIdle;
     }
 }

@@ -13,9 +13,9 @@ public class Dead : State<Player> {
     }
 
     public override State<Player> Update(float delta, Player player, float timeInState) {
-        if (timeInState > player.respawnTime) {
-            return player.stateRespawn;
-        }
+        // if (timeInState > player.respawnTime) {
+        //     return player.stateRespawn;
+        // }
         return null;
     }
 }

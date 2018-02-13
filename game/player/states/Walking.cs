@@ -189,6 +189,9 @@ public class Walking : State<Player> {
         if (onFloor && Input.IsActionJustPressed("key_jump")) {
             return player.stateJumping;
         }
+        if(!onFloor) {
+            return player.stateFalling;
+        }
 
         float approachSpeed = dir * (isSprinting ? player.groundSprintMaxSpeed : player.groundMaxSpeed);
         player.velocity = Acceleration.ApproachX(
