@@ -61,15 +61,14 @@ public class Player : KinematicBody2D {
 	
     // Gliding ////////////////////////////////////////////////////////////////
     [Export]
-    public float glideMaxYSpeed = 10.0f;
-    //public float glideMinXSpeed = 10.0f;
+    public float glideMaxYSpeed = 20.0f;
 
 
     [Export]
-    public float glideDrag = 10.0f;
+    public float glideDrag = 30.0f;
 
     [Export]
-    public float glideLift = 20.0f;
+    public float glideLift = 9.0f;
 
 
     // MISC ////////////////////////////////////////////////////////////////////
@@ -217,3 +216,5 @@ public class Player : KinematicBody2D {
         return this.direction == Direction.Left ? -1 : 1;
     }
 }
+
+

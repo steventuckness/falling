@@ -31,6 +31,9 @@ groundAcceleration = 300.0
 groundMaxSpeed = 100.0
 fallingMaxSpeed = 500.0
 impactDeadSpeed = 1000.0
+glideMaxYSpeed = 20.0
+glideDrag = 30.0
+glideLift = 9.0
 
 [node name="Finish" type="Node2D" parent="." index="2"]
 
