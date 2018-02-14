@@ -6,21 +6,24 @@
 [ext_resource path="res://world/areas/forest/assets/parallax background/plx-4.png" type="Texture" id=4]
 [ext_resource path="res://world/areas/forest/assets/parallax background/plx-5.png" type="Texture" id=5]
 
-[node name="ParallaxBackgroundCanvas" type="CanvasLayer" index="0"]
-
-layer = 1
-offset = Vector2( 0, 0 )
-rotation = 0.0
-scale = Vector2( 1, 1 )
-transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
+[node name="ParallaxBackgroundCanvas" type="CanvasLayer"]
 
 layer = -1
 offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+__meta__ = {
+"_edit_vertical_guides_": [ -140.0 ]
+}
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
+
+layer = -1
+offset = Vector2( 0, -150 )
+rotation = 0.0
+scale = Vector2( 3, 3 )
+transform = Transform2D( 3, 0, 0, 3, 0, -150 )
 scroll_offset = Vector2( 0, 0 )
 scroll_base_offset = Vector2( 0, 0 )
 scroll_base_scale = Vector2( 0.5, 0.25 )
@@ -31,77 +34,62 @@ _sections_unfolded = [ "Scroll" ]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
 
-position = Vector2( 194.744, -78.389 )
 motion_scale = Vector2( 0.5, 0.25 )
 motion_offset = Vector2( 0, 0 )
 motion_mirroring = Vector2( 384, 0 )
-_sections_unfolded = [ "Motion" ]
+_sections_unfolded = [ "Motion", "Transform" ]
 
-[node name="backGroundColor" type="Sprite" parent="ParallaxBackground/ParallaxLayer" index="0"]
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer" index="0"]
 
-position = Vector2( 178.998, 101.535 )
-scale = Vector2( 1.93228, 1.93228 )
 texture = ExtResource( 1 )
-_sections_unfolded = [ "Animation" ]
+_sections_unfolded = [ "Transform" ]
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground" index="1"]
 
-position = Vector2( 194.744, -78.389 )
 motion_scale = Vector2( 0.5, 0.25 )
 motion_offset = Vector2( 0, 0 )
 motion_mirroring = Vector2( 384, 0 )
-_sections_unfolded = [ "Motion" ]
+_sections_unfolded = [ "Motion", "Transform", "Z Index" ]
 
-[node name="trees" type="Sprite" parent="ParallaxBackground/ParallaxLayer2" index="0"]
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2" index="0"]
 
-position = Vector2( 178.998, 100.686 )
-scale = Vector2( 1.93228, 1.93228 )
 texture = ExtResource( 2 )
-region_rect = Rect2( 0, 0, 1000, 1000 )
-_sections_unfolded = [ "Animation", "Offset", "Region", "Transform", "Z Index" ]
+_sections_unfolded = [ "Animation", "Offset" ]
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground" index="2"]
 
-position = Vector2( 213.471, -58.2953 )
-scale = Vector2( 1.62793, 1.62793 )
 motion_scale = Vector2( 0.5, 0.25 )
 motion_offset = Vector2( 0, 0 )
-motion_mirroring = Vector2( 458, 0 )
-_sections_unfolded = [ "Motion" ]
+motion_mirroring = Vector2( 384, 0 )
+_sections_unfolded = [ "Motion", "Transform" ]
 
-[node name="moreTrees" type="Sprite" parent="ParallaxBackground/ParallaxLayer3" index="0"]
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3" index="0"]
 
-position = Vector2( 100.083, 48.9558 )
-scale = Vector2( 1.19265, 1.19265 )
 texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground" index="3"]
 
-position = Vector2( 192.418, -75.8396 )
 motion_scale = Vector2( 0.5, 0.25 )
 motion_offset = Vector2( 0, 0 )
-motion_mirroring = Vector2( 743, 0 )
-_sections_unfolded = [ "Motion" ]
+motion_mirroring = Vector2( 384, 0 )
+_sections_unfolded = [ "Motion", "Transform" ]
 
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer4" index="0"]
+[node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayer4" index="0"]
 
-position = Vector2( 182.116, 97.9145 )
-scale = Vector2( 1.93163, 1.93163 )
 texture = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground" index="4"]
 
-position = Vector2( -121.163, -62.6651 )
-scale = Vector2( 1.04015, 1.04015 )
 motion_scale = Vector2( 0.5, 0.25 )
 motion_offset = Vector2( 0, 0 )
-motion_mirroring = Vector2( 734, 0 )
-_sections_unfolded = [ "Motion" ]
+motion_mirroring = Vector2( 384, 0 )
+_sections_unfolded = [ "Motion", "Transform" ]
 
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer5" index="0"]
+[node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayer5" index="0"]
 
-position = Vector2( 485.203, 88.3662 )
-scale = Vector2( 1.91745, 1.91745 )
 texture = ExtResource( 5 )
+_sections_unfolded = [ "Material", "Visibility" ]
 
 
