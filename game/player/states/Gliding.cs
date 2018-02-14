@@ -9,13 +9,14 @@ public class Gliding : State<Player> {
 
     public override void OnExit(float delta, Player player) {
         Sprite playerSprite = (Sprite)player.GetNode("Spritesheet");
-        playerSprite.SetRotation(0);
+        //playerSprite.SetRotation(0);
+        player.SetRotation(0);
 
     }
 
     private Vector2 AddLift(Player player, float delta) {
         return Acceleration.ApplyY(
-            player.glideLift * Math.Abs(player.velocity.x),
+            player.glideLift * Math.Abs(player.velocity.x) * -1,
             delta,
             player.velocity
         );
@@ -40,10 +41,12 @@ public class Gliding : State<Player> {
         // TEMPORARY UNTIL WE HAVE REAL SPRITES
         Sprite playerSprite = (Sprite)player.GetNode("Spritesheet");
         if (player.direction == Player.Direction.Left) {
-            playerSprite.SetRotation(-1.5708f); // -90 deg
+            //playerSprite.SetRotation(-1.5708f); // -90 deg
+            player.SetRotation(-1.5708f);
  
         } else {
-            playerSprite.SetRotation(1.5708f); // 90 deg
+            //playerSprite.SetRotation(1.5708f); // 90 deg
+            player.SetRotation(1.5708f);
         }
         player.velocity.x = Math.Abs(player.velocity.x) * player.GetDirectionMultiplier();
 
