@@ -70,6 +70,9 @@ public class Player : KinematicBody2D {
     [Export]
     public float glideLift = 9.0f;
 
+    [Export]
+    public int glideAgainWaitTime = 300; // milliseconds
+
 
     // MISC ////////////////////////////////////////////////////////////////////
     public Vector2 carry = new Vector2(0, 0);

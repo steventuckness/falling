@@ -5,6 +5,8 @@ public class Falling : State<Player> {
     
     private float groundImpactSpeed = 0.0f; // px / sec
     private bool heldJumpWhileEntering = false;
+    private long timeWhenGlideLastPressed = 0; // milliseconds
+
     
     public override void OnEnter(float delta, Player owner) {
         owner.PlayAnimation(Player.Animation.Falling);
@@ -28,7 +30,8 @@ public class Falling : State<Player> {
             return landedState;
         }
 
-        if (Input.IsActionJustPressed("key_jump")) {
+        if (Input.IsActionJustPressed("key_jump") && (OS.GetTicksMsec() - this.timeWhenGlideLastPressed >= player.glideAgainWaitTime)) {
+            this.timeWhenGlideLastPressed = OS.GetTicksMsec();
             return player.stateGliding;
         }
         player.AirControl(delta);
