@@ -32,7 +32,6 @@ public class Gliding : State<Player> {
 
     public override State<Player> Update(float delta, Player player, float timeInState) {
         if(!Input.IsActionPressed("key_jump")) {
-            player.velocity = new Vector2(0,0);
             return player.stateFalling;
         }
 
