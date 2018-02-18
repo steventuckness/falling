@@ -43,8 +43,7 @@ glideAgainWaitTime = 300
 
 [node name="Finish" type="Node2D" parent="." index="2"]
 
-editor/display_folded = true
-position = Vector2( 1000, 250 )
+position = Vector2( 903.601, 299.723 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Area2D" type="Area2D" parent="Finish" index="0"]
@@ -59,8 +58,8 @@ audio_bus_name = "Master"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Finish/Area2D" index="0"]
 
-position = Vector2( -913.53, -343.652 )
 shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="ParallaxBackgroundCanvas" parent="." index="3" instance=ExtResource( 4 )]
 
