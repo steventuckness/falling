@@ -14,6 +14,10 @@ config/name="Falling"
 run/main_scene="res://world/MainScene.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+ActManager="*res://engine/autoloads/ActManager.cs"
+
 [display]
 
 window/size/width=640

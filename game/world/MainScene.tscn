@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://world/act/Act.cs" type="Script" id=1]
 [ext_resource path="res://world/areas/sandbox/sandbox.tscn" type="PackedScene" id=2]
@@ -6,7 +6,12 @@
 [ext_resource path="res://world/areas/forest/forestParallaxBackground.tscn" type="PackedScene" id=4]
 [ext_resource path="res://world/spawn/Spawn.tscn" type="PackedScene" id=5]
 
-[node name="MainScene" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 30.9384, 34.7962 )
+
+[node name="MainScene" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -38,12 +43,33 @@ glideAgainWaitTime = 300
 
 [node name="Finish" type="Node2D" parent="." index="2"]
 
-position = Vector2( -75, -123 )
+editor/display_folded = true
+position = Vector2( 1000, 250 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Area2D" type="Area2D" parent="Finish" index="0"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Finish/Area2D" index="0"]
+
+position = Vector2( -913.53, -343.652 )
+shape = SubResource( 1 )
 
 [node name="ParallaxBackgroundCanvas" parent="." index="3" instance=ExtResource( 4 )]
 
 [node name="Spawn" parent="." index="4" instance=ExtResource( 5 )]
 
 position = Vector2( -107, -32 )
+
+[connection signal="area_entered" from="Finish/Area2D" to="." method="FinishEntered"]
+
+[connection signal="body_entered" from="Finish/Area2D" to="." method="FinishEntered"]
 
 

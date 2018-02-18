@@ -79,4 +79,11 @@ public class Act : Node {
 
         this.sm.Update(delta, this);
     }
+    private void FinishEntered(Godot.Object area)
+    {
+        GD.Print("Finish triggered");
+        ((ActManager)this.GetNode("/root/ActManager")).NextAct();
+    }
 }
+
+

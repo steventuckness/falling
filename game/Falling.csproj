@@ -64,6 +64,7 @@
     <Compile Include="engine\state_machine\StateMachine.cs" />
     <Compile Include="engine\state_machine\State.cs" />
     <Compile Include="engine\math\Acceleration.cs" />
+    <Compile Include="engine\autoloads\ActManager.cs" />
     <Compile Include="world\act\Act.cs" />
     <Compile Include="world\act\states\Play.cs" />
     <Compile Include="world\act\states\ActRespawn.cs" />
