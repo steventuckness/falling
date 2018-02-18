@@ -69,6 +69,8 @@
     <Compile Include="world\act\states\Play.cs" />
     <Compile Include="world\act\states\ActRespawn.cs" />
     <Compile Include="world\areas\forest\forest_act_01\ForestAct01.cs" />
+    <Compile Include="world\Cam.cs" />
+    <Compile Include="world\camera\CamLock.cs" />
     <Compile Include="world\hazards\Spike.cs" />
     <Compile Include="world\MainScene.cs" />
   </ItemGroup>

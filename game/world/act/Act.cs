@@ -12,6 +12,7 @@ public class Act : Node {
     private Player player;
     private Node2D finish;
     private Node2D debug;
+    private Cam cam;
 
     // Exports /////////////////////////////////////////////////////////////////
     [Export]
@@ -29,21 +30,45 @@ public class Act : Node {
 
     public override void _Ready() {
         // Get nodes
-        this.spawn = (Node2D) this.GetNode("Spawn");
-        this.player = (Player) this.GetNode("Player");
-        this.finish = (Node2D) this.GetNode("Finish");
+        this.spawn = (Node2D)this.GetNode("Spawn");
+        this.player = (Player)this.GetNode("Player");
+        this.finish = (Node2D)this.GetNode("Finish");
+        this.cam = (Cam)this.GetNode("Cam");
+
+        this.cam.Follow(this.player);
 
         // Wire events
-        if(this.player.HasUserSignal(Player.SIGNAL_DIED)) {
+        if (this.player.HasUserSignal(Player.SIGNAL_DIED)) {
             this.player.Connect(Player.SIGNAL_DIED, this, "PlayerDied");
+        }
+
+        // Grab all the cam-locks
+        object[] camLocks = this.GetNode("CamLocks").GetChildren();
+        foreach(CamLock camLock in camLocks) {
+            camLock.Connect(CamLock.PLAYER_ENTERED, this, "OnCamLimitEnter");
+            camLock.Connect(CamLock.PLAYER_EXITED, this, "OnCamLimitExit");
         }
 
         this.sm.Init(this.statePlay);
     }
 
+    public void OnCamLimitEnter(CamLock camLock) {
+        // Use the camera lock that we entered to adjust
+        // the limits of the camera
+        this.cam.SetLimits(
+            camLock.LockCamera(this.cam)
+        );
+    }
+
+    public void OnCamLimitExit(CamLock camLock) {
+        if(camLock.ShouldUnlockOnExit()) {
+            this.cam.UnsetLimits();
+        }
+    }
+
     public Node2D CreateDebug() {
-        PackedScene scene = (PackedScene) ResourceLoader.Load("res://engine/Debug.tscn");
-        Debug debugNode = (Debug) scene.Instance();
+        PackedScene scene = (PackedScene)ResourceLoader.Load("res://engine/Debug.tscn");
+        Debug debugNode = (Debug)scene.Instance();
         debugNode.SetAct(this);
 
         return debugNode;
@@ -56,21 +81,22 @@ public class Act : Node {
     }
 
     public override void _PhysicsProcess(float delta) {
-        if(Input.IsActionJustPressed("key_restart")) {
+        if (Input.IsActionJustPressed("key_restart")) {
             this.GetTree().ReloadCurrentScene();
         }
 
-        if(Input.IsActionJustPressed("key_debug_toggle")) {
-            if(this.debug != null) {
-                Camera2D cam = (Camera2D) this.player.GetNode("Camera2D");
+        if (Input.IsActionJustPressed("key_debug_toggle")) {
+            if (this.debug != null) {
+                Camera2D cam = (Camera2D)this.player.GetNode("Camera2D");
                 cam.MakeCurrent();
                 this.RemoveChild(this.debug);
                 this.debug = null;
                 this.player.paused = false;
-            } else {
+            }
+            else {
                 this.debug = this.CreateDebug();
                 this.debug.SetPosition(this.player.GetPosition());
-                Camera2D cam = (Camera2D) this.debug.GetNode("Camera2D");
+                Camera2D cam = (Camera2D)this.debug.GetNode("Camera2D");
                 this.AddChild(debug);
                 cam.MakeCurrent();
                 this.player.paused = true;

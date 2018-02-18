@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://world/act/Act.cs" type="Script" id=1]
 [ext_resource path="res://world/areas/sandbox/sandbox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://world/areas/forest/forestParallaxBackground.tscn" type="PackedScene" id=4]
 [ext_resource path="res://world/spawn/Spawn.tscn" type="PackedScene" id=5]
+[ext_resource path="res://world/camera/Cam.tscn" type="PackedScene" id=6]
+[ext_resource path="res://world/camera/CamLock.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -23,7 +25,7 @@ respawnTime = 2.0
 
 [node name="Level_Sandbox" parent="." index="0" instance=ExtResource( 2 )]
 
-position = Vector2( 0, 1 )
+position = Vector2( 0, 0 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Player" parent="." index="1" instance=ExtResource( 3 )]
@@ -43,6 +45,7 @@ glideAgainWaitTime = 300
 
 [node name="Finish" type="Node2D" parent="." index="2"]
 
+editor/display_folded = true
 position = Vector2( 903.601, 299.723 )
 _sections_unfolded = [ "Transform" ]
 
@@ -67,8 +70,26 @@ _sections_unfolded = [ "Transform" ]
 
 position = Vector2( -107, -32 )
 
+[node name="Cam" parent="." index="5" instance=ExtResource( 6 )]
+
+[node name="CamLocks" type="Node2D" parent="." index="6"]
+
+[node name="CamLock" parent="CamLocks" index="0" instance=ExtResource( 7 )]
+
+_sections_unfolded = [ "Collision" ]
+xMin = true
+xMax = false
+yMin = false
+yMax = true
+unLockOnExit = true
+
+[node name="Limits" parent="CamLocks/CamLock" index="0"]
+
+polygon = PoolVector2Array( -208, 80, 159, 80, 160, -384, -208, -384 )
+
 [connection signal="area_entered" from="Finish/Area2D" to="." method="FinishEntered"]
 
 [connection signal="body_entered" from="Finish/Area2D" to="." method="FinishEntered"]
 
 
+[editable path="CamLocks/CamLock"]
