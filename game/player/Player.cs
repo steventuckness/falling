@@ -143,25 +143,12 @@ public class Player : KinematicBody2D {
         }
     }
 
-    private void CameraLookahead(float delta) {
-        // Camera2D cam = (Camera2D) this.GetNode("Camera2D");
-        // Vector2 offset = new Vector2(Mathf.Sign(this.velocity.x) * 200f, 0);
-        // Vector2 currentOffset = cam.GetOffset();
-
-
-        // GD.Print(cam.GetViewport().GetSize());
-        // GD.Print(cam.GetViewport().GetCanvasTransform());
-
-        // cam.SetOffset(currentOffset.LinearInterpolate(offset, 1f * delta));
-    }
-
     public override void _PhysicsProcess(float delta) {
         if(this.paused) {
             return;
         }
         // this.collision.Update();
         this.sm.Update(delta, this);
-        this.CameraLookahead(delta);
     }
 
  	public Vector2 Move(float slopeStop) { 
