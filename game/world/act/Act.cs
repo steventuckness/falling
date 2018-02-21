@@ -11,8 +11,11 @@ public class Act : Node {
     private Node2D spawn;
     private Player player;
     private Node2D finish;
+    private Node2D finishOverlay;
     private Node2D debug;
     private Cam cam;
+
+    private long startTime;
 
     // Exports /////////////////////////////////////////////////////////////////
     [Export]
@@ -29,10 +32,13 @@ public class Act : Node {
     }
 
     public override void _Ready() {
+        this.startTime = OS.GetTicksMsec();
+        
         // Get nodes
         this.spawn = (Node2D)this.GetNode("Spawn");
         this.player = (Player)this.GetNode("Player");
         this.finish = (Node2D)this.GetNode("Finish");
+        this.finishOverlay = (Node2D)this.GetNode("FinishOverlay");
         this.cam = (Cam)this.GetNode("Cam");
 
         this.cam.Follow(this.player);
@@ -40,6 +46,14 @@ public class Act : Node {
         // Wire events
         if (this.player.HasUserSignal(Player.SIGNAL_DIED)) {
             this.player.Connect(Player.SIGNAL_DIED, this, "PlayerDied");
+        }
+
+        if (this.finish.HasUserSignal(Finish.SIGNAL_REACHED_FINISH)) {
+            this.finish.Connect(Finish.SIGNAL_REACHED_FINISH, this, "PlayerReachedFinish");
+        }
+
+        if (this.finishOverlay.HasUserSignal(FinishOverlay.SIGNAL_GO_TO_NEXT_LEVEL)) {
+            this.finishOverlay.Connect(FinishOverlay.SIGNAL_GO_TO_NEXT_LEVEL, this, "NextLevel");
         }
 
         // Grab all the cam-locks
@@ -105,10 +119,16 @@ public class Act : Node {
 
         this.sm.Update(delta, this);
     }
-    private void FinishEntered(Godot.Object area)
+    private void PlayerReachedFinish()
     {
-        GD.Print("Finish triggered");
-        ((ActManager)this.GetNode("/root/ActManager")).NextAct();
+        long timeElapsed = OS.GetTicksMsec() - this.startTime;
+        this.finish.SetProcess(false);
+        this.finishOverlay.Call("ShowOverlay", timeElapsed);
+        GetTree().SetPause(true);
+    }
+
+    private void NextLevel() {
+         ((ActManager)this.GetNode("/root/ActManager")).NextAct();
     }
 }
 
