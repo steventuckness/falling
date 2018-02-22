@@ -71,6 +71,8 @@
     <Compile Include="world\areas\forest\forest_act_01\ForestAct01.cs" />
     <Compile Include="world\Cam.cs" />
     <Compile Include="world\camera\CamLock.cs" />
+    <Compile Include="world\finishOverlay\FinishOverlay.cs" />
+    <Compile Include="world\finish\Finish.cs" />
     <Compile Include="world\hazards\Spike.cs" />
     <Compile Include="world\MainScene.cs" />
   </ItemGroup>
