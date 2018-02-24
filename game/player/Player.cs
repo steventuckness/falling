@@ -120,6 +120,14 @@ public class Player : KinematicBody2D {
         this.sm.TransitionState(this.stateRespawn);
     }
 
+    public bool IsJumping() {
+        return (this.sm.GetCurrentState() == this.stateJumping);
+    }
+
+    public bool IsFalling() {
+        return (this.sm.GetCurrentState() == this.stateFalling);
+    }
+
     public void PlayAnimation(Animation animation) {
         AnimationPlayer player = (AnimationPlayer) this.GetNode("Animation");
         string directionStr = (direction == Direction.Left ? "left" : "right");
