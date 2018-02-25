@@ -74,6 +74,15 @@
     <Compile Include="world\finishOverlay\FinishOverlay.cs" />
     <Compile Include="world\finish\Finish.cs" />
     <Compile Include="world\hazards\Spike.cs" />
+    <Compile Include="world\interactive\door\DoorBase.cs" />
+    <Compile Include="world\interactive\door\DoorSignalGate.cs" />
+    <Compile Include="world\interactive\door\IDoor.cs" />
+    <Compile Include="world\interactive\ISignal.cs" />
+    <Compile Include="world\interactive\switch\SwitchBase.cs" />
+    <Compile Include="world\interactive\switch\ISwitch.cs" />
+    <Compile Include="world\interactive\SignalGate.cs" />
+    <Compile Include="world\interactive\switch\TimedSwitch.cs" />
+    <Compile Include="world\interactive\switch\ToggleSwitch.cs" />
     <Compile Include="world\MainScene.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

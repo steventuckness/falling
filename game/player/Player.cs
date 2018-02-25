@@ -22,60 +22,38 @@ public class Player : KinematicBody2D {
 
     private float groundImpactSpeed = 0.0f; // px / sec
 
-    [Export]
-    public float gravity = 200.0f;
+    public float gravity = 900.0f;
 
     public Direction direction = Direction.Right;
     private Animation animation;
 
     // Air
-    [Export]
     public float  jumpHeight            = 56f;
-    [Export]
     public float airAcceleration        = 100f;
-    [Export]
     public float airFriction            = 50f;
-    [Export]
     public float airMaxSpeed            = 200f;
 
     // Ground
-    [Export]
-    public float groundFriction         = 200.0f;
-    [Export]
-    public float groundAcceleration     = 150.0f;
-    [Export]
+    public float groundFriction         = 900.0f;
+    public float groundAcceleration     = 500.0f;
     public float groundMaxSpeed         = 400.0f;
-    [Export]
     public float groundSprintMaxSpeed   = 500.0f;
 
     // Collision /////////////////////////////////////////////////////////////// 
     public PlayerCollision collision; // Mostly for storing pre-move collision checks
 
     // Falling
-    [Export]
-    public float fallingMaxSpeed = 50.0f;
-
-    [Export]
-    public float impactDeadSpeed = 30.0f;
+    public float fallingMaxSpeed = 500.0f;
+    public float impactDeadSpeed = 1000.0f;
 	
     // Gliding ////////////////////////////////////////////////////////////////
-    [Export]
     public float glideMaxYSpeed = 20.0f;
-
-
-    [Export]
     public float glideDrag = 30.0f;
-
-    [Export]
     public float glideLift = 9.0f;
-
-    [Export]
     public int glideAgainWaitTime = 300; // milliseconds
-
 
     // MISC ////////////////////////////////////////////////////////////////////
     public Vector2 carry = new Vector2(0, 0);
-    [Export]
     public float respawnTime           = 2.0f;  // Seconds
 
     public enum Direction {
