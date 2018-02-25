@@ -15,23 +15,7 @@ collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.001
 script = ExtResource( 1 )
-_sections_unfolded = [ "Angular", "Linear", "Z Index" ]
-gravity = 200.0
-jumpHeight = 56.0
-airAcceleration = 100.0
-airFriction = 50.0
-airMaxSpeed = 200.0
-groundFriction = 200.0
-groundAcceleration = 150.0
-groundMaxSpeed = 400.0
-groundSprintMaxSpeed = 500.0
-fallingMaxSpeed = 50.0
-impactDeadSpeed = 30.0
-glideMaxYSpeed = 10.0
-glideDrag = 10.0
-glideLift = 20.0
-glideAgainWaitTime = 300
-respawnTime = 2.0
+_sections_unfolded = [ "Angular", "Collision", "Linear" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
