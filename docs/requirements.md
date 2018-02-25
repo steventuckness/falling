@@ -34,6 +34,7 @@
 1. Spikes
 1. Door
     1. Can be connected to more than one switch in order to open
+    1. Door should have an open and closing time
 1. Switches
     1. The switch shall be able to be placed anywhere in the level and connected
     to one or more doors
