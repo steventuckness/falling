@@ -12,7 +12,6 @@ __meta__ = {
 anchorMargin = Vector2( 0.333, 0.333 )
 cameraSnapStep = Vector2( 128, 128 )
 hSnapWithVelocity = false
-turnTimeout = 1.0
 showDebugLines = true
 
 [node name="Camera2D" type="Camera2D" parent="." index="0"]
@@ -40,23 +39,5 @@ editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
 _sections_unfolded = [ "Limit" ]
-
-[node name="Label" type="Label" parent="." index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 40.0
-margin_bottom = 14.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-text = "C"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 

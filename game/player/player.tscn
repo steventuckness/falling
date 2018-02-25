@@ -1,176 +1,14 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://player/Player.cs" type="Script" id=1]
-[ext_resource path="res://player/graphics/character_sprite_sheet.png" type="Texture" id=2]
+[ext_resource path="res://player/assets/sprites/player.png" type="Texture" id=2]
 
-[sub_resource type="Animation" id=1]
-
-resource_name = "falling_left"
-length = 0.44
-loop = true
-step = 0.05
-
-[sub_resource type="Animation" id=2]
-
-resource_name = "falling_right"
-length = 0.44
-loop = true
-step = 0.05
-
-[sub_resource type="Animation" id=3]
-
-resource_name = "gliding_left"
-length = 0.44
-loop = true
-step = 0.05
-
-[sub_resource type="Animation" id=4]
-
-resource_name = "gliding_right"
-length = 0.44
-loop = true
-step = 0.05
-
-[sub_resource type="Animation" id=5]
-
-resource_name = "idle_left"
-length = 1.8
-loop = true
-step = 0.13
-tracks/0/type = "value"
-tracks/0/path = NodePath("Spritesheet:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.13, 0.26, 0.39, 0.52, 0.65, 0.78, 0.91, 1.04, 1.17, 1.3, 1.43, 1.56, 1.69, 1.82 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Spritesheet:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=6]
-
-resource_name = "idle_right"
-length = 1.8
-loop = true
-step = 0.13
-tracks/0/type = "value"
-tracks/0/path = NodePath("Spritesheet:flip_h")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Spritesheet:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.13, 0.26, 0.39, 0.52, 0.65, 0.78, 0.91, 1.04, 1.17, 1.3, 1.43, 1.56, 1.69 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
-}
-
-[sub_resource type="Animation" id=7]
-
-length = 0.44
-loop = true
-step = 0.05
-
-[sub_resource type="Animation" id=8]
-
-length = 0.44
-loop = true
-step = 0.05
-
-[sub_resource type="Animation" id=9]
-
-length = 0.8
-loop = true
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("Spritesheet:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.8 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 20, 27 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Spritesheet:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=10]
-
-length = 0.8
-loop = true
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("Spritesheet:flip_h")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Spritesheet:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.8 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 20, 27 ]
-}
-
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 8, 22 )
+extents = Vector2( 8, 8 )
 
-[node name="Player" type="KinematicBody2D" index="0"]
+[node name="Player" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 1
@@ -192,68 +30,15 @@ impactDeadSpeed = 30.0
 glideMaxYSpeed = 10.0
 glideDrag = 10.0
 glideLift = 20.0
+glideAgainWaitTime = 300
 respawnTime = 2.0
 
-[node name="Camera2D" type="Camera2D" parent="." index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
-anchor_mode = 1
-rotating = false
-current = false
-zoom = Vector2( 1, 1 )
-limit_left = -10000000
-limit_top = -10000000
-limit_right = 10000000
-limit_bottom = 10000000
-limit_smoothed = false
-drag_margin_h_enabled = false
-drag_margin_v_enabled = false
-smoothing_enabled = false
-smoothing_speed = 5.0
-offset_v = 0.0
-offset_h = 0.0
-drag_margin_left = 0.2
-drag_margin_top = 0.2
-drag_margin_right = 0.2
-drag_margin_bottom = 0.2
-editor_draw_screen = true
-editor_draw_limits = true
-editor_draw_drag_margin = true
-_sections_unfolded = [ "Editor" ]
-
-[node name="Spritesheet" type="Sprite" parent="." index="1"]
-
-texture = ExtResource( 2 )
-offset = Vector2( 0, -3 )
-vframes = 4
-hframes = 20
-frame = 22
-_sections_unfolded = [ "Animation", "Offset", "Region", "Transform" ]
-
-[node name="Animation" type="AnimationPlayer" parent="." index="2"]
-
-root_node = NodePath("..")
-autoplay = ""
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-playback_speed = 1.0
-anims/falling_left = SubResource( 1 )
-anims/falling_right = SubResource( 2 )
-anims/gliding_left = SubResource( 3 )
-anims/gliding_right = SubResource( 4 )
-anims/idle_left = SubResource( 5 )
-anims/idle_right = SubResource( 6 )
-anims/jumping_left = SubResource( 7 )
-anims/jumping_right = SubResource( 8 )
-anims/walking_left = SubResource( 9 )
-anims/walking_right = SubResource( 10 )
-blend_times = [  ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
-
-shape = SubResource( 11 )
+shape = SubResource( 1 )
 _sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="BL" type="RayCast2D" parent="." index="4"]
+[node name="BL" type="RayCast2D" parent="." index="1"]
 
 position = Vector2( -8, 0 )
 enabled = true
@@ -262,7 +47,7 @@ cast_to = Vector2( 0, 42 )
 collision_mask = 1
 _sections_unfolded = [ "Transform" ]
 
-[node name="BC" type="RayCast2D" parent="." index="5"]
+[node name="BC" type="RayCast2D" parent="." index="2"]
 
 enabled = true
 exclude_parent = true
@@ -270,7 +55,7 @@ cast_to = Vector2( 0, 42 )
 collision_mask = 1
 _sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="BR" type="RayCast2D" parent="." index="6"]
+[node name="BR" type="RayCast2D" parent="." index="3"]
 
 position = Vector2( 8.18463, 0 )
 enabled = true
@@ -278,5 +63,9 @@ exclude_parent = true
 cast_to = Vector2( 0, 42 )
 collision_mask = 1
 _sections_unfolded = [ "Material", "Transform", "Visibility" ]
+
+[node name="Sprite" type="Sprite" parent="." index="4"]
+
+texture = ExtResource( 2 )
 
 

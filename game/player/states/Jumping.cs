@@ -15,9 +15,6 @@ public class Jumping : State<Player> {
         if (player.velocity.y >= 0) {
             return player.stateFalling;
         }
-        if(Input.IsActionJustPressed("key_jump")) {
-            return player.stateGliding;
-        }
 
         player.DetectDirectionChange();
 

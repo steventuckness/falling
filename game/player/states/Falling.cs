@@ -30,10 +30,6 @@ public class Falling : State<Player> {
             return landedState;
         }
 
-        if (Input.IsActionJustPressed("key_jump") && (OS.GetTicksMsec() - this.timeWhenGlideLastPressed >= player.glideAgainWaitTime)) {
-            this.timeWhenGlideLastPressed = OS.GetTicksMsec();
-            return player.stateGliding;
-        }
         player.AirControl(delta);
         player.ApplyGravity(delta);
         player.Move(0f);
