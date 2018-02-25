@@ -21,7 +21,7 @@ public class Cam : Node2D {
     [Export]
     public bool hSnapWithVelocity = false;
     [Export]
-    public bool showDebugLines = true;
+    public bool showDebugLines = false;
 
     // Anchors /////////////////////////////////////////////////////////////////
     private struct HorizontalAnchor {

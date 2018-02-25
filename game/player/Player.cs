@@ -5,7 +5,6 @@ public class Player : KinematicBody2D {
     // State ///////////////////////////////////////////////////////////////////
     private StateMachine<Player> sm = new StateMachine<Player>();
     public Idle     stateIdle       = new Idle();
-    public Gliding  stateGliding    = new Gliding();
     public Falling  stateFalling    = new Falling();
     public Walking  stateWalking    = new Walking();
     public Jumping  stateJumping    = new Jumping();
@@ -129,26 +128,26 @@ public class Player : KinematicBody2D {
     }
 
     public void PlayAnimation(Animation animation) {
-        AnimationPlayer player = (AnimationPlayer) this.GetNode("Animation");
-        string directionStr = (direction == Direction.Left ? "left" : "right");
-        this.animation = animation;
-        switch (animation) {
-            case Animation.Walking:
-                player.Play("walking_" + directionStr);
-                break;
-            case Animation.Gliding:
-                player.Play("gliding_" + directionStr);
-                break;
-            case Animation.Jumping:
-                player.Play("jumping_" + directionStr);
-                break;
-            case Animation.Falling:
-                player.Play("falling_" + directionStr);
-                break;
-            case Animation.Idle:
-                player.Play("idle_" + directionStr);
-                break;
-        }
+        // AnimationPlayer player = (AnimationPlayer) this.GetNode("Animation");
+        // string directionStr = (direction == Direction.Left ? "left" : "right");
+        // this.animation = animation;
+        // switch (animation) {
+        //     case Animation.Walking:
+        //         player.Play("walking_" + directionStr);
+        //         break;
+        //     case Animation.Gliding:
+        //         player.Play("gliding_" + directionStr);
+        //         break;
+        //     case Animation.Jumping:
+        //         player.Play("jumping_" + directionStr);
+        //         break;
+        //     case Animation.Falling:
+        //         player.Play("falling_" + directionStr);
+        //         break;
+        //     case Animation.Idle:
+        //         player.Play("idle_" + directionStr);
+        //         break;
+        // }
     }
 
     public override void _PhysicsProcess(float delta) {
