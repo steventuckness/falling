@@ -28,7 +28,7 @@ public class Player : KinematicBody2D {
     private Animation animation;
 
     // Air
-    public float  jumpHeight            = 56f;
+    public float jumpHeight            = 56f;
     public float airAcceleration        = 100f;
     public float airFriction            = 50f;
     public float airMaxSpeed            = 200f;
@@ -56,6 +56,9 @@ public class Player : KinematicBody2D {
     public Vector2 carry = new Vector2(0, 0);
     public float respawnTime           = 2.0f;  // Seconds
 
+    // UI //////////////////////////////////////////////////////////////////////
+    public CloneMenu cloneMenu;
+
     public enum Direction {
         Left,
         Right
@@ -75,6 +78,16 @@ public class Player : KinematicBody2D {
         this.collision = new PlayerCollision(this); 
         this.sm.Init(this.stateIdle);
         this.PlayAnimation(Animation.Walking);
+
+        this.cloneMenu = (CloneMenu) this.GetNode("Node2D/Menu");
+        this.cloneMenu.SetOptions(CloneOptions.Instance.OptionsFrom(
+            new CloneOptions.ECloneOption[] {
+                CloneOptions.ECloneOption.RED,
+                CloneOptions.ECloneOption.GREEN,
+                CloneOptions.ECloneOption.BLUE
+            }
+        ));
+        this.cloneMenu.Hide();
     }
 
     public bool IsDead() {
@@ -132,7 +145,12 @@ public class Player : KinematicBody2D {
         if(this.paused) {
             return;
         }
-        // this.collision.Update();
+        if(Input.IsActionPressed("key_up")) {
+            this.cloneMenu.Show();
+        } else {
+            this.cloneMenu.Hide();
+        }
+
         this.sm.Update(delta, this);
     }
 
