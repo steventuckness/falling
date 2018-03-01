@@ -1,25 +1,42 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://world/areas/forest/forest_act_01/ForestAct01.cs" type="Script" id=1]
-[ext_resource path="res://world/areas/forest/tilesets/Tileset_Forest.res" type="TileSet" id=2]
-[ext_resource path="res://world/tilesets/Tileset_World.res" type="TileSet" id=3]
-[ext_resource path="res://world/tilesets/Tileset_Collision.res" type="TileSet" id=4]
-[ext_resource path="res://world/hazards/Spike.tscn" type="PackedScene" id=5]
-[ext_resource path="res://player/player.tscn" type="PackedScene" id=6]
-[ext_resource path="res://world/spawn/Spawn.tscn" type="PackedScene" id=7]
-[ext_resource path="res://world/spawn/SpawnCam.tscn" type="PackedScene" id=8]
+[ext_resource path="res://world/tilesets/Tileset_Collision.res" type="TileSet" id=2]
+[ext_resource path="res://world/spawn/SpawnCam.tscn" type="PackedScene" id=3]
+[ext_resource path="res://world/spawn/Spawn.tscn" type="PackedScene" id=4]
+[ext_resource path="res://player/player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://world/finish/Finish.tscn" type="PackedScene" id=6]
+[ext_resource path="res://world/platform/platform.tscn" type="PackedScene" id=7]
 
+[sub_resource type="Curve2D" id=1]
 
+bake_interval = 5.0
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 160, 70, 0, 0, 0, 0, 40, 70, 0, 0, 0, 0, 160, 70 )
+}
 
+[sub_resource type="Curve2D" id=2]
 
+bake_interval = 5.0
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -30, 190, 0, 0, 0, 0, -30, 60, 0, 0, 0, 0, -30, 190 )
+}
 
-[node name="ForestAct01" type="Node2D"]
+[sub_resource type="Curve2D" id=3]
 
+bake_interval = 5.0
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 210, 190, 0, 0, 0, 0, 210, 70, 0, 0, 0, 0, 210, 190 )
+}
+
+[node name="ForestAct01" type="Node2D" index="0"]
+
+position = Vector2( 150, 50 )
 script = ExtResource( 1 )
 
-[node name="Foreground" type="TileMap" parent="." index="0"]
+[node name="Collision" type="TileMap" parent="." index="0"]
 
-z_index = 1
+position = Vector2( -60, 0 )
 mode = 0
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 16, 16 )
@@ -36,88 +53,86 @@ collision_layer = 1
 collision_mask = 1
 occluder_light_mask = 1
 format = 1
-tile_data = PoolIntArray( -262144, 0, 0, -262143, 1, 0, -262142, 0, 0, -262141, 1, 0, -262140, 0, 0, -262139, 1, 0, -196608, 1, 0, -196603, 0, 0, -131072, 0, 0, -131067, 1, 0, -65536, 1, 0, -65531, 0, 0, 0, 0, 0, 1, 2, 0, 5, 1, 0, 65536, 1, 0, 65541, 0, 0, 131072, 0, 0, 131077, 1, 0, 196608, 1, 0, 196613, 0, 0, 196614, 1, 0, 196615, 0, 0, 196616, 1, 0, 196617, 0, 0, 196618, 1, 0, 262144, 0, 0, 262154, 1, 0, 327680, 1, 0, 327690, 0, 0, 393216, 0, 0, 393226, 1, 0, 458752, 1, 0, 458757, 1, 0, 458758, 0, 0, 458759, 1, 0, 458760, 0, 0, 458761, 1, 0, 458762, 0, 0, 524288, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 589824, 1, 0, 589825, 0, 0, 589826, 1, 0, 589827, 0, 0, 589828, 1, 0, 589829, 1, 0 )
-_sections_unfolded = [ "Cell", "Z Index" ]
-
-[node name="TileMap" type="TileMap" parent="." index="1"]
-
-mode = 0
-tile_set = ExtResource( 3 )
-cell_size = Vector2( 16, 16 )
-cell_quadrant_size = 16
-cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-cell_half_offset = 2
-cell_tile_origin = 0
-cell_y_sort = false
-cell_clip_uv = false
-collision_use_kinematic = false
-collision_friction = 1.0
-collision_bounce = 0.0
-collision_layer = 1
-collision_mask = 1
-occluder_light_mask = 1
-format = 1
-tile_data = PoolIntArray( 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 0, 0 )
+tile_data = PoolIntArray( -131078, 0, 0, -131077, 0, 0, -131076, 0, 0, -131075, 0, 0, -131074, 0, 0, -131073, 0, 0, -196608, 0, 0, -196607, 0, 0, -196606, 0, 0, -196605, 0, 0, -196604, 0, 0, -196603, 0, 0, -196602, 0, 0, -196601, 0, 0, -196600, 0, 0, -196599, 0, 0, -196598, 0, 0, -196597, 0, 0, -196596, 0, 0, -196595, 0, 0, -196594, 0, 0, -196593, 0, 0, -196592, 0, 0, -196591, 0, 0, -196590, 0, 0, -196589, 0, 0, -196588, 0, 0, -196587, 0, 0, -196586, 0, 0, -196585, 0, 0, -65542, 0, 0, -131049, 0, 0, -6, 0, 0, -65513, 0, 0, 65530, 0, 0, 23, 0, 0, 131066, 0, 0, 65559, 0, 0, 196602, 0, 0, 131095, 0, 0, 262138, 0, 0, 196631, 0, 0, 327674, 0, 0, 262167, 0, 0, 393210, 0, 0, 327703, 0, 0, 458746, 0, 0, 393239, 0, 0, 524282, 0, 0, 458775, 0, 0, 589818, 0, 0, 524311, 0, 0, 655354, 0, 0, 589847, 0, 0, 720890, 0, 0, 655383, 0, 0, 786426, 0, 0, 720919, 0, 0, 851962, 0, 0, 786455, 0, 0, 917498, 0, 0, 917499, 0, 0, 917500, 0, 0, 917501, 0, 0, 917502, 0, 0, 917503, 0, 0, 851968, 0, 0, 851969, 0, 0, 851970, 0, 0, 851971, 0, 0, 851972, 0, 0, 851973, 0, 0, 851974, 0, 0, 851975, 0, 0, 851976, 0, 0, 851977, 0, 0, 851978, 0, 0, 851979, 0, 0, 851980, 0, 0, 851981, 0, 0, 851982, 0, 0, 851983, 0, 0, 851984, 0, 0, 851985, 0, 0, 851986, 0, 0, 851987, 0, 0, 851988, 0, 0, 851989, 0, 0, 851990, 0, 0, 851991, 0, 0 )
 _sections_unfolded = [ "Cell" ]
 
-[node name="Collision" type="TileMap" parent="." index="2"]
+[node name="SpawnCam" parent="." index="1" instance=ExtResource( 3 )]
 
-visible = false
-mode = 0
-tile_set = ExtResource( 4 )
-cell_size = Vector2( 16, 16 )
-cell_quadrant_size = 16
-cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-cell_half_offset = 2
-cell_tile_origin = 0
-cell_y_sort = false
-cell_clip_uv = false
-collision_use_kinematic = false
-collision_friction = 1.0
-collision_bounce = 0.0
-collision_layer = 1
-collision_mask = 1
-occluder_light_mask = 1
-format = 1
-tile_data = PoolIntArray( -262144, 0, 0, -262143, 0, 0, -262142, 0, 0, -262141, 0, 0, -262140, 0, 0, -262139, 0, 0, -196608, 0, 0, -196603, 0, 0, -131072, 0, 0, -131067, 0, 0, -65536, 0, 0, -65531, 0, 0, 0, 0, 0, 1, 0, 0, 5, 0, 0, 65536, 0, 0, 65541, 0, 0, 131072, 0, 0, 131077, 0, 0, 196608, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 262144, 0, 0, 262154, 0, 0, 327680, 0, 0, 327690, 0, 0, 393216, 0, 0, 393226, 0, 0, 458752, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 524288, 0, 0, 524293, 0, 0, 589824, 0, 0, 589825, 0, 0, 589826, 0, 0, 589827, 0, 0, 589828, 0, 0, 589829, 0, 0 )
-_sections_unfolded = [ "Cell" ]
+position = Vector2( -100, 170 )
 
-[node name="Hazards" type="Node2D" parent="." index="3"]
+[node name="Spawn" parent="." index="2" instance=ExtResource( 4 )]
 
-editor/display_folded = true
-
-[node name="Spikes" type="Node2D" parent="Hazards" index="0"]
-
-[node name="Spike_01" parent="Hazards/Spikes" index="0" instance=ExtResource( 5 )]
-
-position = Vector2( 24, 136 )
-
-[node name="Spike_02" parent="Hazards/Spikes" index="1" instance=ExtResource( 5 )]
-
-position = Vector2( 40, 136 )
-
-[node name="Spike_03" parent="Hazards/Spikes" index="2" instance=ExtResource( 5 )]
-
-position = Vector2( 56, 136 )
-
-[node name="Spike_04" parent="Hazards/Spikes" index="3" instance=ExtResource( 5 )]
-
-position = Vector2( 72, 136 )
-
-[node name="player" parent="." index="4" instance=ExtResource( 6 )]
-
-position = Vector2( 28, -11 )
-groundFriction = 500.0
-impactDeadSpeed = 30.0
-respawnTime = 2.0
-
-[node name="Spawn" parent="." index="5" instance=ExtResource( 7 )]
-
-position = Vector2( 30, -14 )
+position = Vector2( -80, 180 )
 _sections_unfolded = [ "Z Index" ]
 
-[node name="SpawnCam" parent="." index="6" instance=ExtResource( 8 )]
+[node name="player" parent="." index="3" instance=ExtResource( 5 )]
 
-visible = false
+position = Vector2( -100, 160 )
+
+[node name="Finish" parent="." index="4" instance=ExtResource( 6 )]
+
+position = Vector2( 200, 50 )
+
+[node name="Platforms" type="Node2D" parent="." index="5"]
+
+[node name="Path2D2" type="Path2D" parent="Platforms" index="0"]
+
+position = Vector2( -20, -20 )
+curve = SubResource( 1 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Platforms/Path2D2" index="0"]
+
+position = Vector2( 160, 70 )
+rotation = 3.14159
+offset = 0.0
+h_offset = 0.0
+v_offset = 0.0
+rotate = false
+cubic_interp = true
+loop = true
+lookahead = 4.0
+
+[node name="Platform" parent="Platforms/Path2D2/PathFollow2D" index="0" instance=ExtResource( 7 )]
+
+[node name="Path2D" type="Path2D" parent="Platforms" index="1"]
+
+curve = SubResource( 2 )
+
+[node name="PathFollow2D2" type="PathFollow2D" parent="Platforms/Path2D" index="0"]
+
+position = Vector2( -30, 190 )
+offset = 0.0
+h_offset = 0.0
+v_offset = 0.0
+rotate = false
+cubic_interp = true
+loop = true
+lookahead = 4.0
+_sections_unfolded = [ "Transform" ]
+
+[node name="Platform2" parent="Platforms/Path2D/PathFollow2D2" index="0" instance=ExtResource( 7 )]
+
+_sections_unfolded = [ "Transform" ]
+
+[node name="Path2D3" type="Path2D" parent="Platforms" index="2"]
+
+position = Vector2( -10, 0 )
+curve = SubResource( 3 )
+
+[node name="PathFollow2D3" type="PathFollow2D" parent="Platforms/Path2D3" index="0"]
+
+position = Vector2( 210, 190 )
+rotation = -1.5708
+offset = 0.0
+h_offset = 0.0
+v_offset = 0.0
+rotate = false
+cubic_interp = true
+loop = true
+lookahead = 4.0
+
+[node name="Platform3" parent="Platforms/Path2D3/PathFollow2D3" index="0" instance=ExtResource( 7 )]
+
+rotation = 1.5708
 
 
