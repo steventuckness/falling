@@ -84,6 +84,7 @@
     <Compile Include="world\interactive\switch\TimedSwitch.cs" />
     <Compile Include="world\interactive\switch\ToggleSwitch.cs" />
     <Compile Include="world\MainScene.cs" />
+    <Compile Include="world\platform\Platform.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
