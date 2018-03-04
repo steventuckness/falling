@@ -80,7 +80,7 @@ public class Player : KinematicBody2D {
         this.PlayAnimation(Animation.Walking);
 
         this.cloneMenu = (CloneMenu) this.GetNode("Node2D/Menu");
-        this.cloneMenu.SetOptions(CloneOptions.Instance.OptionsFrom(
+        this.cloneMenu.SetOptions(CloneOptions.OptionsFrom(
             new CloneOptions.ECloneOption[] {
                 CloneOptions.ECloneOption.RED,
                 CloneOptions.ECloneOption.GREEN,

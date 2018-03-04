@@ -33,7 +33,7 @@ _sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_lock_": true
 }
-cameraSpeed = 1.0
+cameraSpeed = 5.0
 respawnTime = 2.0
 
 [node name="Player" parent="." index="0" instance=ExtResource( 2 )]
@@ -72,8 +72,6 @@ position = Vector2( 48, 480 )
 
 [node name="Cam" parent="." index="2" instance=ExtResource( 5 )]
 
-showDebugLines = false
-
 [node name="CamLocks" type="Node2D" parent="." index="3"]
 
 editor/display_folded = true
@@ -81,10 +79,10 @@ visible = false
 
 [node name="CamLock" parent="CamLocks" index="0" instance=ExtResource( 6 )]
 
-xMin = true
-xMax = true
-yMin = true
-yMax = true
+xMin = false
+xMax = false
+yMin = false
+yMax = false
 unLockOnExit = false
 
 [node name="Limits" parent="CamLocks/CamLock" index="0"]
@@ -122,8 +120,6 @@ __meta__ = {
 }
 
 [node name="Switches" type="Node2D" parent="." index="7"]
-
-editor/display_folded = true
 
 [node name="SwitchGroup" type="Node2D" parent="Switches" index="0" groups=[
 "Door_1_Input",
@@ -239,12 +235,11 @@ shape = SubResource( 1 )
 
 [node name="Doors" type="Node2D" parent="." index="8"]
 
-editor/display_folded = true
-
 [node name="Door" type="StaticBody2D" parent="Doors" index="0" groups=[
 "Door_1",
 ]]
 
+editor/display_folded = true
 position = Vector2( 360, 488 )
 input_pickable = false
 collision_layer = 1

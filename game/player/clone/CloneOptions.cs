@@ -3,16 +3,28 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class CloneOptions  {
-    private static CloneOptions options;
-    
+public class CloneOptions {
+    public static CloneOption GetOption(ECloneOption opt) {
+        switch (opt) {
+            case ECloneOption.RED:
+                return new CloneOption("Red", Color.Color8(255, 0, 0, 255));
+            case ECloneOption.GREEN:
+                return new CloneOption("Green", Color.Color8(0, 255, 0, 255));
+            case ECloneOption.BLUE:
+                return new CloneOption("Blue", Color.Color8(0, 0, 255, 255));
+            default:
+                return new CloneOption("Red", Color.Color8(255, 0, 0, 255));
+        }
+    }
+
+    public static List<CloneOption> OptionsFrom(ECloneOption[] eClone) =>
+        eClone.ToList().Select(e => CloneOptions.GetOption(e)).ToList();
+
     public enum ECloneOption {
         RED,
         GREEN,
         BLUE
     }
-
-    private Dictionary<ECloneOption, CloneOption> list = new Dictionary<ECloneOption, CloneOption>();
 
     public class CloneOption {
         private String name;
@@ -25,28 +37,6 @@ public class CloneOptions  {
         public CloneOption(String name, Color c) {
             this.name = name;
             this.c = c;
-        }
-    }
-
-    public CloneOptions() {
-        // Create the dictionary of available clone options. Right now
-        // this is just basic colors and will likely need to be updated to use
-        // assets to support more advanced functionality.
-        this.list.Add(ECloneOption.RED,     new CloneOption("Red", Color.Color8(255, 0, 0, 255)));
-        this.list.Add(ECloneOption.GREEN,   new CloneOption("Green", Color.Color8(0, 255, 0, 255)));
-        this.list.Add(ECloneOption.BLUE,    new CloneOption("Blue", Color.Color8(0, 0, 255, 255)));
-    }
-
-    public Dictionary<ECloneOption, CloneOption> GetOptions() => this.list;
-    public List<CloneOption> GetAvailableOptions() => new List<CloneOption>(this.list.Values);
-    public List<CloneOption> OptionsFrom(ECloneOption[] eClone) => eClone.ToList().Select(e => this.list[e]).ToList();
-
-    public static CloneOptions Instance {
-        get {
-            if(options == null) {
-                options = new CloneOptions();
-            }
-            return options;
         }
     }
 }
