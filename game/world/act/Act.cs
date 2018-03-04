@@ -9,7 +9,7 @@ public class Act : Node {
 
     // Nodes ///////////////////////////////////////////////////////////////////
     private Node2D spawn;
-    private Player player;
+    private PlayerNode player;
     private Node2D finish;
     private Node2D finishOverlay;
     private Node2D debug;
@@ -27,7 +27,7 @@ public class Act : Node {
         return this.spawn;
     }
 
-    public Player GetPlayer() {
+    public PlayerNode GetPlayer() {
         return this.player;
     }
 
@@ -36,7 +36,7 @@ public class Act : Node {
         
         // Get nodes
         this.spawn = (Node2D)this.GetNode("Spawn");
-        this.player = (Player)this.GetNode("Player");
+        this.player = (PlayerNode)this.GetNode("Player");
         this.finish = (Node2D)this.GetNode("Finish");
         this.finishOverlay = (Node2D)this.GetNode("FinishOverlay");
         this.cam = (Cam)this.GetNode("Cam");

@@ -13,7 +13,7 @@ public class ActRespawn : State<Act> {
         }
 
         Node2D spawn = act.GetSpawn();
-        Player player = act.GetPlayer();
+        PlayerNode player = act.GetPlayer();
 
         Vector2 spawnPosition = spawn.GetPosition();
         Vector2 playerPosition = player.GetPosition();

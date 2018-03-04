@@ -10,7 +10,7 @@ public class Gliding : State<Player> {
     public override void OnExit(float delta, Player player) {
         Sprite playerSprite = (Sprite)player.GetNode("Spritesheet");
         //playerSprite.SetRotation(0);
-        player.SetRotation(0);
+        player.node.SetRotation(0);
 
     }
 

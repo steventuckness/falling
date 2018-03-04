@@ -1,7 +1,10 @@
 using Godot;
 using System;
 
-public class Player : KinematicBody2D {
+public class Player {
+
+    public PlayerNode node;
+
     // State ///////////////////////////////////////////////////////////////////
     private StateMachine<Player> sm = new StateMachine<Player>();
     public Idle     stateIdle       = new Idle();
@@ -72,14 +75,14 @@ public class Player : KinematicBody2D {
         Idle
     };
 
-    public override void _Ready() {
-        this.AddUserSignal(Player.SIGNAL_DIED);
+    public void _Ready() {
+        this.node.AddUserSignal(Player.SIGNAL_DIED);
         
         this.collision = new PlayerCollision(this); 
         this.sm.Init(this.stateIdle);
         this.PlayAnimation(Animation.Walking);
 
-        this.cloneMenu = (CloneMenu) this.GetNode("Node2D/Menu");
+        this.cloneMenu = (CloneMenu) this.node.GetNode("Node2D/Menu");
         this.cloneMenu.SetOptions(CloneOptions.OptionsFrom(
             new CloneOptions.ECloneOption[] {
                 CloneOptions.ECloneOption.RED,
@@ -141,7 +144,7 @@ public class Player : KinematicBody2D {
         // }
     }
 
-    public override void _PhysicsProcess(float delta) {
+    public void _PhysicsProcess(float delta) {
         if(this.paused) {
             return;
         }
@@ -155,7 +158,7 @@ public class Player : KinematicBody2D {
     }
 
  	public Vector2 Move(float slopeStop) { 
-        this.velocity = this.MoveAndSlide(this.velocity, new Vector2(0, -1), slopeStop, 4, 1.06f); 
+        this.velocity = this.node.MoveAndSlide(this.velocity, new Vector2(0, -1), slopeStop, 4, 1.06f); 
         return this.velocity; 
 	}
 
@@ -202,7 +205,7 @@ public class Player : KinematicBody2D {
     }
 
     public State<Player> DetectDeathByFalling() {
-        bool isGrounded = this.IsOnFloor();
+        bool isGrounded = this.node.IsOnFloor();
 
         if (!isGrounded) {
             groundImpactSpeed = this.velocity.y;
@@ -221,6 +224,37 @@ public class Player : KinematicBody2D {
     public int GetDirectionMultiplier() {
         return this.direction == Direction.Left ? -1 : 1;
     }
+
+    // Methods to conform to the KinematicBody interface. Add any extra methods
+    // here.
+
+    public void Hide() => this.node.Hide();
+
+    public void EmitSignal(string signal) => this.node.EmitSignal(signal);
+
+    public bool IsOnFloor() => this.node.IsOnFloor();
+
+    public Node GetNode(NodePath path) => this.node.GetNode(path);
+
+    public void SetRotation(float radians) => this.node.SetRotation(radians);
+
+    public Vector2 MoveAndSlide(Vector2 velocity) => this.node.MoveAndSlide(velocity);
+
+    public bool IsOnWall() => this.node.IsOnWall();
+
+    public void Show() => this.node.Show();
+
+    public Vector2 GetGlobalPosition() => this.node.GetGlobalPosition();
+
+    public void SetGlobalPosition(Vector2 position) => this.node.SetGlobalPosition(position);
+
+    public int GetSlideCount() => this.node.GetSlideCount();
+
+    public KinematicCollision2D GetSlideCollision(int slideIdx) => this.node.GetSlideCollision(slideIdx);
+
+    public float GetSafeMargin() => this.node.GetSafeMargin();
+
+    public World2D GetWorld2d() => this.node.GetWorld2d();
 }
 
 

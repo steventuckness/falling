@@ -2,17 +2,10 @@
 
 [ext_resource path="res://world/Cam.cs" type="Script" id=1]
 
-[node name="Cam" type="Node2D"]
+[node name="Cam" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
-__meta__ = {
-"_edit_group_": true
-}
-anchorMargin = Vector2( 0.333, 0.333 )
-cameraSnapStep = Vector2( 128, 128 )
-hSnapWithVelocity = false
-showDebugLines = true
 
 [node name="Camera2D" type="Camera2D" parent="." index="0"]
 

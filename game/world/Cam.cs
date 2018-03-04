@@ -3,7 +3,7 @@ using System;
 
 public class Cam : Node2D {
     private int maxCamValue = 10000000;
-    private Player follow;
+    private PlayerNode follow;
     private Camera2D camera;
     private Vector2 viewportSize;
     private Vector2 center;
@@ -82,7 +82,7 @@ public class Cam : Node2D {
         this.verticalStateData.fallThreshold = 32f;
     }
 
-    public void Follow(Player follow) {
+    public void Follow(PlayerNode follow) {
         this.follow = follow;
         // TODO: Consider entering another state where we move the camera
         // to the new follow's position before letting other things happen.
