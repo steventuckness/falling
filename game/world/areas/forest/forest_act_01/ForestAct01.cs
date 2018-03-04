@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 public class ForestAct01 : Node2D {
-    private Player p;
+    private PlayerNode p;
     private Node2D spawnPoint;
     private Node2D spawnCam;
     private Vector2 deathPoint;
@@ -17,7 +17,7 @@ public class ForestAct01 : Node2D {
     public override void _Ready() {
         this.cameraState = CameraState.WATCHING;
 
-        this.p = (Player)this.GetNode("player");
+        this.p = (PlayerNode)this.GetNode("player");
         this.spawnCam = (Node2D)this.GetNode("SpawnCam");
         this.spawnPoint = (Node2D)this.GetNode("Spawn");
     }
