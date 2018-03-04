@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://player/PlayerNode.cs" type="Script" id=1]
 [ext_resource path="res://player/assets/sprites/player.png" type="Texture" id=2]
+[ext_resource path="res://player/recorder/InputRecorder.cs" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -51,5 +52,12 @@ _sections_unfolded = [ "Material", "Transform", "Visibility" ]
 [node name="Sprite" type="Sprite" parent="." index="4"]
 
 texture = ExtResource( 2 )
+
+[node name="InputRecorder" type="Node" parent="." index="5"]
+
+script = ExtResource( 3 )
+enabled = true
+triggerKey = "key_record"
+holdToRecord = false
 
 

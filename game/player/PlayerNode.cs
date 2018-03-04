@@ -32,6 +32,10 @@ public class PlayerNode : KinematicBody2D {
         implementation._PhysicsProcess(delta);
     }
 
+    public override void _Process(float delta) {
+        implementation._Process(delta);
+    }
+
     public override void _Ready() {
         if (implementation == null) {
             implementation = new Player();
@@ -51,4 +55,10 @@ public class PlayerNode : KinematicBody2D {
 
     public bool IsDead() =>
         implementation.IsDead();
+
+    public void RecordingStarted() => implementation.RecordingStarted();
+
+    public void RecordingStopped() => implementation.RecordingStopped();
+
+    public Recording GetRecording() => implementation.GetRecording();
 }

@@ -15,10 +15,12 @@ public class Player {
     public Respawn stateRespawn = new Respawn();
     public Knockback stateKnockback = new Knockback();
     public bool paused = false;
+    public bool menuEnabled = true;
 
     // Signals /////////////////////////////////////////////////////////////////
     public static String SIGNAL_DIED = "Player::died";
     public static String SIGNAL_RESPAWN = "Player::respawn";
+    public static String SIGNAL_CREATE_CLONE = "Player::createClone";
 
     // Physics /////////////////////////////////////////////////////////////////
     public Vector2 velocity = new Vector2(0, 0);
@@ -75,22 +77,45 @@ public class Player {
         Idle
     };
 
-    public void _Ready() {
-        this.node.AddUserSignal(Player.SIGNAL_DIED);
-        
-        this.collision = new PlayerCollision(this); 
+    private Vector2 recordingInitialPosition;
+    private Vector2 recordingInitialVelocity;
+
+    public virtual void _Ready() {
+        this.AddUserSignal(Player.SIGNAL_DIED);
+        this.AddUserSignal(Player.SIGNAL_CREATE_CLONE);
+
+        this.collision = new PlayerCollision(this);
         this.sm.Init(this.stateIdle);
         this.PlayAnimation(Animation.Walking);
 
-        this.cloneMenu = (CloneMenu) this.node.GetNode("Node2D/Menu");
-        this.cloneMenu.SetOptions(CloneOptions.OptionsFrom(
-            new CloneOptions.ECloneOption[] {
-                CloneOptions.ECloneOption.RED,
-                CloneOptions.ECloneOption.GREEN,
-                CloneOptions.ECloneOption.BLUE
-            }
-        ));
-        this.cloneMenu.Hide();
+        if (menuEnabled) {
+            this.cloneMenu = (CloneMenu)this.node.GetNode("Node2D/Menu");
+            this.cloneMenu.SetOptions(CloneOptions.OptionsFrom(
+                new CloneOptions.ECloneOption[] {
+                    CloneOptions.ECloneOption.RED,
+                    CloneOptions.ECloneOption.GREEN,
+                    CloneOptions.ECloneOption.BLUE
+                }
+            ));
+            this.cloneMenu.Hide();
+        }
+
+        this.GetInputRecorder().Connect(InputRecorder.SIGNAL_RECORDING_STARTED, this.node, "RecordingStarted");
+        this.GetInputRecorder().Connect(InputRecorder.SIGNAL_RECORDING_STOPPED, this.node, "RecordingStopped");
+    }
+
+    protected InputRecorder GetInputRecorder() {
+        return (InputRecorder)this.GetNode("InputRecorder");
+    }
+
+    public void RecordingStarted() {
+        this.recordingInitialPosition = this.GetPosition();
+        this.recordingInitialVelocity = this.velocity;
+    }
+
+    public void RecordingStopped() {
+        this.EmitSignal(SIGNAL_CREATE_CLONE, new object[] {
+            recordingInitialPosition, recordingInitialVelocity });
     }
 
     public bool IsDead() {
@@ -145,23 +170,27 @@ public class Player {
     }
 
     public void _PhysicsProcess(float delta) {
-        if(this.paused) {
+        if (this.paused) {
             return;
         }
-        if (Input.IsActionPressed("key_up")) {
-            this.cloneMenu.Show();
-        }
-        else {
-            this.cloneMenu.Hide();
+        if (menuEnabled) {
+            if (Input.IsActionPressed("key_up")) {
+                this.cloneMenu.Show();
+            }
+            else {
+                this.cloneMenu.Hide();
+            }
         }
 
         this.sm.Update(delta, this);
     }
 
- 	public Vector2 Move(float slopeStop) { 
-        this.velocity = this.node.MoveAndSlide(this.velocity, new Vector2(0, -1), slopeStop, 4, 1.06f); 
-        return this.velocity; 
-	}
+    public virtual void _Process(float delta) { }
+
+    public Vector2 Move(float slopeStop) {
+        this.velocity = this.node.MoveAndSlide(this.velocity, new Vector2(0, -1), slopeStop, 4, 1.06f);
+        return this.velocity;
+    }
 
     public void ApplyGravity(float delta) {
         // this.velocity = Acceleration.ApplyTerminalY(this.fallingMaxSpeed, this.gravity, delta, this.velocity);
@@ -216,13 +245,13 @@ public class Player {
         int dir = this.GetInputDirection();
 
         // Ground friction
-        if(dir == 0 && Mathf.Abs(this.velocity.x) > 0) {
+        if (dir == 0 && Mathf.Abs(this.velocity.x) > 0) {
             this.velocity = Acceleration.ApproachX(
                 0, this.groundFriction, delta, this.velocity
             );
-        } 
+        }
         // Ground accel
-        else if(dir != 0) {
+        else if (dir != 0) {
             bool isSprinting = this.IsActionPressed("key_sprint");
             float approachSpeed = dir * (isSprinting ? this.groundSprintMaxSpeed : this.groundMaxSpeed);
             this.velocity = Acceleration.ApproachX(
@@ -247,12 +276,17 @@ public class Player {
         return Input.IsActionJustReleased(key);
     }
 
+    public virtual Recording GetRecording() =>
+        this.GetInputRecorder().lastRecording;
+
     // Methods to conform to the KinematicBody interface. Add any extra methods
     // here.
 
     public void Hide() => this.node.Hide();
 
     public void EmitSignal(string signal) => this.node.EmitSignal(signal);
+
+    public void EmitSignal(string signal, params object[] args) => this.node.EmitSignal(signal, args);
 
     public bool IsOnFloor() => this.node.IsOnFloor();
 
@@ -277,6 +311,12 @@ public class Player {
     public float GetSafeMargin() => this.node.GetSafeMargin();
 
     public World2D GetWorld2d() => this.node.GetWorld2d();
+
+    public void AddUserSignal(string signal) => this.node.AddUserSignal(signal);
+
+    public Vector2 GetPosition() => this.node.GetPosition();
+
+    public void SetPosition(Vector2 position) => this.node.SetPosition(position);
 }
 
 
