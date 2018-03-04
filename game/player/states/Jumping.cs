@@ -19,7 +19,7 @@ public class Jumping : State<Player> {
         player.DetectDirectionChange();
 
         // Slow down the jump (variable jump height)
-        if(Input.IsActionJustReleased("key_jump")) {
+        if(player.IsActionJustReleased("key_jump")) {
             player.velocity.y *= 0.5f;
         }
         player.AirControl(delta);

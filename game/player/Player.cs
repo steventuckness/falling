@@ -174,12 +174,12 @@ public class Player {
     }
 
     public void DetectDirectionChange() {
-        if (Input.IsActionPressed("key_left") && this.direction != Direction.Left) {
+        if (this.IsActionPressed("key_left") && this.direction != Direction.Left) {
             GD.Print("Direction: Left");
             this.direction = Direction.Left;
             this.PlayAnimation(this.animation);
         }
-        if (Input.IsActionPressed("key_right") && this.direction != Direction.Right) {
+        if (this.IsActionPressed("key_right") && this.direction != Direction.Right) {
             GD.Print("Direction: Right");
             this.direction = Direction.Right;
             this.PlayAnimation(this.animation);
@@ -187,8 +187,8 @@ public class Player {
     }
 
     public int GetInputDirection() {
-        int isLeft = Input.IsActionPressed("key_left") ? 1 : 0;
-        int isRight = Input.IsActionPressed("key_right") ? 1 : 0;
+        int isLeft = this.IsActionPressed("key_left") ? 1 : 0;
+        int isRight = this.IsActionPressed("key_right") ? 1 : 0;
 
         return isRight - isLeft;
     }
@@ -233,6 +233,18 @@ public class Player {
 
     public int GetDirectionMultiplier() {
         return this.direction == Direction.Left ? -1 : 1;
+    }
+
+    public virtual bool IsActionPressed(string key) {
+        return Input.IsActionPressed(key);
+    }
+
+    public virtual bool IsActionJustPressed(string key) {
+        return Input.IsActionJustPressed(key);
+    }
+
+    public virtual bool IsActionJustReleased(string key) {
+        return Input.IsActionJustReleased(key);
     }
 
     // Methods to conform to the KinematicBody interface. Add any extra methods
