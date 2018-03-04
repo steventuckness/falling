@@ -223,7 +223,7 @@ public class Player {
         } 
         // Ground accel
         else if(dir != 0) {
-            bool isSprinting = Input.IsActionPressed("key_sprint");
+            bool isSprinting = this.IsActionPressed("key_sprint");
             float approachSpeed = dir * (isSprinting ? this.groundSprintMaxSpeed : this.groundMaxSpeed);
             this.velocity = Acceleration.ApproachX(
                 approachSpeed, this.groundAcceleration, delta, this.velocity

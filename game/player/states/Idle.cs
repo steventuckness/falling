@@ -14,9 +14,9 @@ public class Idle : State<Player> {
 
     public override State<Player> Update(float delta, Player player, float timeInState) {
         bool isGrounded = player.IsOnFloor();
-        int isLeft = Input.IsActionPressed("key_left") ? 1 : 0;
-        int isRight = Input.IsActionPressed("key_right") ? 1 : 0;
-        int isJump = Input.IsActionJustPressed("key_jump") ? 1 : 0;
+        int isLeft = player.IsActionPressed("key_left") ? 1 : 0;
+        int isRight = player.IsActionPressed("key_right") ? 1 : 0;
+        int isJump = player.IsActionJustPressed("key_jump") ? 1 : 0;
         int dir = isRight - isLeft;
 
         if (!isGrounded) {
