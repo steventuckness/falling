@@ -10,7 +10,7 @@ public class Falling : State<Player> {
     
     public override void OnEnter(float delta, Player owner) {
         owner.PlayAnimation(Player.Animation.Falling);
-        this.heldJumpWhileEntering = Input.IsActionPressed("key_jump");
+        this.heldJumpWhileEntering = owner.IsActionPressed("key_jump");
     }
 
     public override void OnExit(float delta, Player owner) {

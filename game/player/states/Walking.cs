@@ -174,16 +174,16 @@ public class Walking : State<Player> {
     public override State<Player> Update(float delta, Player player, float timeInState) {
         // Slope stuff
         bool onFloor = player.IsOnFloor();
-        bool isSprinting = Input.IsActionPressed("key_sprint");
+        bool isSprinting = player.IsActionPressed("key_sprint");
         player.DetectDirectionChange();
-        int isLeft = Input.IsActionPressed("key_left") ? 1 : 0;
-        int isRight = Input.IsActionPressed("key_right") ? 1 : 0;
+        int isLeft = player.IsActionPressed("key_left") ? 1 : 0;
+        int isRight = player.IsActionPressed("key_right") ? 1 : 0;
         int dir = isRight - isLeft;
 
         if (dir == 0) {
             return player.stateIdle;
         }
-        if (onFloor && Input.IsActionJustPressed("key_jump")) {
+        if (onFloor && player.IsActionJustPressed("key_jump")) {
             return player.stateJumping;
         }
         if(!onFloor) {
