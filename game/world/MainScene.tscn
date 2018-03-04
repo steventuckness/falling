@@ -38,12 +38,12 @@ respawnTime = 2.0
 
 [node name="Player" parent="." index="0" instance=ExtResource( 2 )]
 
+editor/display_folded = true
 position = Vector2( 296, 504 )
 _sections_unfolded = [ "Angular", "Collision", "Linear", "Transform", "Z Index" ]
 
 [node name="Node2D" type="Node2D" parent="Player" index="5"]
 
-editor/display_folded = true
 position = Vector2( -296, -504 )
 z_index = 1
 _sections_unfolded = [ "Z Index" ]
@@ -72,20 +72,20 @@ position = Vector2( 48, 480 )
 
 [node name="Cam" parent="." index="2" instance=ExtResource( 5 )]
 
+
 anchorMargin = Vector2( 0.333, 0.333 )
 cameraSnapStep = Vector2( 128, 128 )
-hSnapWithVelocity = false
+hSnapWithVelocity = true
 showDebugLines = false
 
 [node name="CamLocks" type="Node2D" parent="." index="3"]
 
-editor/display_folded = true
 visible = false
 
 [node name="CamLock" parent="CamLocks" index="0" instance=ExtResource( 6 )]
 
-xMin = false
-xMax = false
+xMin = true
+xMax = true
 yMin = false
 yMax = false
 unLockOnExit = false
@@ -125,6 +125,8 @@ __meta__ = {
 }
 
 [node name="Switches" type="Node2D" parent="." index="7"]
+
+editor/display_folded = true
 
 [node name="SwitchGroup" type="Node2D" parent="Switches" index="0" groups=[
 "Door_1_Input",

@@ -7,12 +7,12 @@ public class Player {
 
     // State ///////////////////////////////////////////////////////////////////
     private StateMachine<Player> sm = new StateMachine<Player>();
-    public Idle     stateIdle       = new Idle();
-    public Falling  stateFalling    = new Falling();
-    public Walking  stateWalking    = new Walking();
-    public Jumping  stateJumping    = new Jumping();
-    public Dead     stateDead       = new Dead();
-    public Respawn  stateRespawn    = new Respawn();
+    public Idle stateIdle = new Idle();
+    public Falling stateFalling = new Falling();
+    public Walking stateWalking = new Walking();
+    public Jumping stateJumping = new Jumping();
+    public Dead stateDead = new Dead();
+    public Respawn stateRespawn = new Respawn();
     public Knockback stateKnockback = new Knockback();
     public bool paused = false;
 
@@ -31,24 +31,24 @@ public class Player {
     private Animation animation;
 
     // Air
-    public float jumpHeight            = 56f;
-    public float airAcceleration        = 100f;
-    public float airFriction            = 50f;
-    public float airMaxSpeed            = 200f;
+    public float jumpHeight = 56f;
+    public float airAcceleration = 400f;
+    public float airFriction = 50f;
+    public float airMaxSpeed = 200f;
+    public float airMult = 0.65f;
 
     // Ground
-    public float groundFriction         = 900.0f;
-    public float groundAcceleration     = 500.0f;
-    public float groundMaxSpeed         = 400.0f;
-    public float groundSprintMaxSpeed   = 500.0f;
+    public float groundFriction = 2000.0f;
+    public float groundAcceleration = 1000.0f;
+    public float groundMaxSpeed = 90.0f;
+    public float groundSprintMaxSpeed = (90.0f * 1.25f);
 
     // Collision /////////////////////////////////////////////////////////////// 
     public PlayerCollision collision; // Mostly for storing pre-move collision checks
 
     // Falling
-    public float fallingMaxSpeed = 500.0f;
-    public float impactDeadSpeed = 1000.0f;
-	
+    public float fallingMaxSpeed = 160.0f;
+
     // Gliding ////////////////////////////////////////////////////////////////
     public float glideMaxYSpeed = 20.0f;
     public float glideDrag = 30.0f;
@@ -57,7 +57,7 @@ public class Player {
 
     // MISC ////////////////////////////////////////////////////////////////////
     public Vector2 carry = new Vector2(0, 0);
-    public float respawnTime           = 2.0f;  // Seconds
+    public float respawnTime = 2.0f;  // Seconds
 
     // UI //////////////////////////////////////////////////////////////////////
     public CloneMenu cloneMenu;
@@ -65,7 +65,7 @@ public class Player {
     public enum Direction {
         Left,
         Right
-    }    
+    }
 
     public enum Animation {
         Walking,
@@ -103,7 +103,7 @@ public class Player {
 
     public void Kill() {
         // Player cannot be killed while respawning or is already dead
-        if(!this.CanBeKilled()) {
+        if (!this.CanBeKilled()) {
             return;
         }
         this.sm.TransitionState(this.stateDead);
@@ -148,9 +148,10 @@ public class Player {
         if(this.paused) {
             return;
         }
-        if(Input.IsActionPressed("key_up")) {
+        if (Input.IsActionPressed("key_up")) {
             this.cloneMenu.Show();
-        } else {
+        }
+        else {
             this.cloneMenu.Hide();
         }
 
@@ -163,7 +164,13 @@ public class Player {
 	}
 
     public void ApplyGravity(float delta) {
-        this.velocity = Acceleration.ApplyTerminalY(this.fallingMaxSpeed, this.gravity, delta, this.velocity);
+        // this.velocity = Acceleration.ApplyTerminalY(this.fallingMaxSpeed, this.gravity, delta, this.velocity);
+        this.velocity = Acceleration.ApproachY(
+            this.fallingMaxSpeed,
+            this.gravity,
+            delta,
+            this.velocity
+        );
     }
 
     public void DetectDirectionChange() {
@@ -189,36 +196,39 @@ public class Player {
     public void AirControl(float delta) {
         int dir = this.GetInputDirection();
         // Air friction
-        if(this.velocity.x != 0) {
+        if (this.velocity.x != 0 && dir == 0) {
             this.velocity = Acceleration.ApproachX(
                 0f, this.airFriction, delta, this.velocity
             );
         }
-
         // Air control
-        this.velocity = Acceleration.ApplyTerminalX(
-            float.MaxValue,
-            this.airAcceleration * dir,
-            delta,
-            this.velocity
-        );
+        else if (dir != 0) {
+            this.velocity = Acceleration.ApproachX(
+                dir * this.groundMaxSpeed,
+                this.groundAcceleration * this.airMult,
+                delta,
+                this.velocity
+            );
+        }
     }
 
-    public State<Player> DetectDeathByFalling() {
-        bool isGrounded = this.node.IsOnFloor();
+    public void GroundControl(float delta) {
+        int dir = this.GetInputDirection();
 
-        if (!isGrounded) {
-            groundImpactSpeed = this.velocity.y;
+        // Ground friction
+        if(dir == 0 && Mathf.Abs(this.velocity.x) > 0) {
+            this.velocity = Acceleration.ApproachX(
+                0, this.groundFriction, delta, this.velocity
+            );
+        } 
+        // Ground accel
+        else if(dir != 0) {
+            bool isSprinting = Input.IsActionPressed("key_sprint");
+            float approachSpeed = dir * (isSprinting ? this.groundSprintMaxSpeed : this.groundMaxSpeed);
+            this.velocity = Acceleration.ApproachX(
+                approachSpeed, this.groundAcceleration, delta, this.velocity
+            );
         }
-
-        if (groundImpactSpeed >= this.impactDeadSpeed && isGrounded) {
-            return this.stateDead; 
-        }
-
-        if (isGrounded) {
-            return this.stateIdle;
-        }
-        return null;
     }
 
     public int GetDirectionMultiplier() {
