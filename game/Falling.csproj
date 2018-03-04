@@ -54,6 +54,10 @@
     <Compile Include="player\Player.cs" />
     <Compile Include="player\collision\PlayerCollision.cs" />
     <Compile Include="player\PlayerNode.cs" />
+    <Compile Include="player\PlayerClone.cs" />
+    <Compile Include="player\recorder\InputRecorder.cs" />
+    <Compile Include="player\recorder\KeyEntry.cs" />
+    <Compile Include="player\recorder\Recording.cs" />
     <Compile Include="player\states\Dead.cs" />
     <Compile Include="player\states\Falling.cs" />
     <Compile Include="player\states\Gliding.cs" />

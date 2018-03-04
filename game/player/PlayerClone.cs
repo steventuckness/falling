@@ -31,8 +31,10 @@ public class PlayerClone : Player {
     }
 
     public override void _Ready() {
+        this.menuEnabled = false;
         base._Ready();
         SanityCheck();
+        GetInputRecorder().enabled = false;
     }
 
     /// <summary>
@@ -89,7 +91,7 @@ public class PlayerClone : Player {
     public void StartPlayback() {
         this.currentTime = 0;
         this.velocity = this.initiaVelocity;
-        this.GetKinematicBody().SetPosition(this.initialPosition);
+        this.SetPosition(this.initialPosition);
     }
 
     public override bool IsActionPressed(string key) {

@@ -31,19 +31,9 @@ public class Act : Node {
         return this.player;
     }
 
-    public override void _Ready() {
-        this.startTime = OS.GetTicksMsec();
-        
-        // Get nodes
-        this.spawn = (Node2D)this.GetNode("Spawn");
-        this.player = (PlayerNode)this.GetNode("Player");
-        this.finish = (Node2D)this.GetNode("Finish");
-        this.finishOverlay = (Node2D)this.GetNode("FinishOverlay");
-        this.cam = (Cam)this.GetNode("Cam");
+    private void ConnectEvents() {
+        this.player.Connect(Player.SIGNAL_CREATE_CLONE, this, "CreateClone");
 
-        this.cam.Follow(this.player);
-
-        // Wire events
         if (this.player.HasUserSignal(Player.SIGNAL_DIED)) {
             this.player.Connect(Player.SIGNAL_DIED, this, "PlayerDied");
         }
@@ -62,7 +52,20 @@ public class Act : Node {
             camLock.Connect(CamLock.PLAYER_ENTERED, this, "OnCamLimitEnter");
             camLock.Connect(CamLock.PLAYER_EXITED, this, "OnCamLimitExit");
         }
+    }
 
+    public override void _Ready() {
+        this.startTime = OS.GetTicksMsec();
+        
+        // Get nodes
+        this.spawn = (Node2D)this.GetNode("Spawn");
+        this.player = (PlayerNode)this.GetNode("Player");
+        this.finish = (Node2D)this.GetNode("Finish");
+        this.finishOverlay = (Node2D)this.GetNode("FinishOverlay");
+        this.cam = (Cam)this.GetNode("Cam");
+
+        this.cam.Follow(this.player);
+        this.ConnectEvents();
         this.sm.Init(this.statePlay);
     }
 
@@ -129,6 +132,20 @@ public class Act : Node {
 
     private void NextLevel() {
          ((ActManager)this.GetNode("/root/ActManager")).NextAct();
+    }
+
+    private void CreateClone(Vector2 initialPosition, Vector2 initialVelocity) {
+        PlayerNode node = (PlayerNode)
+             ((PackedScene)ResourceLoader.Load("res://player/player.tscn"))
+                 .Instance();
+        PlayerClone clone = new PlayerClone();
+        clone.initialPosition = initialPosition;
+        clone.initiaVelocity = initialVelocity;
+        clone.recording = this.GetPlayer().GetRecording();
+        node.implementation = clone;
+        this.AddChild(node);
+        GD.Print("Clone created!");
+        
     }
 }
 
