@@ -46,6 +46,16 @@ public class Acceleration {
             new Vector2(Mathf.Min(velocity.x + (acceleration * delta), approach), velocity.y) :
             new Vector2(Mathf.Max(velocity.x - (acceleration * delta), approach), velocity.y);
 
+    public static Vector2 ApproachY(
+        float approach,
+        float acceleration,
+        float delta,
+        Vector2 velocity
+    ) =>
+        velocity.y < approach ?
+            new Vector2(velocity.x, Mathf.Min(velocity.y + (acceleration * delta), approach)) :
+            new Vector2(velocity.x, Mathf.Max(velocity.y - (acceleration * delta), approach));
+
     public static Vector2 ApplyTerminalY(
         float terminalVel, 
         float acceleration, 

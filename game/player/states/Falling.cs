@@ -18,22 +18,12 @@ public class Falling : State<Player> {
 
     public override State<Player> Update(float delta, Player player, float timeInState) {        
         player.DetectDirectionChange();
-        Vector2 a = new Vector2(player.groundAcceleration * delta, 0);
-        int isLeft = Input.IsActionPressed("key_left") ? 1 : 0;
-        int isRight = Input.IsActionPressed("key_right") ? 1 : 0;
-        int dir = isRight - isLeft;
-
-        bool isGrounded = player.IsOnFloor();
-
-        State<Player> landedState = player.DetectDeathByFalling();
-        if (landedState != null) {
-            return landedState;
+        if(player.IsOnFloor()) {
+            return player.stateIdle;
         }
-
         player.AirControl(delta);
         player.ApplyGravity(delta);
         player.Move(0f);
-
         return null;
     }
 }

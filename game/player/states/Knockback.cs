@@ -9,7 +9,10 @@ public class Knockback : State<Player> {
     public override State<Player> Update(float delta, Player player, float timeInState) {
         player.ApplyGravity(delta);
         player.Move(0f);
-        return player.DetectDeathByFalling();
+        if(player.IsOnFloor()) {
+            return player.stateIdle;
+        }
+        return null;
     }
 
 }

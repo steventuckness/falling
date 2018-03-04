@@ -173,12 +173,9 @@ public class Walking : State<Player> {
 
     public override State<Player> Update(float delta, Player player, float timeInState) {
         // Slope stuff
-        Vector2 floor = new Vector2(0, -1);
-        RayCast2D[] feet = this.GetFeet(player);
         bool onFloor = player.IsOnFloor();
         bool isSprinting = Input.IsActionPressed("key_sprint");
         player.DetectDirectionChange();
-        Vector2 a = new Vector2(player.groundAcceleration * delta, 0);
         int isLeft = Input.IsActionPressed("key_left") ? 1 : 0;
         int isRight = Input.IsActionPressed("key_right") ? 1 : 0;
         int dir = isRight - isLeft;
@@ -192,39 +189,9 @@ public class Walking : State<Player> {
         if(!onFloor) {
             return player.stateFalling;
         }
-
-        float approachSpeed = dir * (isSprinting ? player.groundSprintMaxSpeed : player.groundMaxSpeed);
-        player.velocity = Acceleration.ApproachX(
-            approachSpeed,
-            player.groundAcceleration,
-            delta,
-            player.velocity
-        );
+        player.GroundControl(delta);
         player.ApplyGravity(delta);
-
-        bool enteringDown = this.DetectDownSlope(feet, player);
-        bool enteringUp = this.DetectUpSlope(feet, player);
-
-        // Move the player
-        Vector2 preMoveVelocity = player.velocity;
         player.Move(0f);
-
-        bool hitSlope = this.CurrentlyTouchingUpSlope(player, preMoveVelocity);
-
-        // Player has left the floor
-        if (onFloor && !player.IsOnFloor()) {
-            if (enteringDown) {
-                this.HandleGoingDownSlope(player, feet);
-            }
-            else if (enteringUp) {
-                this.HandleGoingUpSlope(player, feet);
-            }
-        }
-        // Player is still on the floor and currently on the up-slope
-        if (onFloor && hitSlope) {
-            // We don't want the slope to slow down our horizontal movement
-            player.velocity.x = preMoveVelocity.x;
-        }
         return null;
     }
 }
