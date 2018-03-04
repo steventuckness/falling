@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="engine\Debug.cs" />
+    <Compile Include="player\clone\CloneOptions.cs" />
     <Compile Include="player\Player.cs" />
     <Compile Include="player\collision\PlayerCollision.cs" />
     <Compile Include="player\states\Dead.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="engine\state_machine\State.cs" />
     <Compile Include="engine\math\Acceleration.cs" />
     <Compile Include="engine\autoloads\ActManager.cs" />
+    <Compile Include="ui\CloneMenu.cs" />
     <Compile Include="world\act\Act.cs" />
     <Compile Include="world\act\states\Play.cs" />
     <Compile Include="world\act\states\ActRespawn.cs" />
