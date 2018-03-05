@@ -7,13 +7,14 @@ public class PlayerClone : Player {
 
     private float currentTime = 0f;
     private bool isPlaying = true;
-
+    private HashSet<string> keysJustPressedCurrentFrame = new HashSet<string>();
+    private HashSet<string> keysJustPressedPastFrames = new HashSet<string>();
+    private HashSet<string> keysJustReleasedCurrentFrame = new HashSet<string>();
+    private HashSet<string> keysJustReleasedPastFrames = new HashSet<string>();
     public Vector2 initialPosition;
 
     public Vector2 initiaVelocity;
 
-    // this will determine how sensitive the inputs will be triggered
-    public float timeSensitivity = 0.01f;
 
     private void SanityCheck() {
         if (initialPosition == null) {
@@ -35,6 +36,9 @@ public class PlayerClone : Player {
         base._Ready();
         SanityCheck();
         GetInputRecorder().enabled = false;
+        if (this.isPlaying) {
+            this.StartPlayback();
+        }
     }
 
     /// <summary>
@@ -74,6 +78,26 @@ public class PlayerClone : Player {
         return false;
     }
 
+    private void MoveJustPressedKeysToLastFrame() {
+        keysJustPressedPastFrames.UnionWith(keysJustPressedCurrentFrame);
+        keysJustPressedCurrentFrame = new HashSet<string>();
+    }
+
+    private void MoveJustReleasedKeysToLastFrame() {
+        keysJustReleasedPastFrames.UnionWith(keysJustReleasedCurrentFrame);
+        keysJustReleasedCurrentFrame = new HashSet<string>();
+    }
+
+    private void RemovePressedKeysFromPastFrames() =>
+        keysJustReleasedPastFrames.RemoveWhere(
+            (key) => HasEvent(LastOccurenceOf(key, 0f, this.currentTime), KeyEntry.EventType.PRESS)
+        );
+
+    private void RemoveReleasedKeysFromPastFrames() =>
+        keysJustPressedPastFrames.RemoveWhere(
+            (key) => HasEvent(LastOccurenceOf(key, 0f, this.currentTime), KeyEntry.EventType.RELEASE)
+        );
+
     public override void _Process(float delta) {
         if (!isPlaying) {
             return;
@@ -82,6 +106,10 @@ public class PlayerClone : Player {
         if (this.currentTime > this.recording.length) {
             this.StartPlayback();
         }
+        this.MoveJustPressedKeysToLastFrame();
+        this.MoveJustReleasedKeysToLastFrame();
+        this.RemoveReleasedKeysFromPastFrames();
+        this.RemoveReleasedKeysFromPastFrames();
     }
 
     public void StopPlayback() {
@@ -89,6 +117,7 @@ public class PlayerClone : Player {
     }
 
     public void StartPlayback() {
+        this.isPlaying = true;
         this.currentTime = 0;
         this.velocity = this.initiaVelocity;
         this.SetPosition(this.initialPosition);
@@ -100,12 +129,20 @@ public class PlayerClone : Player {
     }
 
     public override bool IsActionJustPressed(string key) {
-        KeyEntry lastKeyPress = LastOccurenceOf(key, this.currentTime - this.timeSensitivity, this.currentTime);
-        return HasEvent(lastKeyPress, KeyEntry.EventType.PRESS);
+        KeyEntry lastKeyPress = LastOccurenceOf(key, 0f, this.currentTime); 
+        if (HasEvent(lastKeyPress, KeyEntry.EventType.PRESS) && !keysJustPressedPastFrames.Contains(key)) {
+            keysJustPressedCurrentFrame.Add(key);
+            return true;
+        }
+        return false;
     }
 
     public override bool IsActionJustReleased(string key) {
-        KeyEntry lastKeyPress = LastOccurenceOf(key, this.currentTime - this.timeSensitivity, this.currentTime);
-        return HasEvent(lastKeyPress, KeyEntry.EventType.RELEASE);
+        KeyEntry lastKeyPress = LastOccurenceOf(key, 0f, this.currentTime); 
+        if (HasEvent(lastKeyPress, KeyEntry.EventType.RELEASE) && !keysJustReleasedPastFrames.Contains(key)) {
+            keysJustReleasedCurrentFrame.Add(key);
+            return true;
+        }
+        return false;
     }
 }
