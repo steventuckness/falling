@@ -88,7 +88,7 @@ public class Player {
         this.PlayAnimation(Animation.Walking);
 
         if (menuEnabled) {
-            this.cloneMenu = (CloneMenu)this.node.GetNode("Node2D/Menu");
+            this.cloneMenu = (CloneMenu)this.node.GetNode("CloneMenu/Menu");
             this.cloneMenu.SetOptions(CloneOptions.OptionsFrom(
                 new CloneOptions.ECloneOption[] {
                     CloneOptions.ECloneOption.RED,
@@ -173,11 +173,12 @@ public class Player {
             return;
         }
         if (menuEnabled) {
-            if (Input.IsActionPressed("key_up")) {
+            if (Input.IsActionPressed("key_up") && this.cloneMenu.Visible == false) {
                 this.cloneMenu.Show();
-            }
-            else {
+            } else if(Input.IsActionJustReleased("key_up") && this.cloneMenu.Visible) {
                 this.cloneMenu.Hide();
+                var sprite = (Sprite)this.node.GetNode("Sprite");
+                sprite.SetModulate(this.cloneMenu.GetSelectedColor());
             }
         }
 
