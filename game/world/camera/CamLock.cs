@@ -3,8 +3,8 @@ using System;
 
 public class CamLock : Area2D {
     // Signals /////////////////////////////////////////////////////////////////
-    public static String PLAYER_ENTERED     = "CamLock::player::entered";
-    public static String PLAYER_EXITED      = "CamLock::player::exited";
+    public static String PLAYER_ENTERED = "CamLock::player::entered";
+    public static String PLAYER_EXITED = "CamLock::player::exited";
 
     // Locking /////////////////////////////////////////////////////////////////
     public struct CamLockFlags {
@@ -44,7 +44,7 @@ public class CamLock : Area2D {
         lim.max = new Vector2(float.MinValue, float.MinValue);
 
         Vector2 position = this.GetGlobalPosition();
-        CollisionPolygon2D poly = (CollisionPolygon2D) this.GetNode("Limits");
+        CollisionPolygon2D poly = (CollisionPolygon2D)this.GetNode("Limits");
         Vector2[] points = poly.GetPolygon();
 
         // Just grab the min x and y values (useful later)
@@ -67,6 +67,8 @@ public class CamLock : Area2D {
 
         this.Connect("body_entered", this, "OnEnter");
         this.Connect("body_exited", this, "OnExit");
+        this.Connect("area_entered", this, "OnEnter");
+        this.Connect("area_exited", this, "OnExit");
 
         this.limits = this.FindLimits();
 
@@ -83,17 +85,17 @@ public class CamLock : Area2D {
     public Cam.CamLimits LockCamera(Cam cam) {
         Cam.CamLimits limits = cam.GetLimits();
         // X
-        if(this.flags.xMin) {
+        if (this.flags.xMin) {
             limits.min.x = this.limits.min.x;
         }
-        if(this.flags.xMax) {
+        if (this.flags.xMax) {
             limits.max.x = this.limits.max.x;
         }
         // Y
-        if(this.flags.yMin) {
+        if (this.flags.yMin) {
             limits.min.y = this.limits.min.y;
         }
-        if(this.flags.yMax) {
+        if (this.flags.yMax) {
             limits.max.y = this.limits.max.y;
         }
         return limits;
@@ -104,16 +106,20 @@ public class CamLock : Area2D {
     }
 
     public void OnEnter(Godot.Object obj) {
-        if (!(obj is PlayerNode)) {
-            return;
+        if (obj is Collider) {
+            Entity ent = ((Collider)obj).GetNodeOwner();
+            if (ent is PlayerNode) {
+                this.EmitSignal(PLAYER_ENTERED, new object[] { this });
+            }
         }
-        this.EmitSignal(PLAYER_ENTERED, new object[] { this });
     }
 
     public void OnExit(Godot.Object obj) {
-        if (!(obj is PlayerNode)) {
-            return;
+        if (obj is Collider) {
+            Entity ent = ((Collider)obj).GetNodeOwner();
+            if (ent is PlayerNode) {
+                this.EmitSignal(PLAYER_EXITED, new object[] { this });
+            }
         }
-        this.EmitSignal(PLAYER_EXITED, new object[] { this });
     }
 }

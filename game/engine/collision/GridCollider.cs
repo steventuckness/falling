@@ -11,7 +11,6 @@ public class GridCollider : Collider {
     public TileMap GetMap() => this.map;
 
     public override bool Collides(BoxCollider other) {
-        TileMap parent = (TileMap) this.GetNodeOwner();
         return false;
     }
 }

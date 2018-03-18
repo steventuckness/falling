@@ -46,7 +46,11 @@ public class Player {
     public float groundSprintMaxSpeed = (90.0f * 1.25f);
 
     // Collision /////////////////////////////////////////////////////////////// 
-    // public PlayerCollision collision; // Mostly for storing pre-move collision checks
+    public CollisionEngine collision {
+        get {
+            return this.node.collision;
+        }
+    }
 
     // Falling
     public float fallingMaxSpeed = 160.0f;

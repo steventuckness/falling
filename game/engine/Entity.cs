@@ -8,6 +8,15 @@ public class Entity : Node2D {
     public Collider collider;
     public delegate void OnCollide();
     public Scene scene;
+    
+    public bool IsCollidable {
+        get {
+            return this.collider.IsCollidable;
+        }
+        set {
+            this.collider.IsCollidable = value;
+        }
+    }
 
     public virtual bool IsRiding(Solid s) {
         return this.collision.CollideFirst<Solid>(
