@@ -2,7 +2,7 @@
 using Godot;
 using System;
 
-public class PlayerNode : KinematicBody2D {
+public class PlayerNode : Entity {
 
     public Player implementation {
         get { return _implementation; }
@@ -28,6 +28,14 @@ public class PlayerNode : KinematicBody2D {
 
     private Player _implementation;
 
+    public void CollideNoop() {
+        return;
+    }
+
+    public void CollideVertical() {
+        this._implementation.velocity.y = 0;
+    }
+
     public override void _PhysicsProcess(float delta) {
         implementation._PhysicsProcess(delta);
     }
@@ -37,6 +45,7 @@ public class PlayerNode : KinematicBody2D {
     }
 
     public override void _Ready() {
+        base._Ready();
         if (implementation == null) {
             implementation = new Player();
         }
@@ -55,6 +64,9 @@ public class PlayerNode : KinematicBody2D {
 
     public bool IsDead() =>
         implementation.IsDead();
+
+    public bool IsOnFloor() =>
+        implementation.IsOnFloor();
 
     public void RecordingStarted() => implementation.RecordingStarted();
 

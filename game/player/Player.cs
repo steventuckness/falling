@@ -46,7 +46,7 @@ public class Player {
     public float groundSprintMaxSpeed = (90.0f * 1.25f);
 
     // Collision /////////////////////////////////////////////////////////////// 
-    public PlayerCollision collision; // Mostly for storing pre-move collision checks
+    // public PlayerCollision collision; // Mostly for storing pre-move collision checks
 
     // Falling
     public float fallingMaxSpeed = 160.0f;
@@ -84,7 +84,6 @@ public class Player {
         this.AddUserSignal(Player.SIGNAL_DIED);
         this.AddUserSignal(Player.SIGNAL_CREATE_CLONE);
 
-        this.collision = new PlayerCollision(this);
         this.sm.Init(this.stateIdle);
         this.PlayAnimation(Animation.Walking);
 
@@ -187,9 +186,24 @@ public class Player {
 
     public virtual void _Process(float delta) { }
 
-    public Vector2 Move(float slopeStop) {
-        this.velocity = this.node.MoveAndSlide(this.velocity, new Vector2(0, -1), slopeStop, 4, 1.06f);
+    public void MoveX(float x, Entity.OnCollide onCollide) {
+        this.node.MoveX(x, onCollide);
+    }
+
+    public void MoveY(float y, Entity.OnCollide onCollide) {
+        this.node.MoveY(y, onCollide);
+    }
+
+    public Vector2 Move() {
+        this.node.MoveX(this.velocity.x, () => {
+            this.velocity.x = 0;
+        });
+        this.node.MoveY(this.velocity.y, () => {
+            this.velocity.y = 0;
+        });
         return this.velocity;
+        // this.velocity = this.node.MoveAndSlide(this.velocity, new Vector2(0, -1), slopeStop, 4, 1.06f);
+        // return this.velocity;
     }
 
     public void ApplyGravity(float delta) {
@@ -282,33 +296,27 @@ public class Player {
     // Methods to conform to the KinematicBody interface. Add any extra methods
     // here.
 
+    public bool IsOnFloor() {
+        return this.node.collision.CollideCheck<Solid>(
+            this.GetPosition() + new Vector2(0, 1)
+        );
+    }
+
     public void Hide() => this.node.Hide();
 
     public void EmitSignal(string signal) => this.node.EmitSignal(signal);
 
     public void EmitSignal(string signal, params object[] args) => this.node.EmitSignal(signal, args);
 
-    public bool IsOnFloor() => this.node.IsOnFloor();
-
     public Node GetNode(NodePath path) => this.node.GetNode(path);
 
     public void SetRotation(float radians) => this.node.SetRotation(radians);
-
-    public Vector2 MoveAndSlide(Vector2 velocity) => this.node.MoveAndSlide(velocity);
-
-    public bool IsOnWall() => this.node.IsOnWall();
 
     public void Show() => this.node.Show();
 
     public Vector2 GetGlobalPosition() => this.node.GetGlobalPosition();
 
     public void SetGlobalPosition(Vector2 position) => this.node.SetGlobalPosition(position);
-
-    public int GetSlideCount() => this.node.GetSlideCount();
-
-    public KinematicCollision2D GetSlideCollision(int slideIdx) => this.node.GetSlideCollision(slideIdx);
-
-    public float GetSafeMargin() => this.node.GetSafeMargin();
 
     public World2D GetWorld2d() => this.node.GetWorld2d();
 
