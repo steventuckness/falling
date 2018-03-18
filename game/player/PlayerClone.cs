@@ -15,6 +15,8 @@ public class PlayerClone : Player {
 
     public Vector2 initiaVelocity;
 
+    public Color color;
+
 
     private void SanityCheck() {
         if (initialPosition == null) {
@@ -39,6 +41,9 @@ public class PlayerClone : Player {
         if (this.isPlaying) {
             this.StartPlayback();
         }
+
+        var sprite = (Sprite)this.GetNode("Sprite");
+        sprite.SetModulate(color);
     }
 
     /// <summary>

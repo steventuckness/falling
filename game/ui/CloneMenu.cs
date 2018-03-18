@@ -33,6 +33,10 @@ public class CloneMenu : ReferenceRect {
         this.selections = options;
     }
 
+    public Color GetSelectedColor() {
+        return this.selections[selectedIndex].GetColor();
+    }
+
     public override void _Ready() {
         // Init
         this.rect = this.GetRect();
@@ -78,7 +82,7 @@ public class CloneMenu : ReferenceRect {
         // Draw box (container)
         this.DrawRect(
             new Rect2(this.inset.x, this.inset.y, this.rect.Size.x - (this.inset.x * 2), this.rect.Size.y - (this.inset.y * 2)),
-            new Color(256, 256, 256, 1),
+            new Color(256, 256, 256, 1), 
             true
         );
 

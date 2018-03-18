@@ -142,6 +142,8 @@ public class Act : Node {
         clone.initialPosition = initialPosition;
         clone.initiaVelocity = initialVelocity;
         clone.recording = this.GetPlayer().GetRecording();
+        var playerSprite = (Sprite)this.GetPlayer().GetNode("Sprite");
+        clone.color = playerSprite.GetModulate();
         node.implementation = clone;
         this.AddChild(node);
         GD.Print("Clone created!");
