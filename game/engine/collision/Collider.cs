@@ -3,11 +3,20 @@ using System;
 using Rect;
 
 public class Collider : Node2D {
-    public delegate Node2D FindOwner();
+    public delegate Entity FindOwner();
     private FindOwner findOwner;
+    private bool isCollidable = true;
+    public bool IsCollidable {
+        get {
+            return this.isCollidable;
+        }
+        set {
+            this.isCollidable = value;
+        }
+    }
 
     public override void _Ready() {
-        this.findOwner = () => (Node2D) this.GetParent();
+        this.findOwner = () => (Entity)this.GetParent();
     }
 
     public void SetFindOwner(FindOwner f) {
@@ -20,9 +29,10 @@ public class Collider : Node2D {
     public virtual float Bottom() => 0.0f;
 
     public bool Collides(Collider other) {
-        if(other is BoxCollider) {
+        if (other is BoxCollider) {
             return this.Collides(other as BoxCollider);
-        } else if(other is GridCollider) {
+        }
+        else if (other is GridCollider) {
             return this.Collides(other as GridCollider);
         }
         return false;
@@ -31,8 +41,8 @@ public class Collider : Node2D {
     public virtual bool Collides(BoxCollider other) => false;
     public virtual bool Collides(GridCollider other) => false;
 
-    public Node2D GetNodeOwner() => this.findOwner();
-    public T OwnerAs<T> () where T : Entity {
+    public Entity GetNodeOwner() => this.findOwner();
+    public T OwnerAs<T>() where T : Entity {
         return this.findOwner() as T;
     }
 
