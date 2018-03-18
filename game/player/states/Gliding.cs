@@ -58,13 +58,10 @@ public class Gliding : State<Player> {
             player.velocity.x = player.glideMinXSpeed * player.GetDirectionMultiplier();
         } */  
 
-        player.MoveAndSlide(player.velocity);
+        player.Move();
 
         if (player.IsOnFloor()) {
             return player.stateIdle;
-        }
-        if (player.IsOnWall()) {
-            return player.stateKnockback;
         }
         return null;
     }

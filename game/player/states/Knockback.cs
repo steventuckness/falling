@@ -8,7 +8,7 @@ public class Knockback : State<Player> {
 
     public override State<Player> Update(float delta, Player player, float timeInState) {
         player.ApplyGravity(delta);
-        player.Move(0f);
+        player.Move();
         if(player.IsOnFloor()) {
             return player.stateIdle;
         }

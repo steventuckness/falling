@@ -12,165 +12,6 @@ public class Walking : State<Player> {
     public override void OnExit(float delta, Player owner) {
     }
 
-    private RayCast2D[] GetFeet(Player player) {
-        return new RayCast2D[] {
-            player.GetNode("BL") as RayCast2D,
-            player.GetNode("BC") as RayCast2D,
-            player.GetNode("BR") as RayCast2D
-        };
-    }
-
-    // Detect if the player is going down the slope by
-    // 1). Checking if one of the feet raycasts is colliding AND
-    // 2). The collision normal of the foot is not a flat floor AND
-    // 3). The collision normal x component is in the same direction of
-    //      the player's velocity.
-    private bool DetectDownSlope(RayCast2D[] feet, Player p) {
-        bool enteringDown = false;
-        Vector2 v = p.velocity;
-        Vector2 floor = new Vector2(0, -1);
-
-        foreach (RayCast2D foot in feet) {
-            Vector2 collNormal = foot.GetCollisionNormal();
-            if (foot.IsColliding() && collNormal.AngleTo(floor) != 0 && Math.Sign(collNormal.x) == Math.Sign(p.velocity.x)) {
-                enteringDown = true;
-            }
-        }
-        return enteringDown;
-    }
-
-    private bool DetectUpSlope(RayCast2D[] feet, Player p) {
-        bool enteringUp = false;
-        Vector2 v = p.velocity;
-        Vector2 floor = new Vector2(0, -1);
-
-        foreach (RayCast2D foot in feet) {
-            Vector2 collNormal = foot.GetCollisionNormal();
-            if (
-                foot.IsColliding() &&
-                collNormal.AngleTo(floor) != 0 &&
-                Math.Sign(collNormal.x) == -Math.Sign(p.velocity.x)
-            ) {
-                enteringUp = true;
-            }
-        }
-        return enteringUp;
-    }
-
-    private RayCast2D NearestSlope(RayCast2D[] feet, Player p, int x) {
-        Vector2 floor = new Vector2(0, -1);
-        Vector2 closest = new Vector2(float.MaxValue, float.MaxValue);
-        RayCast2D closestCast = null;
-
-        foreach (RayCast2D foot in feet) {
-            Vector2 collNormal = foot.GetCollisionNormal();
-            if (foot.IsColliding() && collNormal.AngleTo(floor) != 0 && Math.Sign(collNormal.x) == x) {
-                Vector2 point = foot.GetCollisionPoint();
-                if (point.y < closest.y) {
-                    closest = point;
-                    closestCast = foot;
-                }
-            }
-        }
-        return closestCast;
-    }
-
-    private RayCast2D NearestFloor(RayCast2D[] feet, Player p) {
-        Vector2 floor = new Vector2(0, -1);
-        Vector2 closest = new Vector2(float.MaxValue, float.MaxValue);
-        RayCast2D closestCast = null;
-
-        foreach (RayCast2D foot in feet) {
-            Vector2 collNormal = foot.GetCollisionNormal();
-            if (foot.IsColliding() && collNormal.Equals(floor)) {
-                Vector2 point = foot.GetCollisionPoint();
-                if (point.y < closest.y) {
-                    closest = point;
-                    closestCast = foot;
-                }
-            }
-        }
-        return closestCast;
-    }
-
-    private Vector2 GetNormalizedSlopeVector(Vector2 normal) {
-        float angle = normal.AngleTo(new Vector2(0, -1));
-        angle = angle < 0 ? (angle + Mathf.PI) : angle;
-
-        return new Vector2(
-            Mathf.Cos(angle),
-            Mathf.Sin(angle)
-        ).Normalized() * new Vector2(1, -1);
-    }
-
-    private Vector2 GetPlayerExtents(Player player) {
-        CollisionShape2D shape = (CollisionShape2D)player.GetNode("CollisionShape2D");
-        RectangleShape2D rect = (RectangleShape2D)shape.GetShape();
-        return rect.GetExtents();
-    }
-
-    // When the player is moving horizontally, it can potentially
-    // cause the player to fly off the edge of a slope. Instead,
-    // this function will find the slope vector below the player
-    // and adjust his velocity to create the illusion of following
-    // that slope. This function could be enhanced in the future to
-    // potentially "hack" into the way MoveAndSlide() works by converting
-    // x velocity into downward y velocity to slide along the downward
-    // slope.
-    private void HandleGoingDownSlope(Player player, RayCast2D[] feet) {
-        RayCast2D closestFoot = this.NearestSlope(
-            feet,
-            player,
-            (int)Mathf.Sign(player.velocity.x)
-        );
-
-        Vector2 normal = closestFoot.GetCollisionNormal();
-
-        // Slope vectors
-        Vector2 upSlope = this.GetNormalizedSlopeVector(normal);
-        Vector2 downSlope = upSlope * new Vector2(-1, -1);
-
-        // TODO: We may still decide to keep this in the future.
-        // First slam the player down to the slope
-        // Vector2 pos = closestFoot.GetCollisionPoint();
-        // pos += (this.GetPlayerExtents(player) * new Vector2(Mathf.Sign(normal.x), Mathf.Sign(normal.y)));
-        // player.SetGlobalPosition(pos);
-
-        // Manipulate player velocity so he stays on the slope going down
-        player.velocity = downSlope * Math.Abs(player.velocity.x);
-    }
-
-    private void HandleGoingUpSlope(Player player, RayCast2D[] feet) {
-        // Determine where the floor leveled off so we can
-        // set the player back down on top of that.
-        RayCast2D closestFoot = this.NearestFloor(feet, player);
-        Vector2 extents = this.GetPlayerExtents(player);
-        Vector2 pos = closestFoot.GetCollisionPoint();
-        Vector2 point = player.GetGlobalPosition() - pos;
-        Vector2 by = new Vector2(Mathf.Sign(point.x), Mathf.Sign(point.y));
-
-        // Clamp the player back to the floor
-        player.SetGlobalPosition(pos + (by * extents));
-        player.velocity.y = 0;
-    }
-
-    private bool CurrentlyTouchingUpSlope(Player player, Vector2 preMoveVelocity) {
-        Vector2 floor = new Vector2(0, -1);
-        bool hitSlope = false;
-        int collisionCount = player.GetSlideCount();
-        if (collisionCount > 0) {
-            KinematicCollision2D lastCollision = player.GetSlideCollision(0);
-            if (lastCollision != null) {
-                Vector2 lastNormal = lastCollision.GetNormal();
-                if (lastNormal.AngleTo(floor) != 0 &&
-                    Math.Sign(lastNormal.x) == -Math.Sign(preMoveVelocity.x)) {
-                    hitSlope = true;
-                }
-            }
-        }
-        return hitSlope;
-    }
-
     public override State<Player> Update(float delta, Player player, float timeInState) {
         // Slope stuff
         bool onFloor = player.IsOnFloor();
@@ -191,7 +32,12 @@ public class Walking : State<Player> {
         }
         player.GroundControl(delta);
         player.ApplyGravity(delta);
-        player.Move(0f);
+        player.MoveX(player.velocity.x * delta, () => {
+            player.velocity.x = 0;
+        });
+        player.MoveY(player.velocity.y * delta, () => {
+            player.velocity.y = 0;
+        });
         return null;
     }
 }
