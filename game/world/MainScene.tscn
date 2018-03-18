@@ -9,11 +9,11 @@
 [ext_resource path="res://world/camera/CamLock.tscn" type="PackedScene" id=7]
 [ext_resource path="res://world/finishOverlay/FinishOverlay.tscn" type="PackedScene" id=8]
 [ext_resource path="res://world/finish/Finish.tscn" type="PackedScene" id=9]
-[ext_resource path="res://world/tilesets/Tileset_Collision.res" type="TileSet" id=10]
-[ext_resource path="res://engine/SolidTiles.cs" type="Script" id=11]
-[ext_resource path="res://engine/collision/GridCollider.cs" type="Script" id=12]
-[ext_resource path="res://engine/Solid.cs" type="Script" id=13]
-[ext_resource path="res://engine/collision/BoxCollider.cs" type="Script" id=14]
+[ext_resource path="res://engine/Solid.cs" type="Script" id=10]
+[ext_resource path="res://engine/collision/BoxCollider.cs" type="Script" id=11]
+[ext_resource path="res://engine/SolidTiles.cs" type="Script" id=12]
+[ext_resource path="res://world/tilesets/Tileset_Collision.res" type="TileSet" id=13]
+[ext_resource path="res://engine/collision/GridCollider.cs" type="Script" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -78,6 +78,7 @@ showDebugLines = false
 
 [node name="CamLocks" type="Node2D" parent="." index="4"]
 
+editor/display_folded = true
 visible = false
 
 [node name="CamLock" parent="CamLocks" index="0" instance=ExtResource( 7 )]
@@ -98,38 +99,7 @@ polygon = PoolVector2Array( 0, 0, 0, 528, 480, 528, 480, 0 )
 
 position = Vector2( 448, 496 )
 
-[node name="Collision" type="TileMap" parent="." index="7"]
-
-editor/display_folded = true
-mode = 0
-tile_set = ExtResource( 10 )
-cell_size = Vector2( 16, 16 )
-cell_quadrant_size = 16
-cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-cell_half_offset = 2
-cell_tile_origin = 0
-cell_y_sort = false
-cell_clip_uv = false
-collision_use_kinematic = false
-collision_friction = 1.0
-collision_bounce = 0.0
-collision_layer = 1
-collision_mask = 1
-occluder_light_mask = 1
-format = 1
-tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 17, 0, 0, 18, 0, 0, 19, 0, 0, 20, 0, 0, 21, 0, 0, 22, 0, 0, 23, 0, 0, 24, 0, 0, 25, 0, 0, 26, 0, 0, 27, 0, 0, 28, 0, 0, 29, 0, 0, 65536, 0, 0, 65565, 0, 0, 131072, 0, 0, 131101, 0, 0, 196608, 0, 0, 196637, 0, 0, 262144, 0, 0, 262173, 0, 0, 327680, 0, 0, 327709, 0, 0, 393216, 0, 0, 393245, 0, 0, 458752, 0, 0, 458781, 0, 0, 524288, 0, 0, 524317, 0, 0, 589824, 0, 0, 589853, 0, 0, 655360, 0, 0, 655389, 0, 0, 720896, 0, 0, 720925, 0, 0, 786432, 0, 0, 786461, 0, 0, 851968, 0, 0, 851997, 0, 0, 917504, 0, 0, 917533, 0, 0, 983040, 0, 0, 983069, 0, 0, 1048576, 0, 0, 1048605, 0, 0, 1114112, 0, 0, 1114141, 0, 0, 1179648, 0, 0, 1179677, 0, 0, 1245184, 0, 0, 1245213, 0, 0, 1310720, 0, 0, 1310749, 0, 0, 1376256, 0, 0, 1376285, 0, 0, 1441792, 0, 0, 1441821, 0, 0, 1507328, 0, 0, 1507357, 0, 0, 1572864, 0, 0, 1572886, 0, 0, 1572887, 0, 0, 1572888, 0, 0, 1572889, 0, 0, 1572890, 0, 0, 1572891, 0, 0, 1572892, 0, 0, 1572893, 0, 0, 1638400, 0, 0, 1638422, 0, 0, 1638429, 0, 0, 1703936, 0, 0, 1703958, 0, 0, 1703965, 0, 0, 1769472, 0, 0, 1769494, 0, 0, 1769501, 0, 0, 1835008, 0, 0, 1835030, 0, 0, 1835037, 0, 0, 1900544, 0, 0, 1900573, 0, 0, 1966080, 0, 0, 1966109, 0, 0, 2031616, 0, 0, 2031645, 0, 0, 2097152, 0, 0, 2097153, 0, 0, 2097154, 0, 0, 2097155, 0, 0, 2097156, 0, 0, 2097157, 0, 0, 2097158, 0, 0, 2097159, 0, 0, 2097160, 0, 0, 2097161, 0, 0, 2097162, 0, 0, 2097163, 0, 0, 2097164, 0, 0, 2097165, 0, 0, 2097166, 0, 0, 2097167, 0, 0, 2097168, 0, 0, 2097169, 0, 0, 2097170, 0, 0, 2097171, 0, 0, 2097172, 0, 0, 2097173, 0, 0, 2097174, 0, 0, 2097175, 0, 0, 2097176, 0, 0, 2097177, 0, 0, 2097178, 0, 0, 2097179, 0, 0, 2097180, 0, 0, 2097181, 0, 0 )
-script = ExtResource( 11 )
-_sections_unfolded = [ "Cell" ]
-__meta__ = {
-"_edit_lock_": true
-}
-stationary = true
-
-[node name="Collider" type="Node2D" parent="Collision" index="0"]
-
-script = ExtResource( 12 )
-
-[node name="Floors" type="Node2D" parent="." index="8"]
+[node name="Floors" type="Node2D" parent="." index="7"]
 
 editor/display_folded = true
 position = Vector2( 296, 504 )
@@ -137,7 +107,7 @@ position = Vector2( 296, 504 )
 [node name="Floor" type="Node2D" parent="Floors" index="0"]
 
 position = Vector2( -56, 16 )
-script = ExtResource( 13 )
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -152,11 +122,44 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 14 )
+script = ExtResource( 11 )
 
 [node name="Shape" type="CollisionShape2D" parent="Floors/Floor/Collider" index="0"]
 
 shape = SubResource( 1 )
+
+[node name="SolidTiles" type="Node2D" parent="." index="8"]
+
+script = ExtResource( 12 )
+stationary = true
+
+[node name="TileMap" type="TileMap" parent="SolidTiles" index="0"]
+
+mode = 0
+tile_set = ExtResource( 13 )
+cell_size = Vector2( 16, 16 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 0, 0, 0, 0, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 17, 0, 0, 18, 0, 0, 19, 0, 0, 20, 0, 0, 21, 0, 0, 22, 0, 0, 23, 0, 0, 24, 0, 0, 25, 0, 0, 26, 0, 0, 27, 0, 0, 28, 0, 0, 29, 0, 0, 65536, 0, 0, 65565, 0, 0, 131072, 0, 0, 131101, 0, 0, 196608, 0, 0, 196611, 0, 0, 196637, 0, 0, 262144, 0, 0, 262173, 0, 0, 327680, 0, 0, 327709, 0, 0, 393216, 0, 0, 393245, 0, 0, 458752, 0, 0, 458781, 0, 0, 524288, 0, 0, 524317, 0, 0, 589824, 0, 0, 589853, 0, 0, 655360, 0, 0, 655389, 0, 0, 720896, 0, 0, 720925, 0, 0, 786432, 0, 0, 786461, 0, 0, 851968, 0, 0, 851997, 0, 0, 917504, 0, 0, 917533, 0, 0, 983040, 0, 0, 983069, 0, 0, 1048576, 0, 0, 1048605, 0, 0, 1114112, 0, 0, 1114141, 0, 0, 1179648, 0, 0, 1179677, 0, 0, 1245184, 0, 0, 1245213, 0, 0, 1310720, 0, 0, 1310749, 0, 0, 1376256, 0, 0, 1376285, 0, 0, 1441792, 0, 0, 1441821, 0, 0, 1507328, 0, 0, 1507357, 0, 0, 1572864, 0, 0, 1572886, 0, 0, 1572887, 0, 0, 1572888, 0, 0, 1572889, 0, 0, 1572890, 0, 0, 1572891, 0, 0, 1572892, 0, 0, 1572893, 0, 0, 1638400, 0, 0, 1638422, 0, 0, 1638429, 0, 0, 1703936, 0, 0, 1703958, 0, 0, 1703965, 0, 0, 1769472, 0, 0, 1769494, 0, 0, 1769501, 0, 0, 1835008, 0, 0, 1835030, 0, 0, 1835037, 0, 0, 1900544, 0, 0, 1900573, 0, 0, 1966080, 0, 0, 1966109, 0, 0, 2031616, 0, 0, 2031645, 0, 0, 2097152, 0, 0, 2097153, 0, 0, 2097154, 0, 0, 2097155, 0, 0, 2097156, 0, 0, 2097157, 0, 0, 2097158, 0, 0, 2097159, 0, 0, 2097160, 0, 0, 2097161, 0, 0, 2097162, 0, 0, 2097163, 0, 0, 2097164, 0, 0, 2097165, 0, 0, 2097166, 0, 0, 2097167, 0, 0, 2097168, 0, 0, 2097169, 0, 0, 2097170, 0, 0, 2097171, 0, 0, 2097172, 0, 0, 2097173, 0, 0, 2097174, 0, 0, 2097175, 0, 0, 2097176, 0, 0, 2097177, 0, 0, 2097178, 0, 0, 2097179, 0, 0, 2097180, 0, 0, 2097181, 0, 0 )
+_sections_unfolded = [ "Cell", "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Collider" type="Node2D" parent="SolidTiles" index="1"]
+
+script = ExtResource( 14 )
 
 
 [editable path="CamLocks/CamLock"]

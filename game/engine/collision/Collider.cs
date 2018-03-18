@@ -32,6 +32,9 @@ public class Collider : Node2D {
     public virtual bool Collides(GridCollider other) => false;
 
     public Node2D GetNodeOwner() => this.findOwner();
+    public T OwnerAs<T> () where T : Entity {
+        return this.findOwner() as T;
+    }
 
     public CollisionShape2D GetCollisionShape() =>
         (CollisionShape2D)this.GetNode("Shape");

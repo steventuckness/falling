@@ -3,6 +3,14 @@ using System;
 
 namespace Rect {
     public static class Rect {
+        public static Vector2[] Points(this Rect2 rect) {
+            return new Vector2[]{
+                new Vector2(rect.Left(), rect.Top()),
+                new Vector2(rect.Right(), rect.Top()),
+                new Vector2(rect.Right(), rect.Bottom()),
+                new Vector2(rect.Left(), rect.Bottom())
+            };
+        }
         public static float Left(this Rect2 rect) {
             return rect.Position.x;
         }

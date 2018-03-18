@@ -231,6 +231,9 @@ public class Cam : Node2D {
     }
 
     public override void _PhysicsProcess(float delta) {
+        if(this.follow == null) {
+            return;
+        }
         this.SetPosition(this.ClampLimits(
             new Vector2(
                 this.HandleHorizontalState(delta),
