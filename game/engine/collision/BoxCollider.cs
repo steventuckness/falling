@@ -30,7 +30,29 @@ public class BoxCollider : Collider {
     }
 
     public override bool Collides(GridCollider other) {
-        // TODO: Handle collision within the tile grid
-        return false;
+        TileMap map = other.GetMap();
+        Rect2 r = this.GetRect();
+        // TODO: Remove this. This corrects a WEIRD issue where
+        // accessing tiles at world coordinates seems to be OFF
+        // by one unit on the right and bottom edges. So we will temporarily
+        // and hackily grow the rect inwards to account for this.
+        r = r.GrowIndividual(0, 0, -1, -1);
+        Vector2[] points = r.Points();
+        bool hit = false;
+        foreach(Vector2 p in points) {
+            int cell = map.GetCellv(map.WorldToMap(p));
+            if(cell > -1) {
+                hit = true;
+                break;
+            }
+        }
+
+        // if(hit) {
+        //     GD.Print("Hit tile!");
+        // } else {
+        //     GD.Print("No hit");
+        // }
+        
+        return hit;
     }
 }

@@ -169,6 +169,16 @@ public class Player {
     }
 
     public void _PhysicsProcess(float delta) {
+        // Vector2 mouse = this.node.GetGlobalMousePosition();
+        // mouse.x = Mathf.Round(mouse.x);
+        // mouse.y = Mathf.Round(mouse.y);
+        // this.SetPosition(mouse);
+
+        // this.node.collision.CollideCheck<Solid>(this.GetPosition());
+
+        // return;
+
+
         if (this.paused) {
             return;
         }
@@ -202,8 +212,6 @@ public class Player {
             this.velocity.y = 0;
         });
         return this.velocity;
-        // this.velocity = this.node.MoveAndSlide(this.velocity, new Vector2(0, -1), slopeStop, 4, 1.06f);
-        // return this.velocity;
     }
 
     public void ApplyGravity(float delta) {

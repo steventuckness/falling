@@ -104,14 +104,14 @@ public class CamLock : Area2D {
     }
 
     public void OnEnter(Godot.Object obj) {
-        if (!(obj is Player)) {
+        if (!(obj is PlayerNode)) {
             return;
         }
         this.EmitSignal(PLAYER_ENTERED, new object[] { this });
     }
 
     public void OnExit(Godot.Object obj) {
-        if (!(obj is Player)) {
+        if (!(obj is PlayerNode)) {
             return;
         }
         this.EmitSignal(PLAYER_EXITED, new object[] { this });
