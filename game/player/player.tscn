@@ -1,23 +1,21 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://player/PlayerNode.cs" type="Script" id=1]
 [ext_resource path="res://engine/collision/BoxCollider.cs" type="Script" id=2]
 [ext_resource path="res://player/assets/sprites/player.png" type="Texture" id=3]
-[ext_resource path="res://player/recorder/InputRecorder.cs" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 8, 8 )
 
-[node name="Player" type="Node2D" index="0"]
+[node name="Player" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Angular", "Collision", "Linear" ]
 
 [node name="Collider" type="Area2D" parent="." index="0"]
 
-editor/display_folded = true
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -31,15 +29,34 @@ script = ExtResource( 2 )
 
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="." index="1"]
+[node name="BL" type="RayCast2D" parent="." index="1"]
+
+position = Vector2( -8, 0 )
+enabled = true
+exclude_parent = true
+cast_to = Vector2( 0, 42 )
+collision_mask = 1
+_sections_unfolded = [ "Transform" ]
+
+[node name="BC" type="RayCast2D" parent="." index="2"]
+
+enabled = true
+exclude_parent = true
+cast_to = Vector2( 0, 42 )
+collision_mask = 1
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="BR" type="RayCast2D" parent="." index="3"]
+
+position = Vector2( 8.18463, 0 )
+enabled = true
+exclude_parent = true
+cast_to = Vector2( 0, 42 )
+collision_mask = 1
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
+
+[node name="Sprite" type="Sprite" parent="." index="4"]
 
 texture = ExtResource( 3 )
-
-[node name="InputRecorder" type="Node" parent="." index="2"]
-
-script = ExtResource( 4 )
-enabled = true
-triggerKey = "key_record"
-holdToRecord = false
 
 

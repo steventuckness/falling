@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Recorder;
 
 public class Player {
 
@@ -30,6 +31,7 @@ public class Player {
     public float gravity = 900.0f;
 
     public Direction direction = Direction.Right;
+    public Animation CurrentAnimation { get { return animation; } }
     private Animation animation;
 
     // Air
@@ -64,6 +66,7 @@ public class Player {
     // MISC ////////////////////////////////////////////////////////////////////
     public Vector2 carry = new Vector2(0, 0);
     public float respawnTime = 2.0f;  // Seconds
+    private Recorder.FrameRecorder<PlayerRecorderFrame> cloneRecorder;
 
     // UI //////////////////////////////////////////////////////////////////////
     public CloneMenu cloneMenu;
@@ -81,8 +84,7 @@ public class Player {
         Idle
     };
 
-    private Vector2 recordingInitialPosition;
-    private Vector2 recordingInitialVelocity;
+    private Recording<PlayerRecorderFrame> lastRecording;
 
     public virtual void _Ready() {
         this.AddUserSignal(Player.SIGNAL_DIED);
@@ -90,6 +92,11 @@ public class Player {
 
         this.sm.Init(this.stateIdle);
         this.PlayAnimation(Animation.Walking);
+        this.cloneRecorder = new Recorder.FrameRecorder<PlayerRecorderFrame>(
+            () => PlayerRecorderFrame.FromPlayer(this),
+            this.RecordingStarted,
+            this.RecordingStopped
+        );
 
         if (menuEnabled) {
             this.cloneMenu = (CloneMenu)this.node.GetNode("CloneMenu/Menu");
@@ -102,23 +109,16 @@ public class Player {
             ));
             this.cloneMenu.Hide();
         }
-
-        this.GetInputRecorder().Connect(InputRecorder.SIGNAL_RECORDING_STARTED, this.node, "RecordingStarted");
-        this.GetInputRecorder().Connect(InputRecorder.SIGNAL_RECORDING_STOPPED, this.node, "RecordingStopped");
     }
 
-    protected InputRecorder GetInputRecorder() {
-        return (InputRecorder)this.GetNode("InputRecorder");
+    private void RecordingStarted() {
+        GD.Print("Recording started!");
     }
 
-    public void RecordingStarted() {
-        this.recordingInitialPosition = this.GetPosition();
-        this.recordingInitialVelocity = this.velocity;
-    }
-
-    public void RecordingStopped() {
-        this.EmitSignal(SIGNAL_CREATE_CLONE, new object[] {
-            recordingInitialPosition, recordingInitialVelocity });
+    private void RecordingStopped(Recorder.Recording<PlayerRecorderFrame> recording) {
+        this.lastRecording = recording;
+        this.EmitSignal(SIGNAL_CREATE_CLONE);
+        GD.Print("Recording stopped!");
     }
 
     public bool IsDead() {
@@ -172,17 +172,7 @@ public class Player {
         // }
     }
 
-    public void _PhysicsProcess(float delta) {
-        // Vector2 mouse = this.node.GetGlobalMousePosition();
-        // mouse.x = Mathf.Round(mouse.x);
-        // mouse.y = Mathf.Round(mouse.y);
-        // this.SetPosition(mouse);
-
-        // this.node.collision.CollideCheck<Solid>(this.GetPosition());
-
-        // return;
-
-
+    public virtual void _PhysicsProcess(float delta) {
         if (this.paused) {
             return;
         }
@@ -199,7 +189,9 @@ public class Player {
         this.sm.Update(delta, this);
     }
 
-    public virtual void _Process(float delta) { }
+    public virtual void _Process(float delta) { 
+        this.cloneRecorder.Process(delta);
+    }
 
     public void MoveX(float x, Entity.OnCollide onCollide) {
         this.node.MoveX(x, onCollide);
@@ -303,8 +295,8 @@ public class Player {
         return Input.IsActionJustReleased(key);
     }
 
-    public virtual Recording GetRecording() =>
-        this.GetInputRecorder().lastRecording;
+    public virtual Recorder.Recording<PlayerRecorderFrame> GetRecording() =>
+        this.lastRecording;
 
     // Methods to conform to the KinematicBody interface. Add any extra methods
     // here.

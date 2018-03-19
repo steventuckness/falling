@@ -134,13 +134,11 @@ public class Act : Node {
          ((ActManager)this.GetNode("/root/ActManager")).NextAct();
     }
 
-    private void CreateClone(Vector2 initialPosition, Vector2 initialVelocity) {
+    private void CreateClone() {
         PlayerNode node = (PlayerNode)
              ((PackedScene)ResourceLoader.Load("res://player/player.tscn"))
                  .Instance();
         PlayerClone clone = new PlayerClone();
-        clone.initialPosition = initialPosition;
-        clone.initiaVelocity = initialVelocity;
         clone.recording = this.GetPlayer().GetRecording();
         var playerSprite = (Sprite)this.GetPlayer().GetNode("Sprite");
         clone.color = playerSprite.GetModulate();
