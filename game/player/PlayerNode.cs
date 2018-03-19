@@ -68,9 +68,5 @@ public class PlayerNode : Entity {
     public bool IsOnFloor() =>
         implementation.IsOnFloor();
 
-    public void RecordingStarted() => implementation.RecordingStarted();
-
-    public void RecordingStopped() => implementation.RecordingStopped();
-
-    public Recording GetRecording() => implementation.GetRecording();
+    public Recorder.Recording<PlayerRecorderFrame> GetRecording() => implementation.GetRecording();
 }

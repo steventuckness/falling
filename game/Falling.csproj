@@ -67,6 +67,7 @@
     <Compile Include="player\recorder\InputRecorder.cs" />
     <Compile Include="player\recorder\KeyEntry.cs" />
     <Compile Include="player\recorder\Recording.cs" />
+    <Compile Include="player\PlayerRecordedFrame.cs" />
     <Compile Include="player\states\Dead.cs" />
     <Compile Include="player\states\Falling.cs" />
     <Compile Include="player\states\Gliding.cs" />
@@ -80,6 +81,10 @@
     <Compile Include="engine\state_machine\State.cs" />
     <Compile Include="engine\math\Acceleration.cs" />
     <Compile Include="engine\autoloads\ActManager.cs" />
+    <Compile Include="engine\recorder\Frame.cs" />
+    <Compile Include="engine\recorder\FramePlayer.cs" />
+    <Compile Include="engine\recorder\FrameRecorder.cs" />
+    <Compile Include="engine\recorder\Recording.cs" />
     <Compile Include="ui\CloneMenu.cs" />
     <Compile Include="world\act\Act.cs" />
     <Compile Include="world\act\states\Play.cs" />
