@@ -20,7 +20,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 240, 8 )
 
-[node name="MainScene" type="Node2D"]
+[node name="MainScene" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -36,11 +36,10 @@ script = ExtResource( 2 )
 
 [node name="Player" parent="." index="1" instance=ExtResource( 3 )]
 
-editor/display_folded = true
-position = Vector2( 264, 472 )
+position = Vector2( 264, 504 )
 _sections_unfolded = [ "Angular", "Collision", "Linear", "Transform", "Z Index" ]
 
-[node name="CloneMenu" parent="Player" index="6" instance=ExtResource( 4 )]
+[node name="CloneMenu" parent="Player" index="5" instance=ExtResource( 4 )]
 
 [node name="Spawn" parent="." index="2" instance=ExtResource( 5 )]
 

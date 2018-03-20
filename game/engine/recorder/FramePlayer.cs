@@ -4,7 +4,7 @@ using Godot;
 
 namespace Recorder {
 
-public class FramePlayer<S> {
+    public class FramePlayer<S> {
         public Recording<S> Recording;
         public delegate void StateSetter(S state);
 
@@ -54,10 +54,10 @@ public class FramePlayer<S> {
                 return SortFrames(this.Recording.Entries).FindAll(
                     (frame) => frame.Timestamp <= time
                 )[0];
-            } catch (ArgumentOutOfRangeException e ) {
+            }
+            catch (ArgumentOutOfRangeException e) {
                 return null;
             }
         }
-}
-
+    }
 }

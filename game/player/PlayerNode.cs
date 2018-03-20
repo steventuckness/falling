@@ -52,6 +52,55 @@ public class PlayerNode : Entity {
         implementation._Ready();
     }
 
+    public override void MoveX(float x, OnCollide onCollide) {
+        Vector2 pos = this.GetPosition();
+        int moveX = this.CalcMoveX(x);
+        int dirX = (int)Mathf.Sign(moveX);
+        bool collided = false;
+        if (x == 0 || moveX == 0) {
+            return;
+        }
+        for (int i = 0; i < Mathf.Abs(moveX); i++) {
+            Vector2 check = this.GetPosition() + new Vector2(dirX, 0);
+
+            if (
+                !this.collision.CollideCheck<Solid>(check) &&
+                !this.collision.CollideCheck<PlayerNode>(check)
+            ) {
+                this.SetPosition(this.GetPosition() + new Vector2(dirX, 0));
+            }
+            else {
+                collided = true;
+            }
+        }
+        if (collided) {
+            onCollide();
+        }
+    }
+
+    public override void MoveY(float y, OnCollide onCollide) {
+        Vector2 pos = this.GetPosition();
+        int moveY = this.CalcMoveY(y);
+        int dirY = (int)Mathf.Sign(moveY);
+        bool collided = false;
+        if (y == 0 || moveY == 0) {
+            return;
+        }
+        for(int i = 0; i < Mathf.Abs(moveY); i++) {
+            Vector2 check = this.GetPosition() + new Vector2(0, dirY);
+
+            if(!this.collision.CollideCheck<Solid>(check) && !this.collision.CollideCheck<PlayerNode>(check)) {
+                this.SetPosition(this.GetPosition() + new Vector2(0, dirY));
+            } else {
+                collided = true;
+            }
+        }
+
+        if (collided) {
+            onCollide();
+        }
+    }
+
     public void Respawn() {
         implementation.Respawn();
     }
@@ -67,6 +116,9 @@ public class PlayerNode : Entity {
 
     public bool IsOnFloor() =>
         implementation.IsOnFloor();
+
+    public bool IsRidingClone(PlayerClone clone) =>
+        implementation.IsRidingClone(clone);
 
     public Recorder.Recording<PlayerRecorderFrame> GetRecording() => implementation.GetRecording();
 }

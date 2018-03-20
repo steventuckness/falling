@@ -76,7 +76,9 @@ public class Entity : Node2D {
             return;
         }
         for(int i = 0; i < Mathf.Abs(moveX); i++) {
-            if(!this.collision.CollideCheck<Solid>(this.GetPosition() + new Vector2(dirX, 0))) {
+            Vector2 check = this.GetPosition() + new Vector2(dirX, 0);
+
+            if(!this.collision.CollideCheck<Solid>(check)) {
                 this.SetPosition(this.GetPosition() + new Vector2(dirX, 0));
             } else {
                 collided = true;

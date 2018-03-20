@@ -14,7 +14,7 @@ public class PlayerRecorderFrame {
 
     public static PlayerRecorderFrame FromPlayer(Player player) =>
         new PlayerRecorderFrame(
-            player.GetPosition(), 
+            player.GetPosition(),
             player.direction,
             player.CurrentAnimation);
 
