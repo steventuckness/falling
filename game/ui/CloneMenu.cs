@@ -66,6 +66,10 @@ public class CloneMenu : ReferenceRect {
     }
 
     private void DrawOptions() {
+        if (this.selections == null) {
+            return;
+        }
+
         CloneOptions.CloneOption c = this.selections[this.selectedIndex];
 
         // TODO: Draw available options

@@ -23,6 +23,10 @@ public class Act : Node {
     [Export]
     public float respawnTime = 2f;
 
+    // Exporting arrays in C# is broken right now: https://github.com/godotengine/godot/issues/17684
+    //[Export] 
+    //public int[] cloneColors = new int[] { 0 /*red*/, 1 /*green*/ };
+
     public Node2D GetSpawn() {
         return this.spawn;
     }
@@ -67,6 +71,8 @@ public class Act : Node {
         this.cam.Follow(this.player);
         this.ConnectEvents();
         this.sm.Init(this.statePlay);
+
+        this.ConfigureCloneOptions(this.GetActColors(GetTree().GetCurrentScene().GetName()));
     }
 
     public void OnCamLimitEnter(CamLock camLock) {
@@ -145,7 +151,31 @@ public class Act : Node {
         node.implementation = clone;
         this.AddChild(node);
         GD.Print("Clone created!");
+    }
+
+    private void ConfigureCloneOptions(int[] cloneColors) {   
+        var levelCloneOptions = new CloneOptions.ECloneOption[cloneColors.Length];
+    
+        for (int i = 0; i < cloneColors.Length; i++) {
+            levelCloneOptions[i] = (CloneOptions.ECloneOption)cloneColors[i];
+        } 
+
+        this.player.implementation.SetCloneOptions(levelCloneOptions); 
+    }
+    
+    private int[] GetActColors(string sceneName) {
+        int[] actColors;
         
+        switch(sceneName) {
+            case "MainScene":
+                actColors = new int[] { 0 /*red*/, 1 /*green*/ };
+                break;
+            default:
+                actColors = new int[] { 0, 1, 2 };
+                break;
+        }
+
+        return actColors;
     }
 }
 
