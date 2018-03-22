@@ -26,7 +26,7 @@ public class BoxCollider : Collider {
     public override bool Collides(BoxCollider other) {
         Rect2 otherRect = other.GetRect();
         Rect2 thisRect = this.GetRect();
-        return thisRect.Overlaps(otherRect);
+        return thisRect.Overlaps(otherRect) || otherRect.Overlaps(thisRect);
     }
 
     public override bool Collides(GridCollider other) {

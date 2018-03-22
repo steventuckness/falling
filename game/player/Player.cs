@@ -304,7 +304,13 @@ public class Player {
     public bool IsOnFloor() {
         return this.node.collision.CollideCheck<Solid>(
             this.GetPosition() + new Vector2(0, 1)
+        ) || this.node.collision.CollideCheck<PlayerNode>(
+            this.GetPosition() + new Vector2(0, 1)
         );
+    }
+
+    public virtual bool IsRidingClone(PlayerClone clone) {
+        return this.collision.CollideFirst<PlayerNode>(this.GetPosition() + new Vector2(0, 1)) == clone.node;
     }
 
     public void Hide() => this.node.Hide();

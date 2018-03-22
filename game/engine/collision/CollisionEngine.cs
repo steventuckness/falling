@@ -22,8 +22,8 @@ public class CollisionEngine {
         List<Against> entities = this.scene.GetManager().FindEntitiesBy<Against>();
         bool hit = false;
         foreach (Against e in entities) {
-            Collider ec = e.GetCollider();
-            if (e != this.entity && c.Collides(ec)) {
+            Collider otherCollider = e.GetCollider();
+            if (e != this.entity && otherCollider.IsCollidable && c.Collides(otherCollider)) {
                 hit = true;
                 break;
             }
