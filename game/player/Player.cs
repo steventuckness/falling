@@ -100,13 +100,6 @@ public class Player {
 
         if (menuEnabled) {
             this.cloneMenu = (CloneMenu)this.node.GetNode("CloneMenu/Menu");
-            this.cloneMenu.SetOptions(CloneOptions.OptionsFrom(
-                new CloneOptions.ECloneOption[] {
-                    CloneOptions.ECloneOption.RED,
-                    CloneOptions.ECloneOption.GREEN,
-                    CloneOptions.ECloneOption.BLUE
-                }
-            ));
             this.cloneMenu.Hide();
         }
     }
@@ -336,6 +329,10 @@ public class Player {
     public Vector2 GetPosition() => this.node.GetPosition();
 
     public void SetPosition(Vector2 position) => this.node.SetPosition(position);
+
+    public void SetCloneOptions(CloneOptions.ECloneOption[] cloneOptions) {
+        this.cloneMenu.SetOptions(CloneOptions.OptionsFrom(cloneOptions));
+    }
 }
 
 
