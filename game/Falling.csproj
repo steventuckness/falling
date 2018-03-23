@@ -94,7 +94,7 @@
     <Compile Include="world\camera\CamLock.cs" />
     <Compile Include="world\finishOverlay\FinishOverlay.cs" />
     <Compile Include="world\finish\Finish.cs" />
-    <Compile Include="world\hazards\Spike.cs" />
+    <Compile Include="world\hazards\DeathArea.cs" />
     <Compile Include="world\interactive\door\DoorBase.cs" />
     <Compile Include="world\interactive\door\DoorSignalGate.cs" />
     <Compile Include="world\interactive\door\IDoor.cs" />
