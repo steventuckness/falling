@@ -54,7 +54,7 @@ public class PlayerNode : Entity {
 
     public override void MoveX(float x, OnCollide onCollide) {
         Vector2 pos = this.GetPosition();
-        int moveX = this.CalcMoveX(x);
+        int moveX = this.remainders.UpdateX(x);
         int dirX = (int)Mathf.Sign(moveX);
         bool collided = false;
         if (x == 0 || moveX == 0) {
@@ -80,7 +80,7 @@ public class PlayerNode : Entity {
 
     public override void MoveY(float y, OnCollide onCollide) {
         Vector2 pos = this.GetPosition();
-        int moveY = this.CalcMoveY(y);
+        int moveY = this.remainders.UpdateY(y);
         int dirY = (int)Mathf.Sign(moveY);
         bool collided = false;
         if (y == 0 || moveY == 0) {

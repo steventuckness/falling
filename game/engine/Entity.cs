@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 public class Entity : Node2D {
     public CollisionEngine collision;
-    public Vector2 remainders;
     public Collider collider;
     public delegate void OnCollide();
     public Scene scene;
+    public SubPixelFloat remainders;
     
     public bool IsCollidable {
         get {
@@ -26,7 +26,7 @@ public class Entity : Node2D {
 
     public override void _Ready() {
         this.collider = (Collider)this.GetNode("Collider");
-        this.remainders = new Vector2();
+        this.remainders = new SubPixelFloat();
 
         Scene scene = (Scene)this.GetTree().GetRoot().GetNode("MainScene/Scene");
         this.scene = scene;
@@ -40,28 +40,6 @@ public class Entity : Node2D {
 
     public virtual Collider GetCollider() => this.collider;
 
-    public int CalcMoveX(float x) {
-        this.remainders.x += x;
-        int moveX = (int)Mathf.Round(this.remainders.x);
-        if (moveX == 0) {
-            return moveX;
-        }
-        this.remainders.x -= moveX;
-
-        return moveX;
-    }
-
-    public int CalcMoveY(float y) {
-        this.remainders.y += y;
-        int moveY = (int)Mathf.Round(this.remainders.y);
-        if (moveY == 0) {
-            return moveY;
-        }
-        this.remainders.y -= moveY;
-
-        return moveY;
-    }
-
     public virtual void Move(Vector2 move, OnCollide onCollidH, OnCollide onCollideV) {
         this.MoveX(move.x, onCollidH);
         this.MoveY(move.y, onCollideV);
@@ -69,7 +47,7 @@ public class Entity : Node2D {
 
     public virtual void MoveX(float x, OnCollide onCollide) {
         Vector2 pos = this.GetPosition();
-        int moveX = this.CalcMoveX(x);
+        int moveX = this.remainders.UpdateX(x);
         int dirX = (int)Mathf.Sign(moveX);
         bool collided = false;
         if (x == 0 || moveX == 0) {
@@ -91,7 +69,7 @@ public class Entity : Node2D {
 
     public virtual void MoveY(float y, OnCollide onCollide) {
         Vector2 pos = this.GetPosition();
-        int moveY = this.CalcMoveY(y);
+        int moveY = this.remainders.UpdateY(y);
         int dirY = (int)Mathf.Sign(moveY);
         bool collided = false;
         if (y == 0 || moveY == 0) {

@@ -55,6 +55,7 @@
     <Compile Include="engine\collision\GridCollider.cs" />
     <Compile Include="engine\Debug.cs" />
     <Compile Include="engine\Entity.cs" />
+    <Compile Include="engine\math\SubPixelFloat.cs" />
     <Compile Include="engine\Rect.cs" />
     <Compile Include="engine\Scene.cs" />
     <Compile Include="engine\SceneManager.cs" />
