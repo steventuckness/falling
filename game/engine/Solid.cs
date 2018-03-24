@@ -12,7 +12,7 @@ public class Solid : Entity {
     public override void _Ready() {
         base._Ready();
         this.velocity = new Vector2(10, 10);
-        this.remainders = new Vector2();
+        this.remainders = new SubPixelFloat();
     }
 
     public override void _PhysicsProcess(float delta) {
@@ -26,11 +26,8 @@ public class Solid : Entity {
         this.GetCollider().Collides(player.GetCollider());
 
     public virtual void Move(Vector2 move) {
-        this.remainders.x += move.x;
-        this.remainders.y += move.y;
-
-        int moveX = (int)Mathf.Round(this.remainders.x);
-        int moveY = (int)Mathf.Round(this.remainders.y);
+        int moveX = this.remainders.UpdateX(move.x);
+        int moveY = this.remainders.UpdateY(move.y);
 
         if (moveX == 0 && moveY == 0) {
             return;
@@ -46,7 +43,6 @@ public class Solid : Entity {
     }
 
     private void MoveY(int moveY, List<PlayerNode> players, List<PlayerNode> riders) {
-        this.remainders.y -= moveY;
         this.SetPosition(this.GetPosition() + new Vector2(0, moveY));
 
         foreach (PlayerNode p in players) {
@@ -64,7 +60,6 @@ public class Solid : Entity {
     }
 
     private void MoveX(int moveX, List<PlayerNode> players, List<PlayerNode> riders) {
-        this.remainders.x -= moveX;
         this.SetPosition(this.GetPosition() + new Vector2(moveX, 0));
 
         // Loop through all players that were touching
