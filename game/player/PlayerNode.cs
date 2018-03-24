@@ -101,6 +101,19 @@ public class PlayerNode : Entity {
         }
     }
 
+    public static PlayerNode GetPlayerNodeFromChild(Godot.Object child) {
+        if (child == null) {
+            return null;
+        }
+        if (child is PlayerNode) {
+            return (PlayerNode) child;
+        }
+        if (child is Node2D) {
+            return GetPlayerNodeFromChild(((Node2D)child).GetParent());
+        }
+        return null;
+    }
+
     public void Respawn() {
         implementation.Respawn();
     }
@@ -119,6 +132,8 @@ public class PlayerNode : Entity {
 
     public bool IsRidingClone(PlayerClone clone) =>
         implementation.IsRidingClone(clone);
+
+    public void Kill() => implementation.Kill();
 
     public Recorder.Recording<PlayerRecorderFrame> GetRecording() => implementation.GetRecording();
 }
