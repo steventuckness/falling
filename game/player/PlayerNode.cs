@@ -136,4 +136,20 @@ public class PlayerNode : Entity {
     public void Kill() => implementation.Kill();
 
     public Recorder.Recording<PlayerRecorderFrame> GetRecording() => implementation.GetRecording();
+
+    public void InstantiateClone(PlayerNode player) {
+        if (implementation != null) {
+            return;
+        }
+        
+        implementation = new PlayerClone();
+    }
+
+    public Color GetColor() {
+        return ((Sprite)this.implementation.GetNode("Sprite")).GetModulate();
+    }
+
+    public void SetColor(Color color) {
+        ((Sprite)this.implementation.GetNode("Sprite")).SetModulate(color);
+    }
 }

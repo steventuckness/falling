@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using Recorder;
+using System.Collections.Generic;
 
 public class Player {
 
@@ -103,7 +104,7 @@ public class Player {
             this.cloneMenu.Hide();
         }
     }
-
+    
     private void RecordingStarted() {
         GD.Print("Recording started!");
     }
@@ -332,6 +333,10 @@ public class Player {
 
     public void SetCloneOptions(CloneOptions.ECloneOption[] cloneOptions) {
         this.cloneMenu.SetOptions(CloneOptions.OptionsFrom(cloneOptions));
+    }
+
+    public List<CloneOptions.CloneOption> GetCloneOptions() {
+        return this.cloneMenu.GetOptions();
     }
 }
 

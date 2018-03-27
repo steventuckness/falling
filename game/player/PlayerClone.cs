@@ -5,15 +5,12 @@ using System.Linq;
 
 public class PlayerClone : Player {
     public Recorder.Recording<PlayerRecorderFrame> recording;
-    public Color color;
     private Recorder.FramePlayer<PlayerRecorderFrame> movementPlayer;
     private Vector2 lastPosition;
 
     public override void _Ready() {
         this.menuEnabled = false;
         base._Ready();
-        var sprite = (Sprite)this.GetNode("Sprite");
-        sprite.SetModulate(color);
         this.movementPlayer = new Recorder.FramePlayer<PlayerRecorderFrame>(
             this.recording,
             (state) => state.ApplyOnPlayer(this)

@@ -33,6 +33,10 @@ public class CloneMenu : ReferenceRect {
         this.selections = options;
     }
 
+     public List<CloneOptions.CloneOption> GetOptions() {
+        return this.selections;
+    }
+
     public Color GetSelectedColor() {
         return this.selections[selectedIndex].GetColor();
     }
