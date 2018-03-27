@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public class Act : Node {
     // State ///////////////////////////////////////////////////////////////////
@@ -73,6 +74,7 @@ public class Act : Node {
         this.sm.Init(this.statePlay);
 
         this.ConfigureCloneOptions(this.GetActColors(GetTree().GetCurrentScene().GetName()));
+        this.GetPlayer().SetColor(this.player.implementation.GetCloneOptions()[0].GetColor()); 
     }
 
     public void OnCamLimitEnter(CamLock camLock) {
@@ -141,14 +143,27 @@ public class Act : Node {
     }
 
     private void CreateClone() {
+        
         PlayerNode node = (PlayerNode)
              ((PackedScene)ResourceLoader.Load("res://player/player.tscn"))
                  .Instance();
-        PlayerClone clone = new PlayerClone();
-        clone.recording = this.GetPlayer().GetRecording();
-        var playerSprite = (Sprite)this.GetPlayer().GetNode("Sprite");
-        clone.color = playerSprite.GetModulate();
-        node.implementation = clone;
+
+        // instantiate clone in PlayerNode class to avoid losing the reference 
+        node.InstantiateClone(this.GetPlayer());
+        ((PlayerClone)node.implementation).recording = player.GetRecording();
+        node.SetColor(player.GetColor());
+       
+        // loop through children and remove children that have the new clone color
+        var clones = this.GetTree().GetNodesInGroup("clones");
+        GD.Print($"clones count : {clones.Length}");
+
+        foreach(var existingClone in clones) {
+            if (((PlayerNode)existingClone).GetColor() == node.GetColor()) {
+                ((PlayerNode)existingClone).QueueFree();
+            }
+        }
+
+        node.AddToGroup("clones");
         this.AddChild(node);
         GD.Print("Clone created!");
     }
