@@ -41,6 +41,12 @@ public class Player {
     public float airFriction = 50f;
     public float airMaxSpeed = 200f;
     public float airMult = 0.65f;
+    public const float WALL_JUMP_GRACE_TIME = 0.3f;
+    public const float WALL_CLING_TIME = 0.25f;
+    public float wallJumpGraceTime = 0;
+    public float wallClingTimer = 0;
+    public bool isClinging = false;
+    public bool canCling = false;
 
     // Ground
     public float groundFriction = 2000.0f;
@@ -54,6 +60,13 @@ public class Player {
             return this.node.collision;
         }
     }
+    public struct CollisionData {
+        public bool top;
+        public bool right;
+        public bool bottom;
+        public bool left;
+    }
+    public CollisionData collisionData = new CollisionData();
 
     // Falling
     public float fallingMaxSpeed = 160.0f;
@@ -173,17 +186,23 @@ public class Player {
         if (menuEnabled) {
             if (Input.IsActionPressed("key_up") && this.cloneMenu.Visible == false) {
                 this.cloneMenu.Show();
-            } else if(Input.IsActionJustReleased("key_up") && this.cloneMenu.Visible) {
+            }
+            else if (Input.IsActionJustReleased("key_up") && this.cloneMenu.Visible) {
                 this.cloneMenu.Hide();
                 var sprite = (Sprite)this.node.GetNode("Sprite");
                 sprite.SetModulate(this.cloneMenu.GetSelectedColor());
             }
         }
+        // Convenience data for solid collision checks
+        this.collisionData.top = this.collision.CollideCheck<Solid>(this.GetPosition() + new Vector2(0, -1));
+        this.collisionData.right = this.collision.CollideCheck<Solid>(this.GetPosition() + new Vector2(1, 0));
+        this.collisionData.bottom = this.collision.CollideCheck<Solid>(this.GetPosition() + new Vector2(0, 1));
+        this.collisionData.left = this.collision.CollideCheck<Solid>(this.GetPosition() + new Vector2(-1, 0));
 
         this.sm.Update(delta, this);
     }
 
-    public virtual void _Process(float delta) { 
+    public virtual void _Process(float delta) {
         this.cloneRecorder.Process(delta);
     }
 
@@ -206,7 +225,6 @@ public class Player {
     }
 
     public void ApplyGravity(float delta) {
-        // this.velocity = Acceleration.ApplyTerminalY(this.fallingMaxSpeed, this.gravity, delta, this.velocity);
         this.velocity = Acceleration.ApproachY(
             this.fallingMaxSpeed,
             this.gravity,
@@ -236,6 +254,7 @@ public class Player {
     }
 
     public void AirControl(float delta) {
+        this.UpdateCling(delta);
         int dir = this.GetInputDirection();
         // Air friction
         if (this.velocity.x != 0 && dir == 0) {
@@ -244,7 +263,7 @@ public class Player {
             );
         }
         // Air control
-        else if (dir != 0) {
+        else if (dir != 0 && !this.IsClinging()) {
             this.velocity = Acceleration.ApproachX(
                 dir * this.groundMaxSpeed,
                 this.groundAcceleration * this.airMult,
@@ -253,6 +272,55 @@ public class Player {
             );
         }
     }
+    public void UpdateWallJump(float delta) {
+        bool cLeft = this.collisionData.left;
+        bool cRight = this.collisionData.right;
+
+        if (!cLeft && !cRight) {
+            this.wallJumpGraceTime = Mathf.Max(0, this.wallJumpGraceTime - delta);
+        }
+        else {
+            this.wallJumpGraceTime = WALL_JUMP_GRACE_TIME;
+        }
+    }
+    public void UpdateCling(float delta) {
+        int dir = this.GetInputDirection();
+        bool cLeft = this.collisionData.left;
+        bool cRight = this.collisionData.right;
+        
+        // Back in the air
+        if(!cLeft && !cRight) {
+            this.canCling = true;
+            this.isClinging = false;
+        }
+
+        // Pressing out from a wall
+        if (this.canCling && (dir == -1 && cRight || dir == 1 && cLeft)) {
+            this.isClinging = true;
+            this.wallClingTimer = WALL_CLING_TIME;
+            this.canCling = false;
+        }
+        if(this.isClinging) {
+            this.wallClingTimer = Mathf.Max(0, this.wallClingTimer - delta);
+            if(this.wallClingTimer <= 0) {
+                this.isClinging = false;
+            }
+        }
+    }
+    public bool IsClinging() {
+        return this.isClinging;
+    }
+    public bool CanWallJump() {
+        int dir = this.GetInputDirection();
+        bool cLeft = this.collisionData.left;
+        bool cRight = this.collisionData.right;
+        bool pushingOff = (dir == -1) ? (!cLeft) : (dir == 1) ? (!cRight) : false;
+        return this.wallJumpGraceTime > 0 && (dir != 0) && pushingOff;
+    }
+    public void ResetWallJump() {
+        this.wallJumpGraceTime = 0;
+    }
+    public Vector2 WallJump(int dir) => new Vector2(50 * dir, -Mathf.Sqrt(2 * this.gravity * this.jumpHeight));
 
     public void GroundControl(float delta) {
         int dir = this.GetInputDirection();
