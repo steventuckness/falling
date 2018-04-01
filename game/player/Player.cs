@@ -117,15 +117,24 @@ public class Player {
             this.cloneMenu.Hide();
         }
     }
-    
-    private void RecordingStarted() {
+
+    protected virtual void RecordingStarted() {
         GD.Print("Recording started!");
+        var trail = ((TrailRenderer)node.GetNode("trail"));
+        trail.StartingColor = this.GetColor();
+        trail.IsEnabled = true;
     }
 
-    private void RecordingStopped(Recorder.Recording<PlayerRecorderFrame> recording) {
+    protected virtual void RecordingStopped(Recorder.Recording<PlayerRecorderFrame> recording) {
         this.lastRecording = recording;
         this.EmitSignal(SIGNAL_CREATE_CLONE);
+        ((TrailRenderer)node.GetNode("trail")).IsEnabled = false;
         GD.Print("Recording stopped!");
+    }
+
+    public Color GetColor() {
+        var sprite = (Sprite)this.node.GetNode("Sprite");
+        return sprite.GetModulate();
     }
 
     public bool IsDead() {

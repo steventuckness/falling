@@ -89,5 +89,9 @@ public class PlayerClone : Player {
         return false;
     }
 
+    protected override void RecordingStarted() {}
+
+    protected override void RecordingStopped(Recorder.Recording<PlayerRecorderFrame> recording) {}
+
     public override bool IsRidingClone(PlayerClone clone) => false;
 }

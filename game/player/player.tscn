@@ -1,20 +1,31 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://player/PlayerNode.cs" type="Script" id=1]
-[ext_resource path="res://engine/collision/BoxCollider.cs" type="Script" id=2]
-[ext_resource path="res://player/assets/sprites/player.png" type="Texture" id=3]
+[ext_resource path="res://engine/TrailRenderer.cs" type="Script" id=2]
+[ext_resource path="res://engine/collision/BoxCollider.cs" type="Script" id=3]
+[ext_resource path="res://player/assets/sprites/player.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 8, 8 )
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Angular", "Collision", "Linear" ]
 
-[node name="Collider" type="Area2D" parent="." index="0"]
+[node name="trail" type="Node2D" parent="." index="0"]
+
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+IsEnabled = false
+MaxPoints = 30
+StartingColor = Color( 1, 0, 0, 1 )
+EndingColor = Color( 0, 0, 0, 0 )
+Size = Vector2( 10, 10 )
+
+[node name="Collider" type="Area2D" parent="." index="1"]
 
 editor/display_folded = true
 input_pickable = true
@@ -24,16 +35,15 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Shape" type="CollisionShape2D" parent="Collider" index="0"]
 
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="." index="1"]
+[node name="Sprite" type="Sprite" parent="." index="2"]
 
-texture = ExtResource( 3 )
-_sections_unfolded = [ "Material", "Pause" ]
+texture = ExtResource( 4 )
 
 
