@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://world/interactive/door/DoorSignalGate.cs" type="Script" id=1]
+
+[node name="DoorSwitchControl" type="Node2D"]
+
+position = Vector2( 649.285, 277.789 )
+scale = Vector2( 0.695824, 0.695824 )
+script = ExtResource( 1 )
+inputGroup = "Switch_1"
+doorGroup = "Door_1"
+orMode = false
+
+
