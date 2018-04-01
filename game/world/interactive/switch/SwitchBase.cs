@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 public class SwitchBase : Node2D, ISwitch {
-    private RayCast2D cast;
+    private Area2D area2d;
     private bool isPressed = false;
     private bool wasPressedLastFrame = false;
 
@@ -10,12 +10,31 @@ public class SwitchBase : Node2D, ISwitch {
     public static String SIGNAL_SWITCH_ON = "Switch::on";
     public static String SIGNAL_SWITCH_OFF = "Switch::off";
 
+    private int playersOnSwitch = 0;
+
     public override void _Ready() {
-        this.cast = (RayCast2D) this.GetNode("RayCast2D");
+        this.area2d = (Area2D) this.GetNode("Area2D");
 
         // Signals
         this.AddUserSignal(SIGNAL_SWITCH_ON);
         this.AddUserSignal(SIGNAL_SWITCH_OFF);
+
+        this.area2d.Connect("area_entered", this, "onAreaEntered");
+        this.area2d.Connect("area_exited", this, "onAreaExited");
+    }
+
+    private void onAreaEntered(Godot.Object body) {
+        PlayerNode player = PlayerNode.GetPlayerNodeFromChild(body);
+        if (player != null) {
+            this.playersOnSwitch++;
+        }
+    }
+
+    private void onAreaExited(Godot.Object body) {
+        PlayerNode player = PlayerNode.GetPlayerNodeFromChild(body);
+        if (player != null) {
+           this.playersOnSwitch--;
+        }
     }
 
     public override void _PhysicsProcess(float delta) {
@@ -23,10 +42,12 @@ public class SwitchBase : Node2D, ISwitch {
         this.Process(delta);
     }
 
-    public virtual void Process(float delta) {
+    public virtual void Process(float delta) {                
         if(this.IsBeingPressed() && this.CanTurnOn()) {
             this.TurnOn();
-        }
+        } else if (!this.IsBeingPressed() && !this.CanTurnOn()) {
+            this.TurnOff();
+        } 
     }
 
     public bool WasPressedLastFrame() {
@@ -44,18 +65,7 @@ public class SwitchBase : Node2D, ISwitch {
     }
 
     public bool IsBeingPressed() {
-        if(!this.cast.IsColliding()) {
-            return false;
-        }
-
-        Godot.Object collider = this.cast.GetCollider();
-
-        // TODO: Switches can be pressed by other entities as well, handle that
-        if(collider is Player) {
-            return true;
-        }
-
-        return false;
+        return this.playersOnSwitch > 0;
     }
 
     public void TurnOn() {

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://world/act/Act.cs" type="Script" id=1]
 [ext_resource path="res://engine/Scene.cs" type="Script" id=2]
@@ -16,6 +16,9 @@
 [ext_resource path="res://engine/collision/GridCollider.cs" type="Script" id=14]
 [ext_resource path="res://world/hazards/spikes/Tileset_Spikes.res" type="TileSet" id=15]
 [ext_resource path="res://world/hazards/DeathArea.cs" type="Script" id=16]
+[ext_resource path="res://world/interactive/door/DoorSwitchControl.tscn" type="PackedScene" id=17]
+[ext_resource path="res://world/interactive/switch/Switch.tscn" type="PackedScene" id=18]
+[ext_resource path="res://world/interactive/door/Door.tscn" type="PackedScene" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -43,7 +46,6 @@ script = ExtResource( 2 )
 
 [node name="Player" parent="." index="1" instance=ExtResource( 3 )]
 
-editor/display_folded = true
 position = Vector2( 264, 504 )
 _sections_unfolded = [ "Angular", "Collision", "Linear", "Transform", "Z Index" ]
 
@@ -149,6 +151,8 @@ script = ExtResource( 14 )
 
 [node name="Spikes" type="Node2D" parent="." index="9"]
 
+editor/display_folded = true
+
 [node name="TileMap" type="TileMap" parent="Spikes" index="0"]
 
 mode = 0
@@ -172,7 +176,6 @@ _sections_unfolded = [ "Cell" ]
 
 [node name="Area2D" type="Area2D" parent="Spikes" index="1"]
 
-editor/display_folded = true
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -186,6 +189,23 @@ script = ExtResource( 16 )
 
 position = Vector2( 384.109, 507.565 )
 shape = SubResource( 2 )
+
+[node name="DoorSwitchControl" parent="." index="10" instance=ExtResource( 17 )]
+
+position = Vector2( 266.263, 575.695 )
+
+[node name="Switch" parent="." index="11" groups=[
+"Switch_1",
+] instance=ExtResource( 18 )]
+
+position = Vector2( 160.173, 458.079 )
+
+[node name="Door" parent="." index="12" groups=[
+"Door_1",
+] instance=ExtResource( 19 )]
+
+position = Vector2( 327.236, 501.323 )
+scale = Vector2( 1, 1 )
 
 
 [editable path="CamLocks/CamLock"]
