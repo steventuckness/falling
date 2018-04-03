@@ -27,8 +27,6 @@ public class Player {
     // Physics /////////////////////////////////////////////////////////////////
     public Vector2 velocity = new Vector2(0, 0);
 
-    private float groundImpactSpeed = 0.0f; // px / sec
-
     public float gravity = 900.0f;
 
     public Direction direction = Direction.Right;
@@ -224,6 +222,7 @@ public class Player {
     }
 
     public Vector2 Move() {
+        GD.Print("Player::Move()");
         this.node.MoveX(this.velocity.x, () => {
             this.velocity.x = 0;
         });

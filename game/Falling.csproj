@@ -53,8 +53,13 @@
     <Compile Include="engine\collision\Collider.cs" />
     <Compile Include="engine\collision\CollisionEngine.cs" />
     <Compile Include="engine\collision\GridCollider.cs" />
+    <Compile Include="engine\Component.cs" />
+    <Compile Include="engine\components\MovingPlatform.cs" />
+    <Compile Include="engine\components\PlatformPush.cs" />
+    <Compile Include="engine\components\PlatformRider.cs" />
     <Compile Include="engine\Debug.cs" />
     <Compile Include="engine\Entity.cs" />
+    <Compile Include="engine\math\Interpolation.cs" />
     <Compile Include="engine\math\SubPixelFloat.cs" />
     <Compile Include="engine\Rect.cs" />
     <Compile Include="engine\Scene.cs" />
