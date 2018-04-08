@@ -19,6 +19,8 @@ public class Player {
     public bool paused = false;
     public bool menuEnabled = true;
 
+    private bool wasRecordingDuringDeath = false;
+
     // Signals /////////////////////////////////////////////////////////////////
     public static String SIGNAL_DIED = "Player::died";
     public static String SIGNAL_RESPAWN = "Player::respawn";
@@ -150,6 +152,13 @@ public class Player {
         if (!this.CanBeKilled()) {
             return;
         }
+
+        this.wasRecordingDuringDeath = this.cloneRecorder.IsRecording;
+        
+        if (this.cloneRecorder.IsRecording) {
+            this.cloneRecorder.StopRecording();
+        }
+        
         this.sm.TransitionState(this.stateDead);
     }
 
@@ -414,6 +423,12 @@ public class Player {
 
     public List<CloneOptions.CloneOption> GetCloneOptions() {
         return this.cloneMenu.GetOptions();
+    }
+
+    public bool WasRecordingDuringDeath {
+        get {
+            return this.wasRecordingDuringDeath;
+        }
     }
 }
 

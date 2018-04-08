@@ -152,4 +152,10 @@ public class PlayerNode : Entity {
     public void SetColor(Color color) {
         ((Sprite)this.implementation.GetNode("Sprite")).SetModulate(color);
     }
+
+    public bool WasRecordingDuringDeath  {
+        get {
+            return this.implementation.WasRecordingDuringDeath;
+        }
+    }
 }
