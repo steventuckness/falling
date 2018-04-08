@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Entity : Node2D {
     public CollisionEngine collision;
@@ -8,7 +9,7 @@ public class Entity : Node2D {
     public delegate void OnCollide();
     public Scene scene;
     public SubPixelFloat remainders;
-    
+
     public bool IsCollidable {
         get {
             return this.collider.IsCollidable;
@@ -17,6 +18,8 @@ public class Entity : Node2D {
             this.collider.IsCollidable = value;
         }
     }
+    public T GetComponent<T>() where T : Component =>
+        this.GetChildren().OfType<T>().FirstOrDefault(c => c is T);
 
     public virtual bool IsRiding(Solid s) {
         return this.collision.CollideFirst<Solid>(
@@ -53,16 +56,17 @@ public class Entity : Node2D {
         if (x == 0 || moveX == 0) {
             return;
         }
-        for(int i = 0; i < Mathf.Abs(moveX); i++) {
+        for (int i = 0; i < Mathf.Abs(moveX); i++) {
             Vector2 check = this.GetPosition() + new Vector2(dirX, 0);
 
-            if(!this.collision.CollideCheck<Solid>(check)) {
+            if (!this.collision.CollideCheck<Solid>(check)) {
                 this.SetPosition(this.GetPosition() + new Vector2(dirX, 0));
-            } else {
+            }
+            else {
                 collided = true;
             }
         }
-        if(collided) {
+        if (collided && onCollide != null) {
             onCollide();
         }
     }
@@ -75,15 +79,16 @@ public class Entity : Node2D {
         if (y == 0 || moveY == 0) {
             return;
         }
-        for(int i = 0; i < Mathf.Abs(moveY); i++) {
-            if(!this.collision.CollideCheck<Solid>(this.GetPosition() + new Vector2(0, dirY))) {
+        for (int i = 0; i < Mathf.Abs(moveY); i++) {
+            if (!this.collision.CollideCheck<Solid>(this.GetPosition() + new Vector2(0, dirY))) {
                 this.SetPosition(this.GetPosition() + new Vector2(0, dirY));
-            } else {
+            }
+            else {
                 collided = true;
             }
         }
 
-        if (collided) {
+        if (collided && onCollide != null) {
             onCollide();
         }
     }

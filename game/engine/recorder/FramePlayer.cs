@@ -56,6 +56,7 @@ namespace Recorder {
                 )[0];
             }
             catch (ArgumentOutOfRangeException e) {
+                GD.Print(e.Message);
                 return null;
             }
         }

@@ -73,7 +73,7 @@ public class PlayerNode : Entity {
                 collided = true;
             }
         }
-        if (collided) {
+        if (collided && onCollide != null) {
             onCollide();
         }
     }
@@ -86,17 +86,20 @@ public class PlayerNode : Entity {
         if (y == 0 || moveY == 0) {
             return;
         }
-        for(int i = 0; i < Mathf.Abs(moveY); i++) {
+        for (int i = 0; i < Mathf.Abs(moveY); i++) {
             Vector2 check = this.GetPosition() + new Vector2(0, dirY);
 
-            if(!this.collision.CollideCheck<Solid>(check) && !this.collision.CollideCheck<PlayerNode>(check)) {
+            if (
+                !this.collision.CollideCheck<Solid>(check) &&
+                !this.collision.CollideCheck<PlayerNode>(check)) {
                 this.SetPosition(this.GetPosition() + new Vector2(0, dirY));
-            } else {
+            }
+            else {
                 collided = true;
             }
         }
 
-        if (collided) {
+        if (collided && onCollide != null) {
             onCollide();
         }
     }
@@ -106,7 +109,7 @@ public class PlayerNode : Entity {
             return null;
         }
         if (child is PlayerNode) {
-            return (PlayerNode) child;
+            return (PlayerNode)child;
         }
         if (child is Node2D) {
             return GetPlayerNodeFromChild(((Node2D)child).GetParent());
@@ -141,7 +144,7 @@ public class PlayerNode : Entity {
         if (implementation != null) {
             return;
         }
-        
+
         implementation = new PlayerClone();
     }
 
