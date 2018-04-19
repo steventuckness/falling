@@ -101,8 +101,23 @@ public class Act : Node {
 
     public void PlayerDied() {
         GD.Print("Act -> Received signal of player death");
-        // TODO: Make the Act actually handle respawn
-        this.sm.TransitionState(this.stateRespawn);
+
+        if (player.WasRecordingDuringDeath) {
+            GD.Print("player was recording");
+
+            // just respawn immediately for now except don't kill all of the clones and don't delay...
+            Node2D spawn = this.GetSpawn();
+            Vector2 spawnPosition = spawn.GetPosition();
+            this.player.Show();
+            this.player.SetPosition(spawnPosition);
+            this.player.Respawn();
+        } else {
+            GD.Print("player was not recording");
+            this.KillAllClones();
+            
+            // TODO: Make the Act actually handle respawn
+            this.sm.TransitionState(this.stateRespawn);
+        }
     }
 
     public override void _PhysicsProcess(float delta) {
@@ -154,7 +169,7 @@ public class Act : Node {
         node.SetColor(player.GetColor());
        
         // loop through children and remove children that have the new clone color
-        var clones = this.GetTree().GetNodesInGroup("clones");
+        var clones = this.GetClones();
         GD.Print($"clones count : {clones.Length}");
 
         foreach(var existingClone in clones) {
@@ -166,6 +181,18 @@ public class Act : Node {
         node.AddToGroup("clones");
         this.AddChild(node);
         GD.Print("Clone created!");
+    }
+
+    private object[] GetClones() {
+        return this.GetTree().GetNodesInGroup("clones");
+    }
+
+    public void KillAllClones() {
+        GD.Print("attempting to kill all clones");
+        var clones = this.GetClones();
+        foreach(var clone in clones) {
+            ((PlayerNode)clone).QueueFree();
+        }
     }
 
     private void ConfigureCloneOptions(int[] cloneColors) {   
