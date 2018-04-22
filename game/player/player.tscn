@@ -12,7 +12,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 8, 8 )
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Angular", "Collision", "Linear" ]
@@ -21,6 +21,11 @@ _sections_unfolded = [ "Angular", "Collision", "Linear" ]
 
 script = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
+IsEnabled = false
+MaxPoints = 30
+StartingColor = Color( 1, 0, 0, 1 )
+EndingColor = Color( 0, 0, 0, 0 )
+Size = Vector2( 10, 10 )
 
 [node name="Collider" type="Area2D" parent="." index="1"]
 
