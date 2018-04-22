@@ -26,7 +26,7 @@ public class FinishOverlay : Node2D
         }
     }
 
-    public void ShowOverlay(long timeElapsed) { 
+    public void ShowOverlay(long timeElapsed, int clonesCreated) { 
         Dictionary<object, object> datimeTimeElapsed = OS.GetDatetimeFromUnixTime((int)timeElapsed / 1000);
 
         object hours;
@@ -40,6 +40,7 @@ public class FinishOverlay : Node2D
         milliseconds = (int)timeElapsed % 1000; // get last 3 digits for more precision
 
         this.popupDialogLabel.SetText($"Finished the level in {hours}:{minutes}:{seconds}:{milliseconds}");
+        ((Label)this.popupDialog.GetNode("ClonesTaken")).SetText($"{clonesCreated} clones were used.");
         this.popupDialog.ShowModal(true);
     }
 

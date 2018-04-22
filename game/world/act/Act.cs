@@ -3,6 +3,10 @@ using System;
 using System.Collections.Generic;
 
 public class Act : Node {
+
+    private long startTime;
+    private int clonesCreated = 0;
+
     // State ///////////////////////////////////////////////////////////////////
     private StateMachine<Act> sm = new StateMachine<Act>();
     public Play statePlay = new Play();
@@ -12,11 +16,10 @@ public class Act : Node {
     private Node2D spawn;
     private PlayerNode player;
     private Node2D finish;
-    private Node2D finishOverlay;
+    private FinishOverlay finishOverlay;
     private Node2D debug;
     private Cam cam;
 
-    private long startTime;
 
     // Exports /////////////////////////////////////////////////////////////////
     [Export]
@@ -66,7 +69,7 @@ public class Act : Node {
         this.spawn = (Node2D)this.GetNode("Spawn");
         this.player = (PlayerNode)this.GetNode("Player");
         this.finish = (Node2D)this.GetNode("Finish");
-        this.finishOverlay = (Node2D)this.GetNode("FinishOverlay");
+        this.finishOverlay = (FinishOverlay)this.GetNode("FinishOverlay");
         this.cam = (Cam)this.GetNode("Cam");
 
         this.cam.Follow(this.player);
@@ -149,7 +152,7 @@ public class Act : Node {
     {
         long timeElapsed = OS.GetTicksMsec() - this.startTime;
         this.finish.SetProcess(false);
-        this.finishOverlay.Call("ShowOverlay", timeElapsed);
+        this.finishOverlay.ShowOverlay(timeElapsed, clonesCreated);
         GetTree().SetPause(true);
     }
 
@@ -158,7 +161,7 @@ public class Act : Node {
     }
 
     private void CreateClone() {
-        
+        this.clonesCreated++; 
         PlayerNode node = (PlayerNode)
              ((PackedScene)ResourceLoader.Load("res://player/player.tscn"))
                  .Instance();
