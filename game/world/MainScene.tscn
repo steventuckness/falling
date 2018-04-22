@@ -36,7 +36,7 @@ extents = Vector2( 31.888, 4.38269 )
 custom_solver_bias = 0.0
 extents = Vector2( 16, 8 )
 
-[node name="MainScene" type="Node2D" index="0"]
+[node name="MainScene" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -52,7 +52,6 @@ script = ExtResource( 2 )
 
 [node name="Player" parent="." index="1" instance=ExtResource( 3 )]
 
-editor/display_folded = true
 position = Vector2( 264, 504 )
 _sections_unfolded = [ "Angular", "Collision", "Linear", "Transform", "Z Index" ]
 
@@ -230,8 +229,6 @@ script = ExtResource( 10 )
 shape = SubResource( 3 )
 
 [node name="MovingPlatform" parent="Platform" index="1" instance=ExtResource( 19 )]
-
-speed = 64.0
 
 [node name="Max" parent="Platform/MovingPlatform" index="1"]
 
