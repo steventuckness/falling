@@ -69,8 +69,8 @@ visible = false
 
 [node name="CamLock" parent="CamLocks" index="0" instance=ExtResource( 6 )]
 
-xMin = true
-xMax = true
+xMin = false
+xMax = false
 yMin = false
 yMax = false
 unLockOnExit = false

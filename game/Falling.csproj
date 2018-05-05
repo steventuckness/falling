@@ -93,6 +93,8 @@
     <Compile Include="engine\recorder\FrameRecorder.cs" />
     <Compile Include="engine\recorder\Recording.cs" />
     <Compile Include="ui\CloneMenu.cs" />
+    <Compile Include="ui\LevelSelect.cs" />
+    <Compile Include="ui\LevelSelectCard.cs" />
     <Compile Include="world\act\Act.cs" />
     <Compile Include="world\act\states\Play.cs" />
     <Compile Include="world\act\states\ActRespawn.cs" />
