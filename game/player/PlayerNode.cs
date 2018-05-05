@@ -1,6 +1,7 @@
 
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public class PlayerNode : Entity {
 
@@ -52,6 +53,29 @@ public class PlayerNode : Entity {
         implementation._Ready();
     }
 
+    private List<PlayerNode> DisableCloneCollisionIfOverlapping() {
+        /*
+         * We use this method to disable collision against any clones that
+         * we are overlapping at the start of a frame. This is possible when
+         * the clone spawns directly on top of the player and can cause the
+         * player to be stuck.
+         * 
+         * Be sure to re-enable collision against clones after movement!
+         */
+        List<PlayerNode> overlaps = this.collision.CollideAll<PlayerNode>(this.GetPosition());
+        overlaps.ForEach((PlayerNode overlap) => {
+            overlap.IsCollidable = false;
+        });
+        return overlaps;
+    }
+
+    private List<PlayerNode> ReEnableCloneCollision(List<PlayerNode> overlaps) {
+        overlaps.ForEach((PlayerNode overlap) => {
+            overlap.IsCollidable = true;
+        });
+        return overlaps;
+    }
+
     public override void MoveX(float x, OnCollide onCollide) {
         Vector2 pos = this.GetPosition();
         int moveX = this.remainders.UpdateX(x);
@@ -60,6 +84,7 @@ public class PlayerNode : Entity {
         if (x == 0 || moveX == 0) {
             return;
         }
+        List<PlayerNode> overlaps = this.DisableCloneCollisionIfOverlapping();
         for (int i = 0; i < Mathf.Abs(moveX); i++) {
             Vector2 check = this.GetPosition() + new Vector2(dirX, 0);
 
@@ -73,6 +98,8 @@ public class PlayerNode : Entity {
                 collided = true;
             }
         }
+
+        this.ReEnableCloneCollision(overlaps);
         if (collided && onCollide != null) {
             onCollide();
         }
@@ -86,6 +113,7 @@ public class PlayerNode : Entity {
         if (y == 0 || moveY == 0) {
             return;
         }
+        List<PlayerNode> overlaps = this.DisableCloneCollisionIfOverlapping();
         for (int i = 0; i < Mathf.Abs(moveY); i++) {
             Vector2 check = this.GetPosition() + new Vector2(0, dirY);
 
@@ -98,6 +126,8 @@ public class PlayerNode : Entity {
                 collided = true;
             }
         }
+
+        this.ReEnableCloneCollision(overlaps);
 
         if (collided && onCollide != null) {
             onCollide();
@@ -156,7 +186,7 @@ public class PlayerNode : Entity {
         ((Sprite)this.implementation.GetNode("Sprite")).SetModulate(color);
     }
 
-    public bool WasRecordingDuringDeath  {
+    public bool WasRecordingDuringDeath {
         get {
             return this.implementation.WasRecordingDuringDeath;
         }

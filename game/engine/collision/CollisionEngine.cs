@@ -56,8 +56,8 @@ public class CollisionEngine {
         Collider c = this.entity.GetCollider();
         List<Against> entities = this.scene.GetManager().FindEntitiesBy<Against>();
         foreach (Against e in entities) {
-            Collider ec = e.GetCollider();
-            if (e != this.entity && c.Collides(ec)) {
+            Collider otherCollider = e.GetCollider();
+            if (e != this.entity && otherCollider.IsCollidable && c.Collides(otherCollider)) {
                 hits.Add(e);
             }
         }
