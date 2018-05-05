@@ -98,7 +98,7 @@ public class PlayerNode : Entity {
                 collided = true;
             }
         }
-        
+
         this.ReEnableCloneCollision(overlaps);
         if (collided && onCollide != null) {
             onCollide();
@@ -186,7 +186,7 @@ public class PlayerNode : Entity {
         ((Sprite)this.implementation.GetNode("Sprite")).SetModulate(color);
     }
 
-    public bool WasRecordingDuringDeath  {
+    public bool WasRecordingDuringDeath {
         get {
             return this.implementation.WasRecordingDuringDeath;
         }
