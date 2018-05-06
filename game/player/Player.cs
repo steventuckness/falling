@@ -24,7 +24,8 @@ public class Player {
     // Signals /////////////////////////////////////////////////////////////////
     public static String SIGNAL_DIED = "Player::died";
     public static String SIGNAL_RESPAWN = "Player::respawn";
-    public static String SIGNAL_CREATE_CLONE = "Player::createClone";
+    public static String SIGNAL_RECORDING_STOPPED = "Player::createClone";
+    public static String SIGNAL_RECORDING_STARTED = "Player::recordingStarted";
 
     // Physics /////////////////////////////////////////////////////////////////
     public Vector2 velocity = new Vector2(0, 0);
@@ -103,7 +104,9 @@ public class Player {
 
     public virtual void _Ready() {
         this.AddUserSignal(Player.SIGNAL_DIED);
-        this.AddUserSignal(Player.SIGNAL_CREATE_CLONE);
+        this.AddUserSignal(Player.SIGNAL_RECORDING_STOPPED);
+        this.AddUserSignal(Player.SIGNAL_RECORDING_STARTED);
+        
 
         this.sm.Init(this.stateIdle);
         this.PlayAnimation(Animation.Walking);
@@ -124,11 +127,12 @@ public class Player {
         var trail = ((TrailRenderer)node.GetNode("trail"));
         trail.StartingColor = this.GetColor();
         trail.IsEnabled = true;
+        this.EmitSignal(SIGNAL_RECORDING_STARTED);
     }
 
     protected virtual void RecordingStopped(Recorder.Recording<PlayerRecorderFrame> recording) {
         this.lastRecording = recording;
-        this.EmitSignal(SIGNAL_CREATE_CLONE);
+        this.EmitSignal(SIGNAL_RECORDING_STOPPED);
         ((TrailRenderer)node.GetNode("trail")).IsEnabled = false;
         GD.Print("Recording stopped!");
     }

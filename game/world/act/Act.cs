@@ -6,6 +6,7 @@ public class Act : Node {
 
     private long startTime;
     private int clonesCreated = 0;
+    const String PHASED_OBJECT = "PhasedObject";
 
     // State ///////////////////////////////////////////////////////////////////
     private StateMachine<Act> sm = new StateMachine<Act>();
@@ -40,7 +41,8 @@ public class Act : Node {
     }
 
     private void ConnectEvents() {
-        this.player.Connect(Player.SIGNAL_CREATE_CLONE, this, "CreateClone");
+        this.player.Connect(Player.SIGNAL_RECORDING_STOPPED, this, "RecordingStopped");
+        this.player.Connect(Player.SIGNAL_RECORDING_STARTED, this, "RecordingStarted");
 
         if (this.player.HasUserSignal(Player.SIGNAL_DIED)) {
             this.player.Connect(Player.SIGNAL_DIED, this, "PlayerDied");
@@ -160,7 +162,18 @@ public class Act : Node {
          ((ActManager)this.GetNode("/root/ActManager")).NextAct();
     }
 
+    private void RecordingStarted() {
+        SetPhasedObjectsVisibility(true);
+    }
+
+    private void RecordingStopped() {
+        GD.Print("Recording stopped at the act");
+        this.SetPhasedObjectsVisibility(false);
+        this.CreateClone();
+    }
+
     private void CreateClone() {
+        GD.Print("Create clone called.");
         this.clonesCreated++; 
         PlayerNode node = (PlayerNode)
              ((PackedScene)ResourceLoader.Load("res://player/player.tscn"))
@@ -206,6 +219,17 @@ public class Act : Node {
         } 
 
         this.player.implementation.SetCloneOptions(levelCloneOptions); 
+    }
+
+    public void SetPhasedObjectsVisibility(bool isVisible) {
+        var nodes = GetTree().GetNodesInGroup(PHASED_OBJECT);
+        foreach (Node node in nodes) {
+            if (node is Node2D) {
+                ((Node2D)node).SetVisible(isVisible);
+            } else {
+                GD.Print("WARNING: A node that is not a Node2D was assigned to PhasedObjects.");
+            }
+        }
     }
     
     private int[] GetActColors(string sceneName) {
