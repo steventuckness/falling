@@ -224,7 +224,10 @@ public class Act : Node {
     public void SetPhasedObjectsVisibility(bool isVisible) {
         var nodes = GetTree().GetNodesInGroup(PHASED_OBJECT);
         foreach (Node node in nodes) {
-            if (node is Node2D) {
+            if (node is Entity) {
+                ((Entity)node).collider.IsCollidable = isVisible;
+            }
+            else if (node is Node2D) {
                 ((Node2D)node).SetVisible(isVisible);
             } else {
                 GD.Print("WARNING: A node that is not a Node2D was assigned to PhasedObjects.");
