@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://world/act/Act.cs" type="Script" id=1]
 [ext_resource path="res://engine/Scene.cs" type="Script" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://world/platform/Platform.cs" type="Script" id=19]
 [ext_resource path="res://engine/components/MovingPlatform.tscn" type="PackedScene" id=20]
 [ext_resource path="res://world/camera/Cam.tscn" type="PackedScene" id=21]
+[ext_resource path="res://icon.png" type="Texture" id=22]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -271,6 +272,14 @@ editor/display_folded = true
 speed = 0.0
 
 [node name="Cam" parent="." index="14" instance=ExtResource( 21 )]
+
+[node name="icon" type="Sprite" parent="." index="15" groups=[
+"PhasedObject",
+]]
+
+visible = false
+position = Vector2( 241.035, 352.051 )
+texture = ExtResource( 22 )
 
 
 [editable path="CamLocks/CamLock"]
