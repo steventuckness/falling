@@ -14,7 +14,7 @@ public class SceneManager {
 
     public void Add(Entity entity) {
         this.entities.Add(entity);
-        if(!this.entitiesByType.ContainsKey(entity.GetType())) {
+        if (!this.entitiesByType.ContainsKey(entity.GetType())) {
             this.entitiesByType.Add(entity.GetType(), new List<Entity>());
         }
         this.entitiesByType[key: entity.GetType()].Add(entity);
@@ -28,7 +28,12 @@ public class SceneManager {
 
     public List<Entity> GetEntities() => this.entities;
     public List<Entity> GetEntitiesByType(Type t) => this.entitiesByType[key: t];
-    public List<T> GetEntitiesBy<T>() where T : Entity => this.entitiesByType[key: typeof(T)].Cast<T>().ToList();
+    public List<T> GetEntitiesBy<T>() where T : Entity {
+        if(!this.entitiesByType.ContainsKey(typeof(T))) {
+            return new List<T>();
+        }
+        return this.entitiesByType[key: typeof(T)].Cast<T>().ToList();
+    }
     public List<T> FindEntitiesBy<T>() where T : Entity =>
         this.entities.Where(e => e.GetType() == typeof(T) || e.GetType().IsSubclassOf(typeof(T))).Cast<T>().ToList();
 }
