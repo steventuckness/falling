@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://world/act/Act.cs" type="Script" id=1]
 [ext_resource path="res://engine/Scene.cs" type="Script" id=2]
@@ -18,8 +18,9 @@
 [ext_resource path="res://world/interactive/door/DoorSwitchControl.tscn" type="PackedScene" id=16]
 [ext_resource path="res://world/interactive/switch/Switch.tscn" type="PackedScene" id=17]
 [ext_resource path="res://world/interactive/door/Door.tscn" type="PackedScene" id=18]
-[ext_resource path="res://engine/components/MovingPlatform.tscn" type="PackedScene" id=19]
-[ext_resource path="res://world/camera/Cam.tscn" type="PackedScene" id=20]
+[ext_resource path="res://world/platform/Platform.cs" type="Script" id=19]
+[ext_resource path="res://engine/components/MovingPlatform.tscn" type="PackedScene" id=20]
+[ext_resource path="res://world/camera/Cam.tscn" type="PackedScene" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -207,10 +208,11 @@ scale = Vector2( 1, 1 )
 [node name="Platform" type="Node2D" parent="." index="12"]
 
 position = Vector2( 320, 480 )
-script = ExtResource( 9 )
+script = ExtResource( 19 )
 __meta__ = {
 "_edit_group_": true
 }
+isOneWay = false
 
 [node name="Collider" type="Area2D" parent="Platform" index="0"]
 
@@ -228,8 +230,9 @@ script = ExtResource( 10 )
 
 shape = SubResource( 3 )
 
-[node name="MovingPlatform" parent="Platform" index="1" instance=ExtResource( 19 )]
+[node name="MovingPlatform" parent="Platform" index="1" instance=ExtResource( 20 )]
 
+editor/display_folded = true
 speed = 64.0
 
 [node name="Max" parent="Platform/MovingPlatform" index="1"]
@@ -237,7 +240,37 @@ speed = 64.0
 position = Vector2( 0, -64 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Cam" parent="." index="13" instance=ExtResource( 20 )]
+[node name="Platform2" type="Node2D" parent="." index="13"]
+
+position = Vector2( 128, 408 )
+script = ExtResource( 19 )
+__meta__ = {
+"_edit_group_": true
+}
+isOneWay = true
+
+[node name="Collider" type="Area2D" parent="Platform2" index="0"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 10 )
+
+[node name="Shape" type="CollisionShape2D" parent="Platform2/Collider" index="0"]
+
+shape = SubResource( 3 )
+
+[node name="MovingPlatform" parent="Platform2" index="1" instance=ExtResource( 20 )]
+
+editor/display_folded = true
+speed = 0.0
+
+[node name="Cam" parent="." index="14" instance=ExtResource( 21 )]
 
 
 [editable path="CamLocks/CamLock"]

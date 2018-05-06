@@ -2,6 +2,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class PlayerNode : Entity {
 
@@ -76,6 +77,24 @@ public class PlayerNode : Entity {
         return overlaps;
     }
 
+    private List<Platform> OneWayPlatforms() {
+        return this.scene.GetManager()
+            .GetEntitiesBy<Platform>()
+            .Where((p) => p.isOneWay)
+            .ToList();
+    }
+
+    private List<Platform> DisableOneWayPlatforms(int dirY, List<Platform> platforms) {
+        platforms.ForEach((p) => {
+            // If we are already overlapping the platform or we are moving up, disable the platform collision
+            if (p.collider.Collides(this.collider) || dirY < 0 || this.implementation.fallThroughPlatform) {
+                p.collider.IsCollidable = false;
+            }
+        });
+
+        return platforms;
+    }
+
     public override void MoveX(float x, OnCollide onCollide) {
         Vector2 pos = this.GetPosition();
         int moveX = this.remainders.UpdateX(x);
@@ -85,6 +104,13 @@ public class PlayerNode : Entity {
             return;
         }
         List<PlayerNode> overlaps = this.DisableCloneCollisionIfOverlapping();
+        List<Platform> oneWay = this.OneWayPlatforms();
+        oneWay.ForEach((p) => {
+            if (p.collider.Collides(this.collider)) {
+                p.collider.IsCollidable = false;
+            }
+        });
+
         for (int i = 0; i < Mathf.Abs(moveX); i++) {
             Vector2 check = this.GetPosition() + new Vector2(dirX, 0);
 
@@ -100,6 +126,9 @@ public class PlayerNode : Entity {
         }
 
         this.ReEnableCloneCollision(overlaps);
+        oneWay.ForEach((p) => {
+            p.collider.IsCollidable = true;
+        });
         if (collided && onCollide != null) {
             onCollide();
         }
@@ -114,6 +143,8 @@ public class PlayerNode : Entity {
             return;
         }
         List<PlayerNode> overlaps = this.DisableCloneCollisionIfOverlapping();
+        List<Platform> oneWay = this.DisableOneWayPlatforms(dirY, this.OneWayPlatforms());
+
         for (int i = 0; i < Mathf.Abs(moveY); i++) {
             Vector2 check = this.GetPosition() + new Vector2(0, dirY);
 
@@ -128,6 +159,10 @@ public class PlayerNode : Entity {
         }
 
         this.ReEnableCloneCollision(overlaps);
+        oneWay.ForEach((p) => {
+            p.collider.IsCollidable = true;
+        });
+        this.implementation.fallThroughPlatform = false;
 
         if (collided && onCollide != null) {
             onCollide();
