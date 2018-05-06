@@ -35,7 +35,6 @@ public class Idle : State<Player> {
         }
         player.GroundControl(delta);
         player.ApplyGravity(delta);
-        GD.Print("Vy: ", player.velocity.y);
         player.MoveX(player.velocity.x * delta, () => {
             player.velocity.x = 0;
         });

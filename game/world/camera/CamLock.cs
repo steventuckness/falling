@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class CamLock : Area2D {
+public class CamLock : Node2D {
     // Signals /////////////////////////////////////////////////////////////////
     public static String PLAYER_ENTERED = "CamLock::player::entered";
     public static String PLAYER_EXITED = "CamLock::player::exited";
@@ -15,13 +15,13 @@ public class CamLock : Area2D {
     }
 
     [Export]
-    public bool xMin = false;
+    public bool xMin = true;
     [Export]
-    public bool xMax = false;
+    public bool xMax = true;
     [Export]
-    public bool yMin = false;
+    public bool yMin = true;
     [Export]
-    public bool yMax = false;
+    public bool yMax = true;
     [Export]
     public bool unLockOnExit = false;
 
@@ -32,6 +32,8 @@ public class CamLock : Area2D {
         public Vector2 max;
     }
 
+    private Area2D detect;
+    private ReferenceRect bounds;
     private CamLockLimits limits = new CamLockLimits();
 
     // Using the polygon contained within the CamLock, determines
@@ -39,36 +41,28 @@ public class CamLock : Area2D {
     // a rectangle that clamps the camera.
     private CamLockLimits FindLimits() {
         CamLockLimits lim = new CamLockLimits();
+        Rect2 b = this.bounds.GetRect();
 
-        lim.min = new Vector2(float.MaxValue, float.MaxValue);
-        lim.max = new Vector2(float.MinValue, float.MinValue);
+        lim.min.x = b.Position.x;
+        lim.min.y = b.Position.y;
 
-        Vector2 position = this.GetGlobalPosition();
-        CollisionPolygon2D poly = (CollisionPolygon2D)this.GetNode("Limits");
-        Vector2[] points = poly.GetPolygon();
-
-        // Just grab the min x and y values (useful later)
-        foreach (Vector2 p in points) {
-            Vector2 adjusted = p + position;
-
-            lim.min.x = Mathf.Min(lim.min.x, adjusted.x);
-            lim.min.y = Mathf.Min(lim.min.y, adjusted.y);
-
-            lim.max.x = Mathf.Max(lim.max.x, adjusted.x);
-            lim.max.y = Mathf.Max(lim.max.y, adjusted.y);
-        }
+        lim.max.x = b.Position.x + b.Size.x;
+        lim.max.y = b.Position.y + b.Size.y;
 
         return lim;
     }
 
     public override void _Ready() {
+        this.detect = this.GetNode("Detect") as Area2D;
+        this.bounds = this.GetNode("Bounds") as ReferenceRect;
+
         this.AddUserSignal(PLAYER_ENTERED);
         this.AddUserSignal(PLAYER_EXITED);
 
-        this.Connect("body_entered", this, "OnEnter");
-        this.Connect("body_exited", this, "OnExit");
-        this.Connect("area_entered", this, "OnEnter");
-        this.Connect("area_exited", this, "OnExit");
+        this.detect.Connect("body_entered", this, "OnEnter");
+        this.detect.Connect("body_exited", this, "OnExit");
+        this.detect.Connect("area_entered", this, "OnEnter");
+        this.detect.Connect("area_exited", this, "OnExit");
 
         this.limits = this.FindLimits();
 

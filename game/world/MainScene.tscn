@@ -1,26 +1,26 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://world/act/Act.cs" type="Script" id=1]
 [ext_resource path="res://engine/Scene.cs" type="Script" id=2]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/CloneMenu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://world/spawn/Spawn.tscn" type="PackedScene" id=5]
-[ext_resource path="res://world/camera/CamLock.tscn" type="PackedScene" id=6]
-[ext_resource path="res://world/finishOverlay/FinishOverlay.tscn" type="PackedScene" id=7]
-[ext_resource path="res://world/finish/Finish.tscn" type="PackedScene" id=8]
-[ext_resource path="res://engine/Solid.cs" type="Script" id=9]
-[ext_resource path="res://engine/collision/BoxCollider.cs" type="Script" id=10]
-[ext_resource path="res://engine/SolidTiles.cs" type="Script" id=11]
-[ext_resource path="res://world/tilesets/Tileset_Collision.res" type="TileSet" id=12]
-[ext_resource path="res://engine/collision/GridCollider.cs" type="Script" id=13]
-[ext_resource path="res://world/hazards/spikes/Tileset_Spikes.res" type="TileSet" id=14]
-[ext_resource path="res://world/hazards/DeathArea.cs" type="Script" id=15]
-[ext_resource path="res://world/interactive/door/DoorSwitchControl.tscn" type="PackedScene" id=16]
-[ext_resource path="res://world/interactive/switch/Switch.tscn" type="PackedScene" id=17]
-[ext_resource path="res://world/interactive/door/Door.tscn" type="PackedScene" id=18]
-[ext_resource path="res://world/platform/Platform.cs" type="Script" id=19]
-[ext_resource path="res://engine/components/MovingPlatform.tscn" type="PackedScene" id=20]
-[ext_resource path="res://world/camera/Cam.tscn" type="PackedScene" id=21]
+[ext_resource path="res://world/finishOverlay/FinishOverlay.tscn" type="PackedScene" id=6]
+[ext_resource path="res://world/finish/Finish.tscn" type="PackedScene" id=7]
+[ext_resource path="res://engine/Solid.cs" type="Script" id=8]
+[ext_resource path="res://engine/collision/BoxCollider.cs" type="Script" id=9]
+[ext_resource path="res://engine/SolidTiles.cs" type="Script" id=10]
+[ext_resource path="res://world/tilesets/Tileset_Collision.res" type="TileSet" id=11]
+[ext_resource path="res://engine/collision/GridCollider.cs" type="Script" id=12]
+[ext_resource path="res://world/hazards/spikes/Tileset_Spikes.res" type="TileSet" id=13]
+[ext_resource path="res://world/hazards/DeathArea.cs" type="Script" id=14]
+[ext_resource path="res://world/interactive/door/DoorSwitchControl.tscn" type="PackedScene" id=15]
+[ext_resource path="res://world/interactive/switch/Switch.tscn" type="PackedScene" id=16]
+[ext_resource path="res://world/interactive/door/Door.tscn" type="PackedScene" id=17]
+[ext_resource path="res://world/platform/Platform.cs" type="Script" id=18]
+[ext_resource path="res://engine/components/MovingPlatform.tscn" type="PackedScene" id=19]
+[ext_resource path="res://world/camera/Cam.tscn" type="PackedScene" id=20]
+[ext_resource path="res://world/camera/CamLock.cs" type="Script" id=21]
 [ext_resource path="res://icon.png" type="Texture" id=22]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -38,15 +38,18 @@ extents = Vector2( 31.888, 4.38269 )
 custom_solver_bias = 0.0
 extents = Vector2( 16, 8 )
 
-[node name="MainScene" type="Node2D" index="0"]
+[sub_resource type="RectangleShape2D" id=4]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[node name="Level" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_lock_": true
 }
-cameraSpeed = 5.0
-respawnTime = 2.0
 
 [node name="Scene" type="Node2D" parent="." index="0"]
 
@@ -54,6 +57,7 @@ script = ExtResource( 2 )
 
 [node name="Player" parent="." index="1" instance=ExtResource( 3 )]
 
+editor/display_folded = true
 position = Vector2( 264, 504 )
 _sections_unfolded = [ "Angular", "Collision", "Linear", "Transform", "Z Index" ]
 
@@ -64,30 +68,13 @@ _sections_unfolded = [ "Angular", "Collision", "Linear", "Transform", "Z Index" 
 position = Vector2( 48, 480 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="CamLocks" type="Node2D" parent="." index="3"]
+[node name="FinishOverlay" parent="." index="3" instance=ExtResource( 6 )]
 
-editor/display_folded = true
-visible = false
-
-[node name="CamLock" parent="CamLocks" index="0" instance=ExtResource( 6 )]
-
-xMin = false
-xMax = false
-yMin = false
-yMax = false
-unLockOnExit = false
-
-[node name="Limits" parent="CamLocks/CamLock" index="0"]
-
-polygon = PoolVector2Array( 0, 0, 0, 528, 480, 528, 480, 0 )
-
-[node name="FinishOverlay" parent="." index="4" instance=ExtResource( 7 )]
-
-[node name="Finish" parent="." index="5" instance=ExtResource( 8 )]
+[node name="Finish" parent="." index="4" instance=ExtResource( 7 )]
 
 position = Vector2( 448, 496 )
 
-[node name="Floors" type="Node2D" parent="." index="6"]
+[node name="Floors" type="Node2D" parent="." index="5"]
 
 editor/display_folded = true
 position = Vector2( 296, 504 )
@@ -95,7 +82,7 @@ position = Vector2( 296, 504 )
 [node name="Floor" type="Node2D" parent="Floors" index="0"]
 
 position = Vector2( -56, 16 )
-script = ExtResource( 9 )
+script = ExtResource( 8 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -109,21 +96,21 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 10 )
+script = ExtResource( 9 )
 
 [node name="Shape" type="CollisionShape2D" parent="Floors/Floor/Collider" index="0"]
 
 shape = SubResource( 1 )
 
-[node name="SolidTiles" type="Node2D" parent="." index="7"]
+[node name="SolidTiles" type="Node2D" parent="." index="6"]
 
 editor/display_folded = true
-script = ExtResource( 11 )
+script = ExtResource( 10 )
 
 [node name="TileMap" type="TileMap" parent="SolidTiles" index="0"]
 
 mode = 0
-tile_set = ExtResource( 12 )
+tile_set = ExtResource( 11 )
 cell_size = Vector2( 16, 16 )
 cell_quadrant_size = 16
 cell_custom_transform = Transform2D( 0, 0, 0, 0, 0, 0 )
@@ -146,16 +133,16 @@ __meta__ = {
 
 [node name="Collider" type="Node2D" parent="SolidTiles" index="1"]
 
-script = ExtResource( 13 )
+script = ExtResource( 12 )
 
-[node name="Spikes" type="Node2D" parent="." index="8"]
+[node name="Spikes" type="Node2D" parent="." index="7"]
 
 editor/display_folded = true
 
 [node name="TileMap" type="TileMap" parent="Spikes" index="0"]
 
 mode = 0
-tile_set = ExtResource( 14 )
+tile_set = ExtResource( 13 )
 cell_size = Vector2( 16, 16 )
 cell_quadrant_size = 16
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -182,38 +169,37 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 15 )
+script = ExtResource( 14 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/Area2D" index="0"]
 
 position = Vector2( 384.109, 507.565 )
 shape = SubResource( 2 )
 
-[node name="DoorSwitchControl" parent="." index="9" instance=ExtResource( 16 )]
+[node name="DoorSwitchControl" parent="." index="8" instance=ExtResource( 15 )]
 
 position = Vector2( 266.263, 575.695 )
 
-[node name="Switch" parent="." index="10" groups=[
+[node name="Switch" parent="." index="9" groups=[
 "Switch_1",
-] instance=ExtResource( 17 )]
+] instance=ExtResource( 16 )]
 
 position = Vector2( 160.173, 458.079 )
 
-[node name="Door" parent="." index="11" groups=[
+[node name="Door" parent="." index="10" groups=[
 "Door_1",
-] instance=ExtResource( 18 )]
+] instance=ExtResource( 17 )]
 
 position = Vector2( 327.236, 501.323 )
 scale = Vector2( 1, 1 )
 
-[node name="Platform" type="Node2D" parent="." index="12"]
+[node name="Platform" type="Node2D" parent="." index="11"]
 
 position = Vector2( 320, 480 )
-script = ExtResource( 19 )
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_group_": true
 }
-isOneWay = false
 
 [node name="Collider" type="Area2D" parent="Platform" index="0"]
 
@@ -225,30 +211,29 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 10 )
+script = ExtResource( 9 )
 
 [node name="Shape" type="CollisionShape2D" parent="Platform/Collider" index="0"]
 
 shape = SubResource( 3 )
 
-[node name="MovingPlatform" parent="Platform" index="1" instance=ExtResource( 20 )]
+[node name="MovingPlatform" parent="Platform" index="1" instance=ExtResource( 19 )]
 
 editor/display_folded = true
-speed = 64.0
 
 [node name="Max" parent="Platform/MovingPlatform" index="1"]
 
 position = Vector2( 0, -64 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Platform2" type="Node2D" parent="." index="13"]
+[node name="Platform2" type="Node2D" parent="." index="12"]
 
+editor/display_folded = true
 position = Vector2( 128, 408 )
-script = ExtResource( 19 )
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_group_": true
 }
-isOneWay = true
 
 [node name="Collider" type="Area2D" parent="Platform2" index="0"]
 
@@ -260,18 +245,59 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 10 )
+script = ExtResource( 9 )
 
 [node name="Shape" type="CollisionShape2D" parent="Platform2/Collider" index="0"]
 
 shape = SubResource( 3 )
 
-[node name="MovingPlatform" parent="Platform2" index="1" instance=ExtResource( 20 )]
+[node name="MovingPlatform" parent="Platform2" index="1" instance=ExtResource( 19 )]
 
 editor/display_folded = true
-speed = 0.0
 
-[node name="Cam" parent="." index="14" instance=ExtResource( 21 )]
+[node name="Cam" parent="." index="13" instance=ExtResource( 20 )]
+
+[node name="CamLocks" type="Node2D" parent="." index="14"]
+
+editor/display_folded = true
+
+[node name="CamLock" type="Node2D" parent="CamLocks" index="0"]
+
+script = ExtResource( 21 )
+
+[node name="Detect" type="Area2D" parent="CamLocks/CamLock" index="0"]
+
+editor/display_folded = true
+position = Vector2( 264, 502 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CamLocks/CamLock/Detect" index="0"]
+
+shape = SubResource( 4 )
+
+[node name="Bounds" type="ReferenceRect" parent="CamLocks/CamLock" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 480.0
+margin_bottom = 528.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 
 [node name="icon" type="Sprite" parent="." index="15" groups=[
 "PhasedObject",
@@ -282,5 +308,4 @@ position = Vector2( 241.035, 352.051 )
 texture = ExtResource( 22 )
 
 
-[editable path="CamLocks/CamLock"]
 [editable path="Platform/MovingPlatform"]

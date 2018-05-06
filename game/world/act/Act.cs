@@ -242,6 +242,9 @@ public class Act : Node {
             case "MainScene":
                 actColors = new int[] { 0 /*red*/, 1 /*green*/ };
                 break;
+            case "BlazeIt":
+                actColors = new int[] { 1 };
+                break;
             default:
                 actColors = new int[] { 0, 1, 2 };
                 break;

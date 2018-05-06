@@ -31,7 +31,7 @@ public class Entity : Node2D {
         this.collider = (Collider)this.GetNode("Collider");
         this.remainders = new SubPixelFloat();
 
-        Scene scene = (Scene)this.GetTree().GetRoot().GetNode("MainScene/Scene");
+        Scene scene = (Scene)this.GetTree().GetRoot().GetNode("Level/Scene");
         this.scene = scene;
         this.scene.GetManager().Add(this);
         this.collision = new CollisionEngine(this, scene);
