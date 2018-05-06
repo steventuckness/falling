@@ -16,6 +16,8 @@ public class Walking : State<Player> {
         // Slope stuff
         bool onFloor = player.IsOnFloor();
         bool isSprinting = player.IsActionPressed("key_sprint");
+        bool isDown = player.IsActionPressed("key_down");
+        bool isJump = player.IsActionJustPressed("key_jump");
         player.DetectDirectionChange();
         int isLeft = player.IsActionPressed("key_left") ? 1 : 0;
         int isRight = player.IsActionPressed("key_right") ? 1 : 0;
@@ -24,12 +26,16 @@ public class Walking : State<Player> {
         if (dir == 0) {
             return player.stateIdle;
         }
-        if (onFloor && player.IsActionJustPressed("key_jump")) {
+        if (onFloor && isJump && !isDown) {
             return player.stateJumping;
         }
         if(!onFloor) {
             return player.stateFalling;
         }
+        if(isDown && isJump) {
+            player.fallThroughPlatform = true;
+        }
+
         player.GroundControl(delta);
         player.ApplyGravity(delta);
         player.MoveX(player.velocity.x * delta, () => {

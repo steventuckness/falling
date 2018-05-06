@@ -70,6 +70,7 @@ public class Player {
 
     // Falling
     public float fallingMaxSpeed = 160.0f;
+    public bool fallThroughPlatform = false;
 
     // Gliding ////////////////////////////////////////////////////////////////
     public float glideMaxYSpeed = 20.0f;
