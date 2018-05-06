@@ -12,6 +12,9 @@ namespace Recorder {
         private float currentTime = 0f;
         private bool isPlaying = true;
 
+        [Export]
+        public bool loop = true;
+
         public FramePlayer(Recording<S> recording, StateSetter setState) {
             this.setState = setState;
             this.Recording = recording;
@@ -20,13 +23,16 @@ namespace Recorder {
         public void Process(float delta) {
             if (!isPlaying) return;
             this.currentTime += delta;
-            if (this.currentTime > this.Recording.Length) {
+
+            if ((this.currentTime > this.Recording.Length) && loop) {
                 this.StartPlayback();
+            } else {
+                if (this.currentTime > this.Recording.Length) {
+                    this.isPlaying = false;
+                }
             }
-            var lastFrame = this.GetLastFrame(this.currentTime);
-            if (lastFrame != null) {
-                this.setState(lastFrame.State);
-            }
+
+            this.syncState();
         }
 
         public void StartPlayback() {
@@ -36,6 +42,27 @@ namespace Recorder {
 
         public void StopPlayback() {
             this.isPlaying = false;
+        }
+
+        public void GoToTheEnd() {
+            this.currentTime = this.Recording.Length;
+            this.syncState();
+        }
+
+        private void syncState() {
+            var lastFrame = this.GetLastFrame(this.currentTime);
+            
+            if (lastFrame != null) {
+                this.setState(lastFrame.State);
+            } 
+        }
+
+        public Boolean IsAtTheEnd() {
+            return this.currentTime >= this.Recording.Length;
+        }
+
+        public Boolean IsPlaying() {
+            return this.isPlaying;
         }
 
         /// <summary>
