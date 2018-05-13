@@ -2,7 +2,7 @@
 
 [ext_resource path="res://ui/LevelSelect.cs" type="Script" id=1]
 
-[node name="LevelSelect" type="Node"]
+[node name="LevelSelect" type="Node" index="0"]
 
 script = ExtResource( 1 )
 

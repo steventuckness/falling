@@ -22,6 +22,9 @@ public class PlayerClone : Player {
         this.movementPlayer.StartPlayback();
         this.movementPlayer.GoToTheEnd();
         this.movementPlayer.StopPlayback();
+
+        var color = this.node.GetColor();
+        this.node.SetColor(new Color(color.r, color.g, color.b, 0.7f));
     }
 
     public override void _PhysicsProcess(float delta) {

@@ -1,9 +1,9 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Act : Node {
-
     private long startTime;
     private int clonesCreated = 0;
     const String PHASED_OBJECT = "PhasedObject";
@@ -23,6 +23,9 @@ public class Act : Node {
 
 
     // Exports /////////////////////////////////////////////////////////////////
+    [Export]
+    public int colors = 1;
+
     [Export]
     public float cameraSpeed = 5f;
     [Export]
@@ -78,7 +81,7 @@ public class Act : Node {
         this.ConnectEvents();
         this.sm.Init(this.statePlay);
 
-        this.ConfigureCloneOptions(this.GetActColors(GetTree().GetCurrentScene().GetName()));
+        this.ConfigureCloneOptions(this.GetActColors());
         this.GetPlayer().SetColor(this.player.implementation.GetCloneOptions()[0].GetColor()); 
     }
 
@@ -173,7 +176,6 @@ public class Act : Node {
     }
 
     private void CreateClone() {
-        GD.Print("Create clone called.");
         this.clonesCreated++; 
         PlayerNode node = (PlayerNode)
              ((PackedScene)ResourceLoader.Load("res://player/player.tscn"))
@@ -235,23 +237,7 @@ public class Act : Node {
         }
     }
     
-    private int[] GetActColors(string sceneName) {
-        int[] actColors;
-        
-        switch(sceneName) {
-            case "MainScene":
-                actColors = new int[] { 0 /*red*/, 1 /*green*/ };
-                break;
-            case "BlazeIt":
-                actColors = new int[] { 1 };
-                break;
-            default:
-                actColors = new int[] { 0, 1, 2 };
-                break;
-        }
-
-        return actColors;
-    }
+    private int[] GetActColors() => Enumerable.Range(1, this.color).ToArray();
 }
 
 

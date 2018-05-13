@@ -100,6 +100,13 @@ public class Player {
         Idle
     };
 
+    public enum PlayerColor {
+        Red,
+        Green,
+        Blue,
+        Yellow
+    }
+
     private Recording<PlayerRecorderFrame> lastRecording;
 
     public virtual void _Ready() {
