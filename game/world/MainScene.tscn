@@ -50,6 +50,9 @@ _sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_lock_": true
 }
+colors = 3
+cameraSpeed = 5.0
+respawnTime = 2.0
 
 [node name="Scene" type="Node2D" parent="." index="0"]
 
@@ -200,6 +203,7 @@ script = ExtResource( 18 )
 __meta__ = {
 "_edit_group_": true
 }
+isOneWay = false
 
 [node name="Collider" type="Area2D" parent="Platform" index="0"]
 
@@ -220,6 +224,7 @@ shape = SubResource( 3 )
 [node name="MovingPlatform" parent="Platform" index="1" instance=ExtResource( 19 )]
 
 editor/display_folded = true
+speed = 64.0
 
 [node name="Max" parent="Platform/MovingPlatform" index="1"]
 
@@ -234,6 +239,7 @@ script = ExtResource( 18 )
 __meta__ = {
 "_edit_group_": true
 }
+isOneWay = false
 
 [node name="Collider" type="Area2D" parent="Platform2" index="0"]
 
@@ -254,6 +260,7 @@ shape = SubResource( 3 )
 [node name="MovingPlatform" parent="Platform2" index="1" instance=ExtResource( 19 )]
 
 editor/display_folded = true
+speed = 64.0
 
 [node name="Cam" parent="." index="13" instance=ExtResource( 20 )]
 
@@ -264,6 +271,11 @@ editor/display_folded = true
 [node name="CamLock" type="Node2D" parent="CamLocks" index="0"]
 
 script = ExtResource( 21 )
+xMin = true
+xMax = true
+yMin = true
+yMax = true
+unLockOnExit = false
 
 [node name="Detect" type="Area2D" parent="CamLocks/CamLock" index="0"]
 

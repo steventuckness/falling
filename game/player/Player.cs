@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Player {
 
     public PlayerNode node;
+    private PlayerColor.Value color;
 
     // State ///////////////////////////////////////////////////////////////////
     private StateMachine<Player> sm = new StateMachine<Player>();
@@ -79,7 +80,7 @@ public class Player {
     public float glideLift = 9.0f;
     public int glideAgainWaitTime = 300; // milliseconds
 
-    // MISC ////////////////////////////////////////////////////////////////////
+    // MISC ////////
     public Vector2 carry = new Vector2(0, 0);
     public float respawnTime = 2.0f;  // Seconds
     private Recorder.FrameRecorder<PlayerRecorderFrame> cloneRecorder;
@@ -100,13 +101,6 @@ public class Player {
         Idle
     };
 
-    public enum PlayerColor {
-        Red,
-        Green,
-        Blue,
-        Yellow
-    }
-
     private Recording<PlayerRecorderFrame> lastRecording;
 
     public virtual void _Ready() {
@@ -116,7 +110,6 @@ public class Player {
         
 
         this.sm.Init(this.stateIdle);
-        this.PlayAnimation(Animation.Walking);
         this.cloneRecorder = new Recorder.FrameRecorder<PlayerRecorderFrame>(
             () => PlayerRecorderFrame.FromPlayer(this),
             this.RecordingStarted,
@@ -132,7 +125,7 @@ public class Player {
     protected virtual void RecordingStarted() {
         GD.Print("Recording started!");
         var trail = ((TrailRenderer)node.GetNode("trail"));
-        trail.StartingColor = this.GetColor();
+        trail.StartingColor = PlayerColor.ToColor(this.GetColor());
         trail.IsEnabled = true;
         this.EmitSignal(SIGNAL_RECORDING_STARTED);
     }
@@ -142,11 +135,6 @@ public class Player {
         this.EmitSignal(SIGNAL_RECORDING_STOPPED);
         ((TrailRenderer)node.GetNode("trail")).IsEnabled = false;
         GD.Print("Recording stopped!");
-    }
-
-    public Color GetColor() {
-        var sprite = (Sprite)this.node.GetNode("Sprite");
-        return sprite.GetModulate();
     }
 
     public bool IsDead() {
@@ -183,7 +171,6 @@ public class Player {
     public bool IsFalling() {
         return (this.sm.GetCurrentState() == this.stateFalling);
     }
-
     public void PlayAnimation(Animation animation) {
         // AnimationPlayer player = (AnimationPlayer) this.GetNode("Animation");
         // string directionStr = (direction == Direction.Left ? "left" : "right");
@@ -207,6 +194,16 @@ public class Player {
         // }
     }
 
+
+    public virtual void SetColor(PlayerColor.Value color) {
+        this.color = color;
+        ((Sprite)this.GetNode("Sprite")).SetModulate(PlayerColor.ToColor(color));
+    }
+
+    public virtual PlayerColor.Value GetColor() {
+        return this.color;
+    }
+
     public virtual void _PhysicsProcess(float delta) {
         if (this.paused) {
             return;
@@ -217,8 +214,7 @@ public class Player {
             }
             else if (Input.IsActionJustReleased("key_up") && this.cloneMenu.Visible) {
                 this.cloneMenu.Hide();
-                var sprite = (Sprite)this.node.GetNode("Sprite");
-                sprite.SetModulate(this.cloneMenu.GetSelectedColor());
+                this.SetColor(this.cloneMenu.GetSelectedColor());
             }
         }
         // Convenience data for solid collision checks
@@ -430,10 +426,6 @@ public class Player {
 
     public void SetCloneOptions(CloneOptions.ECloneOption[] cloneOptions) {
         this.cloneMenu.SetOptions(CloneOptions.OptionsFrom(cloneOptions));
-    }
-
-    public List<CloneOptions.CloneOption> GetCloneOptions() {
-        return this.cloneMenu.GetOptions();
     }
 
     public bool WasRecordingDuringDeath {

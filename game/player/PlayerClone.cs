@@ -22,9 +22,13 @@ public class PlayerClone : Player {
         this.movementPlayer.StartPlayback();
         this.movementPlayer.GoToTheEnd();
         this.movementPlayer.StopPlayback();
+    }
 
-        var color = this.node.GetColor();
-        this.node.SetColor(new Color(color.r, color.g, color.b, 0.7f));
+    public override void SetColor(PlayerColor.Value color) {
+        base.SetColor(color);
+        var originalColor = PlayerColor.ToColor(color);
+        var alphaColor = new Color(originalColor.r, originalColor.g, originalColor.b, 0.7f);
+        ((Sprite)this.GetNode("Sprite")).SetModulate(alphaColor);
     }
 
     public override void _PhysicsProcess(float delta) {

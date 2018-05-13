@@ -7,13 +7,13 @@ public class CloneOptions {
     public static CloneOption GetOption(ECloneOption opt) {
         switch (opt) {
             case ECloneOption.RED:
-                return new CloneOption("Red", Color.Color8(255, 0, 0, 255));
+                return new CloneOption("Red", PlayerColor.Value.Red);
             case ECloneOption.GREEN:
-                return new CloneOption("Green", Color.Color8(0, 255, 0, 255));
+                return new CloneOption("Green", PlayerColor.Value.Green);
             case ECloneOption.BLUE:
-                return new CloneOption("Blue", Color.Color8(0, 0, 255, 255));
+                return new CloneOption("Blue", PlayerColor.Value.Blue);
             default:
-                return new CloneOption("Red", Color.Color8(255, 0, 0, 255));
+                return new CloneOption("Red", PlayerColor.Value.Red);
         }
     }
 
@@ -28,13 +28,17 @@ public class CloneOptions {
 
     public class CloneOption {
         private String name;
-        private Color c;
+        private PlayerColor.Value c;
 
         public Color GetColor() {
+            return PlayerColor.ToColor(this.c);
+        }
+
+        public PlayerColor.Value GetPlayerColor() {
             return this.c;
         }
 
-        public CloneOption(String name, Color c) {
+        public CloneOption(String name, PlayerColor.Value c) {
             this.name = name;
             this.c = c;
         }

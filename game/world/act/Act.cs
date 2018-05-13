@@ -82,7 +82,7 @@ public class Act : Node {
         this.sm.Init(this.statePlay);
 
         this.ConfigureCloneOptions(this.GetActColors());
-        this.GetPlayer().SetColor(this.player.implementation.GetCloneOptions()[0].GetColor()); 
+        this.GetPlayer().SetColor(PlayerColor.Value.Red); 
     }
 
     public void OnCamLimitEnter(CamLock camLock) {
@@ -237,7 +237,7 @@ public class Act : Node {
         }
     }
     
-    private int[] GetActColors() => Enumerable.Range(1, this.color).ToArray();
+    private int[] GetActColors() => Enumerable.Range(1, this.colors).ToArray();
 }
 
 

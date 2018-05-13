@@ -6,7 +6,7 @@ public class CloneMenu : ReferenceRect {
     private struct ItemSlot {
         public Vector2 pos;
         public Vector2 size;
-        public Color c;
+        public PlayerColor.Value color;
     }
 
     private List<CloneOptions.CloneOption> selections;
@@ -37,8 +37,8 @@ public class CloneMenu : ReferenceRect {
         return this.selections;
     }
 
-    public Color GetSelectedColor() {
-        return this.selections[selectedIndex].GetColor();
+    public PlayerColor.Value GetSelectedColor() {
+        return this.selections[selectedIndex].GetPlayerColor();
     }
 
     public override void _Ready() {
