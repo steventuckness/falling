@@ -213,12 +213,12 @@ public class PlayerNode : Entity {
         implementation = new PlayerClone();
     }
 
-    public Color GetColor() {
-        return ((Sprite)this.implementation.GetNode("Sprite")).GetModulate();
+    public void SetColor(PlayerColor.Value color) {
+        this.implementation.SetColor(color);
     }
 
-    public void SetColor(Color color) {
-        ((Sprite)this.implementation.GetNode("Sprite")).SetModulate(color);
+    public PlayerColor.Value GetColor() {
+        return this.implementation.GetColor();
     }
 
     public bool WasRecordingDuringDeath {

@@ -24,6 +24,13 @@ public class PlayerClone : Player {
         this.movementPlayer.StopPlayback();
     }
 
+    public override void SetColor(PlayerColor.Value color) {
+        base.SetColor(color);
+        var originalColor = PlayerColor.ToColor(color);
+        var alphaColor = new Color(originalColor.r, originalColor.g, originalColor.b, 0.7f);
+        ((Sprite)this.GetNode("Sprite")).SetModulate(alphaColor);
+    }
+
     public override void _PhysicsProcess(float delta) {
         if (this.movementPlayer.IsAtTheEnd()) {
             if (this.stillNeedsLerping() && !this.movementPlayer.IsPlaying()) {
