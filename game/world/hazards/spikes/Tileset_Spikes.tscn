@@ -7,6 +7,8 @@
 [node name="Spike" type="Sprite" parent="." index="0"]
 
 texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 8, 8 )
 _sections_unfolded = [ "Region", "Transform" ]
 
 

@@ -1,12 +1,13 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://world/areas/forest/forest_act_01/ForestAct01.cs" type="Script" id=1]
-[ext_resource path="res://world/tilesets/Tileset_Collision.res" type="TileSet" id=2]
+[ext_resource path="res://world/tilesets/__Tileset_Collision.res" type="TileSet" id=2]
 [ext_resource path="res://world/spawn/SpawnCam.tscn" type="PackedScene" id=3]
 [ext_resource path="res://world/spawn/Spawn.tscn" type="PackedScene" id=4]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://world/finish/Finish.tscn" type="PackedScene" id=6]
 [ext_resource path="res://world/platform/platform.tscn" type="PackedScene" id=7]
+
 
 [sub_resource type="Curve2D" id=1]
 

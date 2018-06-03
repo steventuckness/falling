@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://world/tilesets/Tileset_Collision.res" type="TileSet" id=1]
+[ext_resource path="res://world/tilesets/__Tileset_Collision.res" type="TileSet" id=1]
 [ext_resource path="res://world/areas/forest/tilesets/Tileset_Jungle.res" type="TileSet" id=2]
 [ext_resource path="res://world/hazards/Spike.tscn" type="PackedScene" id=3]
+
 
 [node name="Level_Sandbox" type="Node2D"]
 

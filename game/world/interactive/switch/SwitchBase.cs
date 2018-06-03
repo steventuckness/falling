@@ -94,6 +94,6 @@ public class SwitchBase : Node2D, ISwitch {
 
     public override void _Draw() {
         Color c = this.IsOn() ? new Color(0, 256, 0, 1) : new Color(256, 0, 0, 1);
-        this.DrawRect(new Rect2(new Vector2(-8, -8), new Vector2(16, 16)), c);
+        this.DrawRect(new Rect2(new Vector2(-4, -4), new Vector2(8, 8)), c);
     }
 }

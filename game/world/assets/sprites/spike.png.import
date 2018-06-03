@@ -7,10 +7,10 @@ path="res://.import/spike.png-e0dfc1c467d49fd9f331d510781212c2.stex"
 [deps]
 
 source_file="res://world/assets/sprites/spike.png"
-source_md5="448e4535655f72d121fc267c75fc57f0"
+source_md5="a5ca6c8b7a84c017c3f14b33a29bf956"
 
 dest_files=[ "res://.import/spike.png-e0dfc1c467d49fd9f331d510781212c2.stex" ]
-dest_md5="9bdb3ce533c9b5617960adf09ec571e5"
+dest_md5="e1261b3c460007c27862dfd05cfcce7e"
 
 [params]
 
