@@ -33,3 +33,12 @@ This `T` number is key, and it's curve accross level will determine the kind of 
 `A` will specify how long a level with a constant `T` will be cleared in average. Like `T`, `A` can increase or remain constant over time.
 
 `A` and `T` values can only be gathered during play testing.
+
+# Assets we can use
+
+* Pixel particles
+https://untiedgames.itch.io/wills-magic-pixel-particle-effects
+
+* Mechanical fortress + other cool tilesets by the same author:
+
+https://untiedgames.itch.io/mechanical-fortress-tileset
