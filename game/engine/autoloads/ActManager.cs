@@ -15,9 +15,8 @@ public class ActManager : Node {
     private String currentAct;
 
     public List<String> acts = new List<String> {
-        "res://world/MainScene.tscn",
-        "res://world/areas/forest/forest_act_01/ForestAct01.tscn",
         "res://levels/BlazeIt.tscn",
+        "res://levels/Invisibility.tscn",
         "res://levels/NecessarySuicide.tscn",
         "res://levels/SwitchItUp.tscn"
     };

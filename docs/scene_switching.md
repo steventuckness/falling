@@ -1,4 +1,4 @@
-# Scene Switching
+# Scene / Level Switching
 
 ## Autoload
 
@@ -18,11 +18,12 @@ before. However, **never call that directly** outside the `ActManager`. Otherwis
 the `ActManager` will lost track of what scene you currently are.
 
 ## Switching scenes
-
-To go to the next scene, access the `ActManager` from any scene and call the 
 `Next()` method:
 
 ```
 ((ActManager)GetNode("/root/actmanager")).Next();
 ```
 
+## Adding new scene / level
+
+To add a new scene to the scene list, add a new entry to the `ActManager` `acts` variable.
