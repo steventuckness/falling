@@ -83,6 +83,7 @@ public class Act : Node {
 
         this.ConfigureCloneOptions(this.GetActColors());
         this.GetPlayer().SetColor(PlayerColor.Value.Red); 
+        this.SetPhasedObjectsVisibility(false);
     }
 
     public void OnCamLimitEnter(CamLock camLock) {
@@ -226,12 +227,15 @@ public class Act : Node {
     public void SetPhasedObjectsVisibility(bool isVisible) {
         var nodes = GetTree().GetNodesInGroup(PHASED_OBJECT);
         foreach (Node node in nodes) {
+            GD.Print(node.Name);
             if (node is Entity) {
                 ((Entity)node).collider.IsCollidable = isVisible;
+                
             }
-            else if (node is Node2D) {
+            if (node is Node2D) {
                 ((Node2D)node).SetVisible(isVisible);
-            } else {
+            } 
+            if (!(node is Node2D) || !(node is Entity)) {
                 GD.Print("WARNING: A node that is not a Node2D was assigned to PhasedObjects.");
             }
         }
