@@ -28,10 +28,12 @@ extents = Vector2( 16, 8 )
 [node name="Level" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
+colors = 1
+cameraSpeed = 5.0
+respawnTime = 2.0
 
 [node name="SolidTiles" type="Node2D" parent="." index="0"]
 
-editor/display_folded = true
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true,
@@ -92,6 +94,11 @@ script = ExtResource( 9 )
 __meta__ = {
 "_edit_lock_": true
 }
+xMin = true
+xMax = true
+yMin = true
+yMax = true
+unLockOnExit = false
 
 [node name="Detect" type="Area2D" parent="CamLocks/CamLock" index="0"]
 
@@ -154,6 +161,7 @@ script = ExtResource( 13 )
 __meta__ = {
 "_edit_group_": true
 }
+isOneWay = true
 
 [node name="Collider" type="Area2D" parent="Platforms/Platform" index="0"]
 

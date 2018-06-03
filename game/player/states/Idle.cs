@@ -7,6 +7,7 @@ public class Idle : State<Player> {
     public override void OnEnter(float delta, Player player) {
         // player.velocity = new Vector2(0, 0);
         player.PlayAnimation(Player.Animation.Idle);
+        player.lastWallJumpDir = 0;
     }
 
     public override void OnExit(float delta, Player owner) {

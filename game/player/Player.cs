@@ -49,6 +49,7 @@ public class Player {
     public float wallClingTimer = 0;
     public bool isClinging = false;
     public bool canCling = false;
+    public int lastWallJumpDir = 0;
 
     // Ground
     public float groundFriction = 2000.0f;
@@ -107,7 +108,7 @@ public class Player {
         this.AddUserSignal(Player.SIGNAL_DIED);
         this.AddUserSignal(Player.SIGNAL_RECORDING_STOPPED);
         this.AddUserSignal(Player.SIGNAL_RECORDING_STARTED);
-        
+
 
         this.sm.Init(this.stateIdle);
         this.cloneRecorder = new Recorder.FrameRecorder<PlayerRecorderFrame>(
@@ -152,11 +153,11 @@ public class Player {
         }
 
         this.wasRecordingDuringDeath = this.cloneRecorder.IsRecording;
-        
+
         if (this.cloneRecorder.IsRecording) {
             this.cloneRecorder.StopRecording();
         }
-        
+
         this.sm.TransitionState(this.stateDead);
     }
 
@@ -312,9 +313,9 @@ public class Player {
         int dir = this.GetInputDirection();
         bool cLeft = this.collisionData.left;
         bool cRight = this.collisionData.right;
-        
+
         // Back in the air
-        if(!cLeft && !cRight) {
+        if (!cLeft && !cRight) {
             this.canCling = true;
             this.isClinging = false;
         }
@@ -325,9 +326,9 @@ public class Player {
             this.wallClingTimer = WALL_CLING_TIME;
             this.canCling = false;
         }
-        if(this.isClinging) {
+        if (this.isClinging) {
             this.wallClingTimer = Mathf.Max(0, this.wallClingTimer - delta);
-            if(this.wallClingTimer <= 0) {
+            if (this.wallClingTimer <= 0) {
                 this.isClinging = false;
             }
         }
@@ -340,12 +341,15 @@ public class Player {
         bool cLeft = this.collisionData.left;
         bool cRight = this.collisionData.right;
         bool pushingOff = (dir == -1) ? (!cLeft) : (dir == 1) ? (!cRight) : false;
-        return this.wallJumpGraceTime > 0 && (dir != 0) && pushingOff;
+        return this.wallJumpGraceTime > 0 && (dir != 0) && pushingOff && (dir != this.lastWallJumpDir);
     }
     public void ResetWallJump() {
         this.wallJumpGraceTime = 0;
     }
-    public Vector2 WallJump(int dir) => new Vector2(50 * dir, -Mathf.Sqrt(2 * this.gravity * this.jumpHeight));
+    public Vector2 WallJump(int dir) {
+        this.lastWallJumpDir = dir;
+        return new Vector2(50 * dir, -Mathf.Sqrt(2 * this.gravity * this.jumpHeight));
+    }
 
     public void GroundControl(float delta) {
         int dir = this.GetInputDirection();
