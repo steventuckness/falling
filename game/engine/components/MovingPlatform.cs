@@ -39,7 +39,7 @@ public class MovingPlatform : Component {
     private List<Entity> GetEntities() => this.entity.scene.GetManager().GetEntities();
 
     public bool Overlaps(Entity other) =>
-        this.entity.GetCollider().Collides(other.GetCollider());
+        other.IsCollidable && this.entity.GetCollider().Collides(other.GetCollider());
 
     public override void _PhysicsProcess(float delta) {
         this.time += delta;
@@ -75,7 +75,13 @@ public class MovingPlatform : Component {
             if (this.Overlaps(e) && e.GetComponent<PlatformPush>() != null) {
                 Collider eCollider = e.GetCollider();
                 float movePlayerX = x > 0 ? ((c.Right()) - (eCollider.Left())) : ((c.Left()) - (eCollider.Right()));
-                e.MoveX(movePlayerX, null);
+                if (e is PlayerNode && (e as PlayerNode).implementation is Player) {
+                    var asPlayer = e as PlayerNode;
+                    asPlayer.MoveX(movePlayerX, asPlayer.Kill);
+                }
+                else {
+                    e.MoveX(movePlayerX, null);
+                }
             }
             else if (riders.Contains(e)) {
                 e.MoveX(x, null);
@@ -93,7 +99,13 @@ public class MovingPlatform : Component {
             if (this.Overlaps(e) && e.GetComponent<PlatformPush>() != null) {
                 Collider eCollider = e.GetCollider();
                 float movePlayerY = y > 0 ? ((c.Bottom()) - (eCollider.Top())) : ((c.Top()) - (eCollider.Bottom()));
-                e.MoveY(movePlayerY, null);
+                if (e is PlayerNode && (e as PlayerNode).implementation is Player) {
+                    var asPlayer = e as PlayerNode;
+                    asPlayer.MoveY(movePlayerY, asPlayer.Kill);
+                }
+                else {
+                    e.MoveY(movePlayerY, null);
+                }
             }
             else if (riders.Contains(e)) {
                 e.MoveY(y, null);
