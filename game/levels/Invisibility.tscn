@@ -1,0 +1,244 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://world/act/Act.cs" type="Script" id=1]
+[ext_resource path="res://engine/SolidTiles.cs" type="Script" id=2]
+[ext_resource path="res://world/tilesets/Tileset_Collision.res" type="TileSet" id=3]
+[ext_resource path="res://engine/collision/GridCollider.cs" type="Script" id=4]
+[ext_resource path="res://engine/Scene.cs" type="Script" id=5]
+[ext_resource path="res://player/player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://ui/CloneMenu.tscn" type="PackedScene" id=7]
+[ext_resource path="res://world/finishOverlay/FinishOverlay.tscn" type="PackedScene" id=8]
+[ext_resource path="res://world/camera/CamLock.cs" type="Script" id=9]
+[ext_resource path="res://world/camera/Cam.tscn" type="PackedScene" id=10]
+[ext_resource path="res://world/finish/Finish.tscn" type="PackedScene" id=11]
+[ext_resource path="res://world/spawn/Spawn.tscn" type="PackedScene" id=12]
+[ext_resource path="res://world/hazards/spikes/Tileset_Spikes.res" type="TileSet" id=13]
+[ext_resource path="res://world/hazards/DeathArea.cs" type="Script" id=14]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 87.9236, 4.54898 )
+
+[node name="Level" type="Node2D" index="0"]
+
+script = ExtResource( 1 )
+colors = 1
+cameraSpeed = 5.0
+respawnTime = 2.0
+
+[node name="SolidTiles" type="Node2D" parent="." index="0"]
+
+editor/display_folded = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="TileMap" type="TileMap" parent="SolidTiles" index="0"]
+
+mode = 0
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 16, 16 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 17, 0, 0, 18, 0, 0, 19, 0, 0, 20, 0, 0, 21, 0, 0, 22, 0, 0, 23, 0, 0, 24, 0, 0, 25, 0, 0, 26, 0, 0, 27, 0, 0, 28, 0, 0, 29, 0, 0, 65536, 0, 0, 65565, 0, 0, 131072, 0, 0, 131101, 0, 0, 196608, 0, 0, 196637, 0, 0, 262144, 0, 0, 262173, 0, 0, 327680, 0, 0, 327709, 0, 0, 393216, 0, 0, 393245, 0, 0, 458752, 0, 0, 458781, 0, 0, 524288, 0, 0, 524317, 0, 0, 589824, 0, 0, 589853, 0, 0, 655360, 0, 0, 655361, 0, 0, 655362, 0, 0, 655363, 0, 0, 655364, 0, 0, 655365, 0, 0, 655366, 0, 0, 655378, 0, 0, 655379, 0, 0, 655380, 0, 0, 655381, 0, 0, 655382, 0, 0, 655383, 0, 0, 655384, 0, 0, 655385, 0, 0, 655386, 0, 0, 655387, 0, 0, 655388, 0, 0, 655389, 0, 0, 720896, 0, 0, 720902, 0, 0, 720914, 0, 0, 720925, 0, 0, 786432, 0, 0, 786438, 0, 0, 786450, 0, 0, 786461, 0, 0, 851968, 0, 0, 851974, 0, 0, 851986, 0, 0, 851997, 0, 0, 917504, 0, 0, 917510, 0, 0, 917522, 0, 0, 917533, 0, 0, 983040, 0, 0, 983046, 0, 0, 983058, 0, 0, 983069, 0, 0, 1048576, 0, 0, 1048577, 0, 0, 1048578, 0, 0, 1048579, 0, 0, 1048580, 0, 0, 1048581, 0, 0, 1048582, 0, 0, 1048583, 0, 0, 1048584, 0, 0, 1048585, 0, 0, 1048586, 0, 0, 1048587, 0, 0, 1048588, 0, 0, 1048589, 0, 0, 1048590, 0, 0, 1048591, 0, 0, 1048592, 0, 0, 1048593, 0, 0, 1048594, 0, 0, 1048595, 0, 0, 1048596, 0, 0, 1048597, 0, 0, 1048598, 0, 0, 1048599, 0, 0, 1048600, 0, 0, 1048601, 0, 0, 1048602, 0, 0, 1048603, 0, 0, 1048604, 0, 0, 1048605, 0, 0 )
+_sections_unfolded = [ "Cell" ]
+
+[node name="Collider" type="Node2D" parent="SolidTiles" index="1"]
+
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="InvisibleTiles" type="Node2D" parent="." index="1" groups=[
+"PhasedObject",
+]]
+
+editor/display_folded = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="TileMap" type="TileMap" parent="InvisibleTiles" index="0"]
+
+mode = 0
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 16, 16 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( 655371, 0, 0, 655372, 0, 0, 655373, 0, 0 )
+_sections_unfolded = [ "Cell" ]
+
+[node name="Collider" type="Node2D" parent="InvisibleTiles" index="1"]
+
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Scene" type="Node2D" parent="." index="2"]
+
+position = Vector2( -1.02246, 0 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Player" parent="." index="3" instance=ExtResource( 6 )]
+
+editor/display_folded = true
+position = Vector2( 48.9775, 150 )
+_sections_unfolded = [ "Angular", "Collision", "Linear", "Transform", "Z Index" ]
+
+[node name="CloneMenu" parent="Player" index="5" instance=ExtResource( 7 )]
+
+[node name="FinishOverlay" parent="." index="4" instance=ExtResource( 8 )]
+
+position = Vector2( -1.02246, 0 )
+
+[node name="CamLocks" type="Node2D" parent="." index="5"]
+
+editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CamLock" type="Node2D" parent="CamLocks" index="0"]
+
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+xMin = true
+xMax = true
+yMin = true
+yMax = true
+unLockOnExit = false
+
+[node name="Detect" type="Area2D" parent="CamLocks/CamLock" index="0"]
+
+editor/display_folded = true
+position = Vector2( 50.3332, 149.866 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CamLocks/CamLock/Detect" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="Bounds" type="ReferenceRect" parent="CamLocks/CamLock" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1.0
+margin_top = -1.0
+margin_right = 481.0
+margin_bottom = 271.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Cam" parent="." index="6" instance=ExtResource( 10 )]
+
+visible = false
+
+[node name="Finish" parent="." index="7" instance=ExtResource( 11 )]
+
+position = Vector2( 447.764, 144.184 )
+
+[node name="Spawn" parent="." index="8" instance=ExtResource( 12 )]
+
+visible = false
+position = Vector2( 42.3906, 136.475 )
+
+[node name="Spikes" type="Node2D" parent="." index="9"]
+
+[node name="TileMap" type="TileMap" parent="Spikes" index="0"]
+
+mode = 0
+tile_set = ExtResource( 13 )
+cell_size = Vector2( 16, 16 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( 983047, 0, 0, 983048, 0, 0, 983049, 0, 0, 983050, 0, 0, 983051, 0, 0, 983052, 0, 0, 983053, 0, 0, 983054, 0, 0, 983055, 0, 0, 983056, 0, 0, 983057, 0, 0 )
+_sections_unfolded = [ "Cell" ]
+
+[node name="Area2D" type="Area2D" parent="Spikes" index="1"]
+
+position = Vector2( 121.892, 246.869 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 14 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/Area2D" index="0"]
+
+position = Vector2( 78.6895, 5.15396 )
+shape = SubResource( 2 )
+
+
