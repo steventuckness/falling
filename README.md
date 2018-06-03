@@ -10,3 +10,4 @@ Pretendo's first game.
 * [Scene Switching](./docs/scene_switching.md)
 * [Spikes](./docs/spikes.md)
 * [Phased Objects](./docs/phased_objects.md)
+* [Level Times](./docs/level_times.md)
