@@ -43,7 +43,7 @@ extents = Vector2( 16, 8 )
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[node name="Level" type="Node2D" index="0"]
+[node name="Level" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -194,10 +194,10 @@ position = Vector2( 160.173, 458.079 )
 ] instance=ExtResource( 17 )]
 
 position = Vector2( 327.236, 501.323 )
-scale = Vector2( 1, 1 )
 
 [node name="Platform" type="Node2D" parent="." index="11"]
 
+editor/display_folded = true
 position = Vector2( 320, 480 )
 script = ExtResource( 18 )
 __meta__ = {
