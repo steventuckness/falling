@@ -29,7 +29,7 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 210, 190, 0, 0, 0, 0, 210, 70, 0, 0, 0, 0, 210, 190 )
 }
 
-[node name="ForestAct01" type="Node2D" index="0"]
+[node name="ForestAct01" type="Node2D"]
 
 position = Vector2( 150, 50 )
 script = ExtResource( 1 )
@@ -94,6 +94,8 @@ lookahead = 4.0
 
 [node name="Platform" parent="Platforms/Path2D2/PathFollow2D" index="0" instance=ExtResource( 7 )]
 
+isOneWay = false
+
 [node name="Path2D" type="Path2D" parent="Platforms" index="1"]
 
 curve = SubResource( 2 )
@@ -113,6 +115,7 @@ _sections_unfolded = [ "Transform" ]
 [node name="Platform2" parent="Platforms/Path2D/PathFollow2D2" index="0" instance=ExtResource( 7 )]
 
 _sections_unfolded = [ "Transform" ]
+isOneWay = false
 
 [node name="Path2D3" type="Path2D" parent="Platforms" index="2"]
 
@@ -134,5 +137,6 @@ lookahead = 4.0
 [node name="Platform3" parent="Platforms/Path2D3/PathFollow2D3" index="0" instance=ExtResource( 7 )]
 
 rotation = 1.5708
+isOneWay = false
 
 
