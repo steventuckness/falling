@@ -82,7 +82,7 @@ public class Act : Node {
         this.sm.Init(this.statePlay);
 
         this.ConfigureCloneOptions(this.GetActColors());
-        this.GetPlayer().SetColor(PlayerColor.Value.Red); 
+        this.GetPlayer().SetColor(this.GetPlayer().implementation.GetFirstCloneOptionColor());
         this.SetPhasedObjectsVisibility(false);
     }
 
