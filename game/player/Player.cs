@@ -432,6 +432,8 @@ public class Player {
         this.cloneMenu.SetOptions(CloneOptions.OptionsFrom(cloneOptions));
     }
 
+    public PlayerColor.Value GetFirstCloneOptionColor() => this.cloneMenu.GetOptions().ToArray()[0].GetPlayerColor();
+    
     public bool WasRecordingDuringDeath {
         get {
             return this.wasRecordingDuringDeath;
