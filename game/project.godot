@@ -20,8 +20,8 @@ ActManager="*res://engine/autoloads/ActManager.cs"
 
 [display]
 
-window/size/width=480
-window/size/height=270
+window/size/width=240
+window/size/height=136
 window/dpi/allow_hidpi=true
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"

@@ -10,7 +10,7 @@
 [ext_resource path="res://engine/Solid.cs" type="Script" id=8]
 [ext_resource path="res://engine/collision/BoxCollider.cs" type="Script" id=9]
 [ext_resource path="res://engine/SolidTiles.cs" type="Script" id=10]
-[ext_resource path="res://world/tilesets/Tileset_Collision.res" type="TileSet" id=11]
+[ext_resource path="res://world/tilesets/__Tileset_Collision.res" type="TileSet" id=11]
 [ext_resource path="res://engine/collision/GridCollider.cs" type="Script" id=12]
 [ext_resource path="res://world/hazards/spikes/Tileset_Spikes.res" type="TileSet" id=13]
 [ext_resource path="res://world/hazards/DeathArea.cs" type="Script" id=14]
@@ -22,6 +22,7 @@
 [ext_resource path="res://world/camera/Cam.tscn" type="PackedScene" id=20]
 [ext_resource path="res://world/camera/CamLock.cs" type="Script" id=21]
 [ext_resource path="res://icon.png" type="Texture" id=22]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 

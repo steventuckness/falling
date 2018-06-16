@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tileset_collision.png-843ad5f736622b18e07b433b25a060c5.stex"
+path="res://.import/cavesofgallet_tiles.png-d829e2eb4d67521ffad80be5291e14b8.stex"
 
 [deps]
 
-source_file="res://world/assets/sprites/tileset_collision.png"
-source_md5="f55e648558ecc8aef85945dbbebe732c"
+source_file="res://world/assets/sprites/cavesofgallet_tiles.png"
+source_md5="9916e38e3c1a81258d04da39e4e72303"
 
-dest_files=[ "res://.import/tileset_collision.png-843ad5f736622b18e07b433b25a060c5.stex" ]
-dest_md5="4d57107b9cdbb7b8d2fc17586f5c257d"
+dest_files=[ "res://.import/cavesofgallet_tiles.png-d829e2eb4d67521ffad80be5291e14b8.stex" ]
+dest_md5="892d9638e0c337725d841437db319cf4"
 
 [params]
 
