@@ -2,11 +2,13 @@
 
 [ext_resource path="res://world/assets/sprites/cavesofgallet_tiles.png" type="Texture" id=1]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
+
+position = Vector2( 0, 0.139183 )
 
 [node name="Background" type="Sprite" parent="." index="0"]
 
-position = Vector2( -16, 0 )
+position = Vector2( -16.1169, -0.0584679 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 8, 8 )
@@ -41,6 +43,174 @@ position = Vector2( 16, 0 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 32, 16, 8, 8 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Background2" type="Sprite" parent="." index="5"]
+
+position = Vector2( 24.0562, -0.0575447 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 8, 0, 8, 8 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Background3" type="Sprite" parent="." index="6"]
+
+position = Vector2( 32.1482, -0.115088 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 16, 0, 8, 8 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Background4" type="Sprite" parent="." index="7"]
+
+position = Vector2( 40.1482, -0.115088 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 24, 0, 8, 8 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Background5" type="Sprite" parent="." index="8"]
+
+position = Vector2( 48.3195, -0.115088 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 32, 0, 8, 8 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Background6" type="Sprite" parent="." index="9"]
+
+position = Vector2( 48.3195, -0.115088 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 40, 0, 8, 8 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Background7" type="Sprite" parent="." index="10"]
+
+position = Vector2( 48.3195, -0.115088 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 48, 0, 8, 8 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Chains" type="Sprite" parent="." index="11"]
+
+position = Vector2( 48.3195, -0.115088 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 56, 0, 8, 8 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Grass_Ground_Corner" type="Sprite" parent="." index="12"]
+
+position = Vector2( 56.4908, -0.172632 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 8, 8, 8 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Grass_Ground_Flat" type="Sprite" parent="." index="13"]
+
+position = Vector2( 64.5593, -0.0556984 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 8, 8, 8, 8 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Grass_Ground_Edge" type="Sprite" parent="." index="14"]
+
+position = Vector2( 72.8031, -0.0556984 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 16, 8, 8, 8 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Grass_Wall" type="Sprite" parent="." index="15"]
+
+position = Vector2( 80.8131, -0.114166 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 16, 8, 8 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Grass_Wall_Edge" type="Sprite" parent="." index="16"]
+
+position = Vector2( 80.8131, -0.114166 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 24, 8, 8 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Grass_Ceiling" type="Sprite" parent="." index="17"]
+
+position = Vector2( 88.8816, -0.172632 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 8, 24, 8, 8 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Grass_Detail1" type="Sprite" parent="." index="18"]
+
+position = Vector2( 97.067, -0.289566 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 16, 24, 8, 8 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Grass_Detail2" type="Sprite" parent="." index="19"]
+
+position = Vector2( 105.194, -0.289566 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 16, 16, 8, 8 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Grass_Detail3" type="Sprite" parent="." index="20"]
+
+position = Vector2( 105.194, -0.289566 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 8, 16, 8, 8 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Wood_Platform1" type="Sprite" parent="." index="21"]
+
+position = Vector2( -16.3508, 8.12692 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 48, 8, 8, 8 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Wood_Platform2" type="Sprite" parent="." index="22"]
+
+position = Vector2( -8.22388, 8.00998 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 56, 8, 8, 8 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Wood_Platform3" type="Sprite" parent="." index="23"]
+
+position = Vector2( -0.184546, 8.06824 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 48, 16, 8, 8 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Wood_Platform4" type="Sprite" parent="." index="24"]
+
+position = Vector2( -0.184546, 8.06824 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 48, 16, 8, 8 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Torch" type="Sprite" parent="." index="25"]
+
+position = Vector2( 7.9577, 12.1046 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 40, 40, 8, 16 )
 _sections_unfolded = [ "Region" ]
 
 
