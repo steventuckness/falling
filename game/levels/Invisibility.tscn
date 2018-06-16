@@ -1,19 +1,20 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://world/act/Act.cs" type="Script" id=1]
-[ext_resource path="res://engine/SolidTiles.cs" type="Script" id=2]
-[ext_resource path="res://world/tilesets/Tileset_Collision.res" type="TileSet" id=3]
-[ext_resource path="res://engine/collision/GridCollider.cs" type="Script" id=4]
-[ext_resource path="res://engine/Scene.cs" type="Script" id=5]
-[ext_resource path="res://player/player.tscn" type="PackedScene" id=6]
-[ext_resource path="res://ui/CloneMenu.tscn" type="PackedScene" id=7]
-[ext_resource path="res://world/finishOverlay/FinishOverlay.tscn" type="PackedScene" id=8]
-[ext_resource path="res://world/camera/CamLock.cs" type="Script" id=9]
-[ext_resource path="res://world/camera/Cam.tscn" type="PackedScene" id=10]
-[ext_resource path="res://world/finish/Finish.tscn" type="PackedScene" id=11]
-[ext_resource path="res://world/spawn/Spawn.tscn" type="PackedScene" id=12]
-[ext_resource path="res://world/hazards/spikes/Tileset_Spikes.res" type="TileSet" id=13]
-[ext_resource path="res://world/hazards/DeathArea.cs" type="Script" id=14]
+[ext_resource path="res://world/tilesets/Tileset_World.res" type="TileSet" id=2]
+[ext_resource path="res://engine/SolidTiles.cs" type="Script" id=3]
+[ext_resource path="res://world/tilesets/Tileset_Collision.res" type="TileSet" id=4]
+[ext_resource path="res://engine/collision/GridCollider.cs" type="Script" id=5]
+[ext_resource path="res://engine/Scene.cs" type="Script" id=6]
+[ext_resource path="res://player/player.tscn" type="PackedScene" id=7]
+[ext_resource path="res://ui/CloneMenu.tscn" type="PackedScene" id=8]
+[ext_resource path="res://world/finishOverlay/FinishOverlay.tscn" type="PackedScene" id=9]
+[ext_resource path="res://world/camera/CamLock.cs" type="Script" id=10]
+[ext_resource path="res://world/camera/Cam.tscn" type="PackedScene" id=11]
+[ext_resource path="res://world/finish/Finish.tscn" type="PackedScene" id=12]
+[ext_resource path="res://world/spawn/Spawn.tscn" type="PackedScene" id=13]
+[ext_resource path="res://world/hazards/spikes/Tileset_Spikes.res" type="TileSet" id=14]
+[ext_resource path="res://world/hazards/DeathArea.cs" type="Script" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -32,10 +33,30 @@ colors = 1
 cameraSpeed = 5.0
 respawnTime = 2.0
 
-[node name="SolidTiles" type="Node2D" parent="." index="0"]
+[node name="BackestBackground" type="TileMap" parent="." index="0"]
 
-editor/display_folded = true
-script = ExtResource( 2 )
+mode = 0
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 8, 8 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( 65536, 4, 0, 655371, 4, 0, 655372, 4, 0, 655373, 4, 0 )
+_sections_unfolded = [ "Cell", "Collision" ]
+
+[node name="SolidTiles" type="Node2D" parent="." index="1"]
+
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -44,8 +65,8 @@ __meta__ = {
 [node name="TileMap" type="TileMap" parent="SolidTiles" index="0"]
 
 mode = 0
-tile_set = ExtResource( 3 )
-cell_size = Vector2( 16, 16 )
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 8, 8 )
 cell_quadrant_size = 16
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 cell_half_offset = 2
@@ -64,17 +85,16 @@ _sections_unfolded = [ "Cell" ]
 
 [node name="Collider" type="Node2D" parent="SolidTiles" index="1"]
 
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="InvisibleTiles" type="Node2D" parent="." index="1" groups=[
+[node name="InvisibleTiles" type="Node2D" parent="." index="2" groups=[
 "PhasedObject",
 ]]
 
-editor/display_folded = true
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -83,8 +103,8 @@ __meta__ = {
 [node name="TileMap" type="TileMap" parent="InvisibleTiles" index="0"]
 
 mode = 0
-tile_set = ExtResource( 3 )
-cell_size = Vector2( 16, 16 )
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 8, 8 )
 cell_quadrant_size = 16
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 cell_half_offset = 2
@@ -98,47 +118,66 @@ collision_layer = 1
 collision_mask = 1
 occluder_light_mask = 1
 format = 1
-tile_data = PoolIntArray( 655371, 0, 0, 655372, 0, 0, 655373, 0, 0 )
+tile_data = PoolIntArray( 655371, 1, 0, 655372, 1, 0, 655373, 1, 0 )
 _sections_unfolded = [ "Cell" ]
 
 [node name="Collider" type="Node2D" parent="InvisibleTiles" index="1"]
 
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Scene" type="Node2D" parent="." index="2"]
+[node name="ForeGround" type="TileMap" parent="." index="3"]
+
+mode = 0
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 8, 8 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( 0, 1610612737, 0, 1, 1610612737, 0, 2, 1610612737, 0, 3, 1610612737, 0, 4, 1610612737, 0, 5, 1610612737, 0, 6, 1610612737, 0, 7, 1610612737, 0, 8, 1610612737, 0, 9, 1610612737, 0, 10, 1610612737, 0, 11, 1610612737, 0, 12, 1610612737, 0, 13, 1610612737, 0, 14, 1610612737, 0, 15, 1610612737, 0, 16, 1610612737, 0, 17, 1610612737, 0, 18, 1610612737, 0, 19, 1610612737, 0, 20, 1610612737, 0, 21, 1610612737, 0, 22, 1610612737, 0, 23, 1610612737, 0, 24, 1610612737, 0, 25, 1610612737, 0, 26, 1610612737, 0, 27, 1610612737, 0, 28, 1610612737, 0, 29, 1610612737, 0, 65536, 2, 0, 65537, 4, 0, 65538, 4, 0, 65539, 4, 0, 65540, 4, 0, 65541, 4, 0, 65542, 4, 0, 65543, 4, 0, 65544, 4, 0, 65545, 4, 0, 65546, 4, 0, 65547, 4, 0, 65548, 4, 0, 65549, 4, 0, 65550, 4, 0, 65551, 4, 0, 65552, 4, 0, 65553, 4, 0, 65554, 4, 0, 65555, 4, 0, 65556, 4, 0, 65557, 4, 0, 65558, 4, 0, 65559, 4, 0, 65560, 4, 0, 65561, 4, 0, 65562, 4, 0, 65563, 4, 0, 65564, 4, 0, 65565, 2, 0, 131072, 2, 0, 131073, 4, 0, 131074, 4, 0, 131075, 4, 0, 131076, 4, 0, 131077, 4, 0, 131078, 4, 0, 131079, 4, 0, 131080, 4, 0, 131081, 4, 0, 131082, 4, 0, 131083, 4, 0, 131084, 4, 0, 131085, 4, 0, 131086, 4, 0, 131087, 4, 0, 131088, 4, 0, 131089, 4, 0, 131090, 4, 0, 131091, 4, 0, 131092, 4, 0, 131093, 4, 0, 131094, 4, 0, 131095, 4, 0, 131096, 4, 0, 131097, 4, 0, 131098, 4, 0, 131099, 4, 0, 131100, 4, 0, 131101, 2, 0, 196608, 2, 0, 196609, 4, 0, 196610, 4, 0, 196611, 4, 0, 196612, 4, 0, 196613, 4, 0, 196614, 4, 0, 196615, 4, 0, 196616, 4, 0, 196617, 4, 0, 196618, 4, 0, 196619, 4, 0, 196620, 4, 0, 196621, 4, 0, 196622, 4, 0, 196623, 4, 0, 196624, 4, 0, 196625, 4, 0, 196626, 4, 0, 196627, 4, 0, 196628, 4, 0, 196629, 4, 0, 196630, 4, 0, 196631, 4, 0, 196632, 4, 0, 196633, 4, 0, 196634, 4, 0, 196635, 4, 0, 196636, 4, 0, 196637, 2, 0, 262144, 2, 0, 262145, 4, 0, 262146, 4, 0, 262147, 4, 0, 262148, 4, 0, 262149, 4, 0, 262150, 4, 0, 262151, 4, 0, 262152, 4, 0, 262153, 4, 0, 262154, 4, 0, 262155, 4, 0, 262156, 4, 0, 262157, 4, 0, 262158, 4, 0, 262159, 4, 0, 262160, 4, 0, 262161, 4, 0, 262162, 4, 0, 262163, 4, 0, 262164, 4, 0, 262165, 4, 0, 262166, 4, 0, 262167, 4, 0, 262168, 4, 0, 262169, 4, 0, 262170, 4, 0, 262171, 4, 0, 262172, 4, 0, 262173, 2, 0, 327680, 2, 0, 327681, 4, 0, 327682, 4, 0, 327683, 4, 0, 327684, 4, 0, 327685, 4, 0, 327686, 4, 0, 327687, 4, 0, 327688, 4, 0, 327689, 4, 0, 327690, 4, 0, 327691, 4, 0, 327692, 4, 0, 327693, 4, 0, 327694, 4, 0, 327695, 4, 0, 327696, 4, 0, 327697, 4, 0, 327698, 4, 0, 327699, 4, 0, 327700, 4, 0, 327701, 4, 0, 327702, 4, 0, 327703, 4, 0, 327704, 4, 0, 327705, 4, 0, 327706, 4, 0, 327707, 4, 0, 327708, 4, 0, 327709, 2, 0, 393216, 2, 0, 393217, 4, 0, 393218, 4, 0, 393219, 4, 0, 393220, 4, 0, 393221, 4, 0, 393222, 4, 0, 393223, 4, 0, 393224, 4, 0, 393225, 4, 0, 393226, 4, 0, 393227, 4, 0, 393228, 4, 0, 393229, 4, 0, 393230, 4, 0, 393231, 4, 0, 393232, 4, 0, 393233, 4, 0, 393234, 4, 0, 393235, 4, 0, 393236, 4, 0, 393237, 4, 0, 393238, 4, 0, 393239, 4, 0, 393240, 4, 0, 393241, 4, 0, 393242, 4, 0, 393243, 4, 0, 393244, 4, 0, 393245, 2, 0, 458752, 2, 0, 458753, 4, 0, 458754, 4, 0, 458755, 4, 0, 458756, 4, 0, 458757, 4, 0, 458758, 4, 0, 458759, 4, 0, 458760, 4, 0, 458761, 4, 0, 458762, 4, 0, 458763, 4, 0, 458764, 4, 0, 458765, 4, 0, 458766, 4, 0, 458767, 4, 0, 458768, 4, 0, 458769, 4, 0, 458770, 4, 0, 458771, 4, 0, 458772, 4, 0, 458773, 4, 0, 458774, 4, 0, 458775, 4, 0, 458776, 4, 0, 458777, 4, 0, 458778, 4, 0, 458779, 4, 0, 458780, 4, 0, 458781, 2, 0, 524288, 2, 0, 524289, 4, 0, 524290, 4, 0, 524291, 4, 0, 524292, 4, 0, 524293, 4, 0, 524294, 4, 0, 524295, 4, 0, 524296, 4, 0, 524297, 4, 0, 524298, 4, 0, 524299, 4, 0, 524300, 4, 0, 524301, 4, 0, 524302, 4, 0, 524303, 4, 0, 524304, 4, 0, 524305, 4, 0, 524306, 4, 0, 524307, 4, 0, 524308, 4, 0, 524309, 4, 0, 524310, 4, 0, 524311, 4, 0, 524312, 4, 0, 524313, 4, 0, 524314, 4, 0, 524315, 4, 0, 524316, 4, 0, 524317, 2, 0, 589824, 2, 0, 589825, 4, 0, 589826, 4, 0, 589827, 4, 0, 589828, 4, 0, 589829, 4, 0, 589830, 4, 0, 589831, 4, 0, 589832, 4, 0, 589833, 4, 0, 589834, 4, 0, 589835, 4, 0, 589836, 4, 0, 589837, 4, 0, 589838, 4, 0, 589839, 4, 0, 589840, 4, 0, 589841, 4, 0, 589842, 4, 0, 589843, 4, 0, 589844, 4, 0, 589845, 4, 0, 589846, 4, 0, 589847, 4, 0, 589848, 4, 0, 589849, 4, 0, 589850, 4, 0, 589851, 4, 0, 589852, 4, 0, 589853, 2, 0, 655360, 2, 0, 655361, 1, 0, 655362, 1, 0, 655363, 1, 0, 655364, 1, 0, 655365, 1, 0, 655366, 1, 0, 655367, 4, 0, 655368, 4, 0, 655369, 4, 0, 655370, 4, 0, 655374, 4, 0, 655375, 4, 0, 655376, 4, 0, 655377, 4, 0, 655378, 1, 0, 655379, 1, 0, 655380, 1, 0, 655381, 1, 0, 655382, 1, 0, 655383, 1, 0, 655384, 1, 0, 655385, 1, 0, 655386, 1, 0, 655387, 1, 0, 655388, 1, 0, 655389, 2, 0, 720896, 2, 0, 720897, 4, 0, 720898, 4, 0, 720899, 4, 0, 720900, 4, 0, 720901, 4, 0, 720902, 1610612738, 0, 720903, 4, 0, 720904, 4, 0, 720905, 4, 0, 720906, 4, 0, 720907, 4, 0, 720908, 4, 0, 720909, 4, 0, 720910, 4, 0, 720911, 4, 0, 720912, 4, 0, 720913, 4, 0, 720914, 2, 0, 720915, 4, 0, 720916, 4, 0, 720917, 4, 0, 720918, 4, 0, 720919, 4, 0, 720920, 4, 0, 720921, 4, 0, 720922, 4, 0, 720923, 4, 0, 720924, 4, 0, 720925, 2, 0, 786432, 2, 0, 786433, 4, 0, 786434, 4, 0, 786435, 4, 0, 786436, 4, 0, 786437, 4, 0, 786438, 1610612738, 0, 786439, 4, 0, 786440, 4, 0, 786441, 4, 0, 786442, 4, 0, 786443, 4, 0, 786444, 4, 0, 786445, 4, 0, 786446, 4, 0, 786447, 4, 0, 786448, 4, 0, 786449, 4, 0, 786450, 2, 0, 786451, 4, 0, 786452, 4, 0, 786453, 4, 0, 786454, 4, 0, 786455, 4, 0, 786456, 4, 0, 786457, 4, 0, 786458, 4, 0, 786459, 4, 0, 786460, 4, 0, 786461, 2, 0, 851968, 2, 0, 851969, 4, 0, 851970, 4, 0, 851971, 4, 0, 851972, 4, 0, 851973, 4, 0, 851974, 1610612738, 0, 851975, 4, 0, 851976, 4, 0, 851977, 4, 0, 851978, 4, 0, 851979, 4, 0, 851980, 4, 0, 851981, 4, 0, 851982, 4, 0, 851983, 4, 0, 851984, 4, 0, 851985, 4, 0, 851986, 2, 0, 851987, 4, 0, 851988, 4, 0, 851989, 4, 0, 851990, 4, 0, 851991, 4, 0, 851992, 4, 0, 851993, 4, 0, 851994, 4, 0, 851995, 4, 0, 851996, 4, 0, 851997, 2, 0, 917504, 2, 0, 917505, 4, 0, 917506, 4, 0, 917507, 4, 0, 917508, 4, 0, 917509, 4, 0, 917510, 1610612738, 0, 917511, 4, 0, 917512, 4, 0, 917513, 4, 0, 917514, 4, 0, 917515, 4, 0, 917516, 4, 0, 917517, 4, 0, 917518, 4, 0, 917519, 4, 0, 917520, 4, 0, 917521, 4, 0, 917522, 2, 0, 917523, 4, 0, 917524, 4, 0, 917525, 4, 0, 917526, 4, 0, 917527, 4, 0, 917528, 4, 0, 917529, 4, 0, 917530, 4, 0, 917531, 4, 0, 917532, 4, 0, 917533, 2, 0, 983040, 2, 0, 983041, 4, 0, 983042, 4, 0, 983043, 4, 0, 983044, 4, 0, 983045, 4, 0, 983046, 1610612738, 0, 983047, 4, 0, 983048, 4, 0, 983049, 4, 0, 983050, 4, 0, 983051, 4, 0, 983052, 4, 0, 983053, 4, 0, 983054, 4, 0, 983055, 4, 0, 983056, 4, 0, 983057, 4, 0, 983058, 2, 0, 983059, 4, 0, 983060, 4, 0, 983061, 4, 0, 983062, 4, 0, 983063, 4, 0, 983064, 4, 0, 983065, 4, 0, 983066, 4, 0, 983067, 4, 0, 983068, 4, 0, 983069, 2, 0, 1048576, 1, 0, 1048577, 1, 0, 1048578, 1, 0, 1048579, 1, 0, 1048580, 1, 0, 1048581, 1, 0, 1048582, 1, 0, 1048583, 1, 0, 1048584, 1, 0, 1048585, 1, 0, 1048586, 1, 0, 1048587, 1, 0, 1048588, 1, 0, 1048589, 1, 0, 1048590, 1, 0, 1048591, 1, 0, 1048592, 1, 0, 1048593, 1, 0, 1048594, 1, 0, 1048595, 1, 0, 1048596, 1, 0, 1048597, 1, 0, 1048598, 1, 0, 1048599, 1, 0, 1048600, 1, 0, 1048601, 1, 0, 1048602, 1, 0, 1048603, 1, 0, 1048604, 1, 0, 1048605, 1, 0 )
+_sections_unfolded = [ "Cell" ]
+
+[node name="Scene" type="Node2D" parent="." index="4"]
 
 position = Vector2( -1.02246, 0 )
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
 
-[node name="Player" parent="." index="3" instance=ExtResource( 6 )]
+[node name="Player" parent="." index="5" instance=ExtResource( 7 )]
 
-editor/display_folded = true
-position = Vector2( 48.9775, 150 )
+position = Vector2( 33.3503, 75.5427 )
 _sections_unfolded = [ "Angular", "Collision", "Linear", "Transform", "Z Index" ]
 
-[node name="CloneMenu" parent="Player" index="5" instance=ExtResource( 7 )]
+[node name="CloneMenu" parent="Player" index="5" instance=ExtResource( 8 )]
 
-[node name="FinishOverlay" parent="." index="4" instance=ExtResource( 8 )]
+[node name="FinishOverlay" parent="." index="6" instance=ExtResource( 9 )]
 
 position = Vector2( -1.02246, 0 )
 
-[node name="CamLocks" type="Node2D" parent="." index="5"]
+[node name="CamLocks" type="Node2D" parent="." index="7"]
 
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="CamLock" type="Node2D" parent="CamLocks" index="0"]
 
-script = ExtResource( 9 )
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -151,7 +190,7 @@ unLockOnExit = false
 [node name="Detect" type="Area2D" parent="CamLocks/CamLock" index="0"]
 
 editor/display_folded = true
-position = Vector2( 50.3332, 149.866 )
+position = Vector2( 32.785, 69.6456 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -160,7 +199,8 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_lock_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CamLocks/CamLock/Detect" index="0"]
@@ -184,30 +224,32 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Rect" ]
+
+[node name="Cam" parent="." index="8" instance=ExtResource( 11 )]
+
+visible = false
+
+[node name="Finish" parent="." index="9" instance=ExtResource( 12 )]
+
+position = Vector2( 224.301, 72.56 )
+
+[node name="Spawn" parent="." index="10" instance=ExtResource( 13 )]
+
+position = Vector2( 33.75, 75.54 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Spikes" type="Node2D" parent="." index="11"]
+
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Cam" parent="." index="6" instance=ExtResource( 10 )]
-
-visible = false
-
-[node name="Finish" parent="." index="7" instance=ExtResource( 11 )]
-
-position = Vector2( 447.764, 144.184 )
-
-[node name="Spawn" parent="." index="8" instance=ExtResource( 12 )]
-
-visible = false
-position = Vector2( 42.3906, 136.475 )
-
-[node name="Spikes" type="Node2D" parent="." index="9"]
-
 [node name="TileMap" type="TileMap" parent="Spikes" index="0"]
 
 mode = 0
-tile_set = ExtResource( 13 )
-cell_size = Vector2( 16, 16 )
+tile_set = ExtResource( 14 )
+cell_size = Vector2( 8, 8 )
 cell_quadrant_size = 16
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 cell_half_offset = 2
@@ -223,10 +265,14 @@ occluder_light_mask = 1
 format = 1
 tile_data = PoolIntArray( 983047, 0, 0, 983048, 0, 0, 983049, 0, 0, 983050, 0, 0, 983051, 0, 0, 983052, 0, 0, 983053, 0, 0, 983054, 0, 0, 983055, 0, 0, 983056, 0, 0, 983057, 0, 0 )
 _sections_unfolded = [ "Cell" ]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Area2D" type="Area2D" parent="Spikes" index="1"]
 
-position = Vector2( 121.892, 246.869 )
+position = Vector2( 60.4151, 122.292 )
+scale = Vector2( 0.5, 0.5 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -234,7 +280,11 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 14 )
+script = ExtResource( 15 )
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/Area2D" index="0"]
 
