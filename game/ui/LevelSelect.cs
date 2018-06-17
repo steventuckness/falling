@@ -11,8 +11,8 @@ public class LevelSelect : Node {
 
     public override void _Ready() {
         levels = GetActManager().acts;
-        cards = CreateCards(levels, 4, 50, 50);
-        var offest = new Vector2(100, 100);
+        cards = CreateCards(levels, cols, 50, 50);
+        var offest = new Vector2(45, 45);
         foreach (LevelSelectCard card in cards) {
             card.SetPosition(card.GetPosition() + offest);
             AddChild(card);
