@@ -18,7 +18,8 @@ public class ActManager : Node {
         "res://levels/BlazeIt.tscn",
         "res://levels/Invisibility.tscn",
         "res://levels/NecessarySuicide.tscn",
-        "res://levels/SwitchItUp.tscn"
+        "res://levels/SwitchItUp.tscn",
+        "res://levels/DoubleTake.tscn"
     };
 
     public ActManager() : base() {
