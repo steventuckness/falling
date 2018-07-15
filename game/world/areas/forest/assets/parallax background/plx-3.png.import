@@ -7,10 +7,7 @@ path="res://.import/plx-3.png-275d0a9ee8f65b2d81656668f73fe4e0.stex"
 [deps]
 
 source_file="res://world/areas/forest/assets/parallax background/plx-3.png"
-source_md5="b50ebfb91131365a479f229c0325c033"
-
 dest_files=[ "res://.import/plx-3.png-275d0a9ee8f65b2d81656668f73fe4e0.stex" ]
-dest_md5="88162efd048166bce3ea5f54be701211"
 
 [params]
 

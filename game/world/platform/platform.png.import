@@ -7,10 +7,7 @@ path="res://.import/platform.png-50c6c9f62c5f7a3503a302ed95a9e347.stex"
 [deps]
 
 source_file="res://world/platform/platform.png"
-source_md5="76c52eaa761cf4ff10bde21835fb98d2"
-
 dest_files=[ "res://.import/platform.png-50c6c9f62c5f7a3503a302ed95a9e347.stex" ]
-dest_md5="aaae2185d86d369e66785569585fd84c"
 
 [params]
 

@@ -7,10 +7,7 @@ path="res://.import/jungle tileset.png-4e80d835598b9bc4f657eabe2d591751.stex"
 [deps]
 
 source_file="res://world/areas/forest/tilesets/jungle tileset.png"
-source_md5="0aa01962c690ae91a6e990fd7d518a70"
-
 dest_files=[ "res://.import/jungle tileset.png-4e80d835598b9bc4f657eabe2d591751.stex" ]
-dest_md5="5f877997c2ec1fb05c4236a5d9e3a50b"
 
 [params]
 

@@ -7,10 +7,7 @@ path="res://.import/cavesofgallet_tiles.png-d829e2eb4d67521ffad80be5291e14b8.ste
 [deps]
 
 source_file="res://world/assets/sprites/cavesofgallet_tiles.png"
-source_md5="9916e38e3c1a81258d04da39e4e72303"
-
 dest_files=[ "res://.import/cavesofgallet_tiles.png-d829e2eb4d67521ffad80be5291e14b8.stex" ]
-dest_md5="892d9638e0c337725d841437db319cf4"
 
 [params]
 

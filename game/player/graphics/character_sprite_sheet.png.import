@@ -7,10 +7,7 @@ path="res://.import/character_sprite_sheet.png-dd327703b6e4832724c8213be4e50593.
 [deps]
 
 source_file="res://player/graphics/character_sprite_sheet.png"
-source_md5="6fae509adc71925364c973744135844c"
-
 dest_files=[ "res://.import/character_sprite_sheet.png-dd327703b6e4832724c8213be4e50593.stex" ]
-dest_md5="3fd1fb074215184c63b2b8b4c29827e4"
 
 [params]
 

@@ -7,10 +7,7 @@ path="res://.import/megaman.png-4b57553d8119b04ffbea6202b3880733.stex"
 [deps]
 
 source_file="res://player/megaman.png"
-source_md5="f2837b27d2315ccb70bf49b1e80d0415"
-
 dest_files=[ "res://.import/megaman.png-4b57553d8119b04ffbea6202b3880733.stex" ]
-dest_md5="3678bcc92833eae46891406aee7682fa"
 
 [params]
 
