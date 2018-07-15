@@ -6,6 +6,8 @@ public class Jumping : State<Player> {
         player.velocity = new Vector2(player.velocity.x, -Mathf.Sqrt(2 * player.gravity * player.jumpHeight));
         player.PlayAnimation(Player.Animation.Jumping);
         player.ResetWallJump();
+
+        (player.GetNode("Sounds/Jump") as AudioStreamPlayer).Play();
     }
 
     public override void OnExit(float delta, Player owner) {
