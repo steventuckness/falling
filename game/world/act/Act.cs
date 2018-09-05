@@ -60,7 +60,7 @@ public class Act : Node {
         }
 
         // Grab all the cam-locks
-        object[] camLocks = this.GetNode("CamLocks").GetChildren();
+        Godot.Array camLocks = this.GetNode("CamLocks").GetChildren();
         foreach(CamLock camLock in camLocks) {
             camLock.Connect(CamLock.PLAYER_ENTERED, this, "OnCamLimitEnter");
             camLock.Connect(CamLock.PLAYER_EXITED, this, "OnCamLimitExit");
@@ -189,7 +189,7 @@ public class Act : Node {
        
         // loop through children and remove children that have the new clone color
         var clones = this.GetClones();
-        GD.Print($"clones count : {clones.Length}");
+        GD.Print($"clones count : {clones.Count}");
 
         foreach(var existingClone in clones) {
             if (((PlayerNode)existingClone).GetColor() == node.GetColor()) {
@@ -202,7 +202,7 @@ public class Act : Node {
         GD.Print("Clone created!");
     }
 
-    private object[] GetClones() {
+    private Godot.Array GetClones() {
         return this.GetTree().GetNodesInGroup("clones");
     }
 

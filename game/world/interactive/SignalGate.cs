@@ -11,7 +11,7 @@ public class SignalGate : Node2D, ISignal {
 
     public override void _Ready() {
         this.inputSignals = new List<ISignal>();
-        object[] nodes = this.GetTree().GetNodesInGroup(inputGroup);
+        Godot.Array nodes = this.GetTree().GetNodesInGroup(inputGroup);
         foreach (ISignal s in nodes) {
             this.inputSignals.Add(s);
         }

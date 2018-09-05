@@ -27,12 +27,12 @@ public class DoorSignalGate : Node2D, ISignal {
         this.doors = new List<IDoor>();
         this.signals = new List<ISignal>();
 
-        object[] inputs = this.GetTree().GetNodesInGroup(inputGroup);
+        Godot.Array inputs = this.GetTree().GetNodesInGroup(inputGroup);
         foreach (ISignal n in inputs) {
             this.signals.Add(n);
         }
 
-        object[] doors = this.GetTree().GetNodesInGroup(doorGroup);
+        Godot.Array doors = this.GetTree().GetNodesInGroup(doorGroup);
         foreach (IDoor n in doors) {
             this.doors.Add(n);
         }

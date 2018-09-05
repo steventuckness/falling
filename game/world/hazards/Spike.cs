@@ -13,7 +13,8 @@ public class Spike : Node2D
     }
 
     public override void _PhysicsProcess(float delta) {
-        object[] bodies = this.area.GetOverlappingBodies();
+        Godot.Array bodies = this.area.GetOverlappingBodies();
+
         // Query world to see if we have an overlap with someone.
         foreach(object body in bodies) {
             if(body is Player) {

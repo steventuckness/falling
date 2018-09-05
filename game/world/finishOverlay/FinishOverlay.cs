@@ -27,7 +27,7 @@ public class FinishOverlay : Node2D
     }
 
     public void ShowOverlay(long timeElapsed, int clonesCreated) { 
-        Dictionary<object, object> datimeTimeElapsed = OS.GetDatetimeFromUnixTime((int)timeElapsed / 1000);
+        Godot.Dictionary datimeTimeElapsed = OS.GetDatetimeFromUnixTime((int)timeElapsed / 1000);
 
         object hours;
         object minutes;
