@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://world/act/Act.cs" type="Script" id=1]
 [ext_resource path="res://world/tilesets/Tileset_World.res" type="TileSet" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://world/spawn/Spawn.tscn" type="PackedScene" id=13]
 [ext_resource path="res://world/hazards/spikes/Tileset_Spikes.res" type="TileSet" id=14]
 [ext_resource path="res://world/hazards/DeathArea.cs" type="Script" id=15]
+[ext_resource path="res://ui/Pause.tscn" type="PackedScene" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -26,7 +27,7 @@ extents = Vector2( 10, 10 )
 custom_solver_bias = 0.0
 extents = Vector2( 87.9236, 4.54898 )
 
-[node name="Level" type="Node2D" index="0"]
+[node name="Level" type="Node2D"]
 
 script = ExtResource( 1 )
 colors = 1
@@ -56,6 +57,7 @@ _sections_unfolded = [ "Cell", "Collision" ]
 
 [node name="SolidTiles" type="Node2D" parent="." index="1"]
 
+editor/display_folded = true
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true,
@@ -94,6 +96,7 @@ __meta__ = {
 "PhasedObject",
 ]]
 
+editor/display_folded = true
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true,
@@ -160,6 +163,7 @@ __meta__ = {
 
 [node name="Player" parent="." index="5" instance=ExtResource( 7 )]
 
+editor/display_folded = true
 position = Vector2( 33.3503, 75.5427 )
 _sections_unfolded = [ "Angular", "Collision", "Linear", "Transform", "Z Index" ]
 
@@ -171,6 +175,7 @@ position = Vector2( -1.02246, 0 )
 
 [node name="CamLocks" type="Node2D" parent="." index="7"]
 
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -290,5 +295,7 @@ __meta__ = {
 
 position = Vector2( 78.6895, 5.15396 )
 shape = SubResource( 2 )
+
+[node name="PauseCanvasLayer" parent="." index="12" instance=ExtResource( 16 )]
 
 

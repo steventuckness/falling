@@ -130,10 +130,6 @@ public class Act : Node {
     }
 
     public override void _PhysicsProcess(float delta) {
-        if (Input.IsActionJustPressed("key_restart")) {
-            this.GetTree().ReloadCurrentScene();
-        }
-
         if (Input.IsActionJustPressed("key_debug_toggle")) {
             if (this.debug != null) {
                 Camera2D cam = (Camera2D)this.player.GetNode("Camera2D");

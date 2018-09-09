@@ -13,10 +13,6 @@ public class MainScene : Node2D {
     }
 
     public override void _Process(float delta) {
-        if (Input.IsActionPressed("key_restart")) {
-            this.GetTree().ReloadCurrentScene();
-        }
-
         // Configure custom signal the only way possible in C# right now.
         // https://github.com/godotengine/godot/issues/11956. (3.1 milestone) 
         if (GetNode("Player").HasUserSignal("playerDied") &&

@@ -60,6 +60,8 @@ script = ExtResource( 6 )
 
 [node name="Sounds" type="Node2D" parent="." index="5"]
 
+editor/display_folded = true
+
 [node name="Jump" type="AudioStreamPlayer" parent="Sounds" index="0"]
 
 stream = ExtResource( 7 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://world/act/Act.cs" type="Script" id=1]
 [ext_resource path="res://engine/Scene.cs" type="Script" id=2]
@@ -15,13 +15,14 @@
 [ext_resource path="res://world/interactive/door/Door.tscn" type="PackedScene" id=13]
 [ext_resource path="res://world/camera/Cam.tscn" type="PackedScene" id=14]
 [ext_resource path="res://world/camera/CamLock.cs" type="Script" id=15]
+[ext_resource path="res://ui/Pause.tscn" type="PackedScene" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[node name="Level" type="Node2D" index="0"]
+[node name="Level" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -65,6 +66,7 @@ __meta__ = {
 
 [node name="Player" parent="." index="2" instance=ExtResource( 4 )]
 
+editor/display_folded = true
 position = Vector2( 34.3593, 246.346 )
 _sections_unfolded = [ "Angular", "Collision", "Linear", "Transform", "Z Index" ]
 
@@ -84,6 +86,7 @@ position = Vector2( 223.894, 249.188 )
 
 [node name="SolidTiles" type="Node2D" parent="." index="6"]
 
+editor/display_folded = true
 script = ExtResource( 9 )
 __meta__ = {
 "_edit_lock_": true
@@ -147,6 +150,8 @@ position = Vector2( 180.083, 252.015 )
 
 [node name="CamLocks" type="Node2D" parent="." index="12"]
 
+editor/display_folded = true
+
 [node name="CamLock" type="Node2D" parent="CamLocks" index="0"]
 
 script = ExtResource( 15 )
@@ -193,5 +198,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Grow Direction", "Margin" ]
+
+[node name="PauseCanvasLayer" parent="." index="13" instance=ExtResource( 16 )]
 
 

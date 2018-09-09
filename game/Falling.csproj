@@ -67,6 +67,7 @@
     <Compile Include="engine\Solid.cs" />
     <Compile Include="engine\SolidTiles.cs" />
     <Compile Include="engine\TrailRenderer.cs" />
+    <Compile Include="levels\Pause.cs" />
     <Compile Include="player\clone\CloneOptions.cs" />
     <Compile Include="player\Player.cs" />
     <Compile Include="player\PlayerNode.cs" />
