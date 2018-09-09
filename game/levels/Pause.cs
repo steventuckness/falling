@@ -34,6 +34,10 @@ public class Pause : Control
         this.GetTree().ChangeScene("res://../ui/LevelSelect.tscn");
     }
 
+    public void _on_QuitButton_pressed() {
+        this.GetTree().Quit();
+    }
+
     private void TogglePause() {
        if (GetTree().Paused == true) {
            this.DisablePause();
