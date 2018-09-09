@@ -67,7 +67,6 @@
     <Compile Include="engine\Solid.cs" />
     <Compile Include="engine\SolidTiles.cs" />
     <Compile Include="engine\TrailRenderer.cs" />
-    <Compile Include="levels\Pause.cs" />
     <Compile Include="player\clone\CloneOptions.cs" />
     <Compile Include="player\Player.cs" />
     <Compile Include="player\PlayerNode.cs" />
@@ -97,6 +96,7 @@
     <Compile Include="ui\CloneMenu.cs" />
     <Compile Include="ui\LevelSelect.cs" />
     <Compile Include="ui\LevelSelectCard.cs" />
+    <Compile Include="ui\Pause.cs" />
     <Compile Include="world\act\Act.cs" />
     <Compile Include="world\act\states\Play.cs" />
     <Compile Include="world\act\states\ActRespawn.cs" />

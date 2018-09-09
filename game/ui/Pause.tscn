@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://levels/Pause.cs" type="Script" id=1]
+[ext_resource path="res://ui/Pause.cs" type="Script" id=1]
 
 [node name="PauseCanvasLayer" type="CanvasLayer" index="0"]
 
@@ -64,7 +64,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 131.0
+margin_right = 130.0
 margin_bottom = 20.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -89,7 +89,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 24.0
-margin_right = 131.0
+margin_right = 130.0
 margin_bottom = 44.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -113,7 +113,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 48.0
-margin_right = 131.0
+margin_right = 130.0
 margin_bottom = 68.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -137,7 +137,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 72.0
-margin_right = 131.0
+margin_right = 130.0
 margin_bottom = 92.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
