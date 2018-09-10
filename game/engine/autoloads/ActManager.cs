@@ -32,6 +32,11 @@ public class ActManager : Node {
         GoToScene(NextActResource());
     }
 
+    public bool IsLastAct() {
+      int currentSceneIndex = this.GetCurrentSceneIndex();
+      return (currentSceneIndex + 1 >= acts.Count);  
+    } 
+
     public void PreloadActs() {
         foreach (String act in acts) {
             ResourceLoader.Load(act);
@@ -51,12 +56,18 @@ public class ActManager : Node {
         }
     }
 
+    private int GetCurrentSceneIndex() {
+        return acts.FindIndex((act) => act == currentAct);
+    }
+
     private String NextActResource() {
-        int currentSceneIndex = acts.FindIndex((act) => act == currentAct);
-        if (currentSceneIndex + 1 >= acts.Count) {
+        int currentSceneIndex = this.GetCurrentSceneIndex();
+        
+        if (this.IsLastAct()) {
             throw new Exception("Cannot go past the last scene in the " +
              "ActManager.");
         }
+        
         if (currentSceneIndex < 0) {
             throw new Exception("The current scene is not registered in the " +
                 " act manager, or the act manager was not used to load the" +

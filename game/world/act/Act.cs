@@ -20,6 +20,7 @@ public class Act : Node {
     private FinishOverlay finishOverlay;
     private Node2D debug;
     private Cam cam;
+    private ActManager actManager;
 
 
     // Exports /////////////////////////////////////////////////////////////////
@@ -76,6 +77,7 @@ public class Act : Node {
         this.finish = (Node2D)this.GetNode("Finish");
         this.finishOverlay = (FinishOverlay)this.GetNode("FinishOverlay");
         this.cam = (Cam)this.GetNode("Cam");
+        this.actManager = (ActManager)this.GetNode("/root/ActManager");
 
         this.cam.Follow(this.player);
         this.ConnectEvents();
@@ -159,7 +161,11 @@ public class Act : Node {
     }
 
     private void NextLevel() {
-         ((ActManager)this.GetNode("/root/ActManager")).NextAct();
+         if (this.actManager.IsLastAct()) {
+              this.GetTree().ChangeScene("res://../ui/GameOver.tscn");
+         } else {
+             this.actManager.NextAct();
+         }
     }
 
     private void RecordingStarted() {
