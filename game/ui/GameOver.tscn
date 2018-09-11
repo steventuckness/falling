@@ -2,7 +2,7 @@
 
 [ext_resource path="res://ui/GameOver.cs" type="Script" id=1]
 
-[node name="CanvasLayer" type="Node2D" index="0"]
+[node name="CanvasLayer" type="Node2D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="0"]
 
