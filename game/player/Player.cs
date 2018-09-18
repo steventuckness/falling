@@ -439,6 +439,10 @@ public class Player {
             return this.wasRecordingDuringDeath;
         }
     }
+
+    public Recorder.FrameRecorder<PlayerRecorderFrame> CloneRecorder {
+        get => this.cloneRecorder;
+    }
 }
 
 

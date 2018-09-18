@@ -18,6 +18,7 @@ public class Act : Node {
     private PlayerNode player;
     private Node2D finish;
     private FinishOverlay finishOverlay;
+
     private Node2D debug;
     private Cam cam;
     private ActManager actManager;
@@ -26,6 +27,9 @@ public class Act : Node {
     // Exports /////////////////////////////////////////////////////////////////
     [Export]
     public int colors = 1;
+
+    [Export]
+    public int maxCloneRecordingTimeInSec = 5; 
 
     [Export]
     public float cameraSpeed = 5f;
@@ -74,6 +78,7 @@ public class Act : Node {
         // Get nodes
         this.spawn = (Node2D)this.GetNode("Spawn");
         this.player = (PlayerNode)this.GetNode("Player");
+        this.player.CloneRecorder.MaxTime = this.maxCloneRecordingTimeInSec;
         this.finish = (Node2D)this.GetNode("Finish");
         this.finishOverlay = (FinishOverlay)this.GetNode("FinishOverlay");
         this.cam = (Cam)this.GetNode("Cam");
@@ -245,5 +250,3 @@ public class Act : Node {
     
     private int[] GetActColors() => Enumerable.Range(1, this.colors).ToArray();
 }
-
-

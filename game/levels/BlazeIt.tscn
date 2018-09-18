@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://world/act/Act.cs" type="Script" id=1]
 [ext_resource path="res://engine/SolidTiles.cs" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://world/platform/Platform.cs" type="Script" id=14]
 [ext_resource path="res://engine/collision/BoxCollider.cs" type="Script" id=15]
 [ext_resource path="res://ui/Pause.tscn" type="PackedScene" id=16]
+[ext_resource path="res://ui/Hud.tscn" type="PackedScene" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -31,12 +32,12 @@ extents = Vector2( 8, 4 )
 
 script = ExtResource( 1 )
 colors = 1
+maxCloneRecordingTimeInSec = 5
 cameraSpeed = 5.0
 respawnTime = 2.0
 
 [node name="SolidTiles" type="Node2D" parent="." index="0"]
 
-editor/display_folded = true
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true,
@@ -101,14 +102,15 @@ __meta__ = {
 [node name="Scene" type="Node2D" parent="." index="2"]
 
 script = ExtResource( 6 )
+_sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Player" parent="." index="3" instance=ExtResource( 7 )]
 
-editor/display_folded = true
 position = Vector2( 121, 119 )
+_sections_unfolded = [ "Angular", "Collision", "Linear", "Material", "Pause", "Transform", "Visibility", "Z Index" ]
 
 [node name="CloneMenu" parent="Player" index="5" instance=ExtResource( 8 )]
 
@@ -187,7 +189,6 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Platforms" type="Node2D" parent="." index="9"]
 
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -224,7 +225,6 @@ __meta__ = {
 
 [node name="World" type="Node2D" parent="." index="10"]
 
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -251,5 +251,7 @@ tile_data = PoolIntArray( 0, 1610612737, 0, 1, 1073741825, 0, 2, 1073741825, 0, 
 _sections_unfolded = [ "Cell" ]
 
 [node name="PauseCanvasLayer" parent="." index="11" instance=ExtResource( 16 )]
+
+[node name="Hud" parent="." index="12" instance=ExtResource( 17 )]
 
 

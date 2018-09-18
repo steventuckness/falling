@@ -95,6 +95,7 @@
     <Compile Include="engine\recorder\Recording.cs" />
     <Compile Include="ui\CloneMenu.cs" />
     <Compile Include="ui\GameOver.cs" />
+    <Compile Include="ui\Hud.cs" />
     <Compile Include="ui\LevelSelect.cs" />
     <Compile Include="ui\LevelSelectCard.cs" />
     <Compile Include="ui\Pause.cs" />

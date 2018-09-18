@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://world/act/Act.cs" type="Script" id=1]
 [ext_resource path="res://world/tilesets/Tileset_World.res" type="TileSet" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://world/hazards/spikes/Tileset_Spikes.res" type="TileSet" id=17]
 [ext_resource path="res://world/hazards/DeathArea.cs" type="Script" id=18]
 [ext_resource path="res://ui/Pause.tscn" type="PackedScene" id=19]
+[ext_resource path="res://ui/Hud.tscn" type="PackedScene" id=20]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -34,6 +35,7 @@ extents = Vector2( 2, 19 )
 
 script = ExtResource( 1 )
 colors = 1
+maxCloneRecordingTimeInSec = 5
 cameraSpeed = 5.0
 respawnTime = 2.0
 
@@ -326,5 +328,7 @@ tile_data = PoolIntArray( 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 
 _sections_unfolded = [ "Cell" ]
 
 [node name="PauseCanvasLayer" parent="." index="13" instance=ExtResource( 19 )]
+
+[node name="Hud" parent="." index="14" instance=ExtResource( 20 )]
 
 

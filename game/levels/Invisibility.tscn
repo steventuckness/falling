@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://world/act/Act.cs" type="Script" id=1]
 [ext_resource path="res://world/tilesets/Tileset_World.res" type="TileSet" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://world/hazards/spikes/Tileset_Spikes.res" type="TileSet" id=14]
 [ext_resource path="res://world/hazards/DeathArea.cs" type="Script" id=15]
 [ext_resource path="res://ui/Pause.tscn" type="PackedScene" id=16]
+[ext_resource path="res://ui/Hud.tscn" type="PackedScene" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -31,6 +32,7 @@ extents = Vector2( 87.9236, 4.54898 )
 
 script = ExtResource( 1 )
 colors = 1
+maxCloneRecordingTimeInSec = 5
 cameraSpeed = 5.0
 respawnTime = 2.0
 
@@ -165,7 +167,7 @@ __meta__ = {
 
 editor/display_folded = true
 position = Vector2( 33.3503, 75.5427 )
-_sections_unfolded = [ "Angular", "Collision", "Linear", "Transform", "Z Index" ]
+_sections_unfolded = [ "Angular", "Collision", "Linear", "Material", "Pause", "Transform", "Visibility", "Z Index" ]
 
 [node name="CloneMenu" parent="Player" index="5" instance=ExtResource( 8 )]
 
@@ -297,5 +299,7 @@ position = Vector2( 78.6895, 5.15396 )
 shape = SubResource( 2 )
 
 [node name="PauseCanvasLayer" parent="." index="12" instance=ExtResource( 16 )]
+
+[node name="Hud" parent="." index="13" instance=ExtResource( 17 )]
 
 
