@@ -5,11 +5,11 @@ using System.Linq;
 
 public class SceneManager {
     private List<Entity> entities;
-    private Dictionary<Type, List<Entity>> entitiesByType;
+    private System.Collections.Generic.Dictionary<Type, List<Entity>> entitiesByType;
 
     public SceneManager() {
         this.entities = new List<Entity>();
-        this.entitiesByType = new Dictionary<Type, List<Entity>>();
+        this.entitiesByType = new System.Collections.Generic.Dictionary<Type, List<Entity>>();
     }
 
     public void Add(Entity entity) {

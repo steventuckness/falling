@@ -77,15 +77,11 @@ namespace Recorder {
         }
 
         private Frame<S> GetLastFrame(float time) {
-            try {
-                return SortFrames(this.Recording.Entries).FindAll(
-                    (frame) => frame.Timestamp <= time
-                )[0];
-            }
-            catch (ArgumentOutOfRangeException e) {
-                GD.Print(e.Message);
-                return null;
-            }
+            var frames = SortFrames(this.Recording.Entries).FindAll(
+                (f) => f.Timestamp <= time
+            );
+            
+            return frames != null && frames.Count > 0 ? frames[0] : null;
         }
     }
 }

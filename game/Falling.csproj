@@ -94,8 +94,12 @@
     <Compile Include="engine\recorder\FrameRecorder.cs" />
     <Compile Include="engine\recorder\Recording.cs" />
     <Compile Include="ui\CloneMenu.cs" />
+    <Compile Include="ui\GameOver.cs" />
+    <Compile Include="ui\Hud.cs" />
     <Compile Include="ui\LevelSelect.cs" />
     <Compile Include="ui\LevelSelectCard.cs" />
+    <Compile Include="ui\Pause.cs" />
+    <Compile Include="ui\Start.cs" />
     <Compile Include="world\act\Act.cs" />
     <Compile Include="world\act\states\Play.cs" />
     <Compile Include="world\act\states\ActRespawn.cs" />

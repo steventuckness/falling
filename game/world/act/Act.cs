@@ -18,13 +18,18 @@ public class Act : Node {
     private PlayerNode player;
     private Node2D finish;
     private FinishOverlay finishOverlay;
+
     private Node2D debug;
     private Cam cam;
+    private ActManager actManager;
 
 
     // Exports /////////////////////////////////////////////////////////////////
     [Export]
     public int colors = 1;
+
+    [Export]
+    public int maxCloneRecordingTimeInSec = 5; 
 
     [Export]
     public float cameraSpeed = 5f;
@@ -60,7 +65,7 @@ public class Act : Node {
         }
 
         // Grab all the cam-locks
-        object[] camLocks = this.GetNode("CamLocks").GetChildren();
+        Godot.Array camLocks = this.GetNode("CamLocks").GetChildren();
         foreach(CamLock camLock in camLocks) {
             camLock.Connect(CamLock.PLAYER_ENTERED, this, "OnCamLimitEnter");
             camLock.Connect(CamLock.PLAYER_EXITED, this, "OnCamLimitExit");
@@ -73,9 +78,11 @@ public class Act : Node {
         // Get nodes
         this.spawn = (Node2D)this.GetNode("Spawn");
         this.player = (PlayerNode)this.GetNode("Player");
+        this.player.CloneRecorder.MaxTime = this.maxCloneRecordingTimeInSec;
         this.finish = (Node2D)this.GetNode("Finish");
         this.finishOverlay = (FinishOverlay)this.GetNode("FinishOverlay");
         this.cam = (Cam)this.GetNode("Cam");
+        this.actManager = (ActManager)this.GetNode("/root/ActManager");
 
         this.cam.Follow(this.player);
         this.ConnectEvents();
@@ -130,10 +137,6 @@ public class Act : Node {
     }
 
     public override void _PhysicsProcess(float delta) {
-        if (Input.IsActionJustPressed("key_restart")) {
-            this.GetTree().ReloadCurrentScene();
-        }
-
         if (Input.IsActionJustPressed("key_debug_toggle")) {
             if (this.debug != null) {
                 Camera2D cam = (Camera2D)this.player.GetNode("Camera2D");
@@ -163,7 +166,11 @@ public class Act : Node {
     }
 
     private void NextLevel() {
-         ((ActManager)this.GetNode("/root/ActManager")).NextAct();
+         if (this.actManager.IsLastAct()) {
+              this.GetTree().ChangeScene("res://../ui/GameOver.tscn");
+         } else {
+             this.actManager.NextAct();
+         }
     }
 
     private void RecordingStarted() {
@@ -189,7 +196,7 @@ public class Act : Node {
        
         // loop through children and remove children that have the new clone color
         var clones = this.GetClones();
-        GD.Print($"clones count : {clones.Length}");
+        GD.Print($"clones count : {clones.Count}");
 
         foreach(var existingClone in clones) {
             if (((PlayerNode)existingClone).GetColor() == node.GetColor()) {
@@ -202,7 +209,7 @@ public class Act : Node {
         GD.Print("Clone created!");
     }
 
-    private object[] GetClones() {
+    private Godot.Array GetClones() {
         return this.GetTree().GetNodesInGroup("clones");
     }
 
@@ -243,5 +250,3 @@ public class Act : Node {
     
     private int[] GetActColors() => Enumerable.Range(1, this.colors).ToArray();
 }
-
-

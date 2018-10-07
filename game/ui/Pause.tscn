@@ -1,0 +1,165 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ui/Pause.cs" type="Script" id=1]
+
+[node name="PauseCanvasLayer" type="CanvasLayer"]
+
+layer = 128
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="Pause" type="Control" parent="." index="0"]
+
+pause_mode = 2
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 1 )
+_sections_unfolded = [ "Pause" ]
+
+[node name="BlackOverlay" type="ColorRect" parent="Pause" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0.0234375, 0.0193176, 0.0193176, 0.352941 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 50.0
+margin_top = 20.0
+margin_right = 180.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+
+[node name="ResumeButton" type="Button" parent="Pause/VBoxContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 130.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Resume"
+flat = true
+align = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="RestartButton" type="Button" parent="Pause/VBoxContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 24.0
+margin_right = 130.0
+margin_bottom = 44.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Restart This Level"
+flat = true
+align = 1
+
+[node name="LevelSelectButton" type="Button" parent="Pause/VBoxContainer" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 48.0
+margin_right = 130.0
+margin_bottom = 68.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Go To Level Select"
+flat = true
+align = 1
+
+[node name="QuitButton" type="Button" parent="Pause/VBoxContainer" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 72.0
+margin_right = 130.0
+margin_bottom = 92.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Quit"
+flat = true
+align = 1
+
+[connection signal="pressed" from="Pause/VBoxContainer/ResumeButton" to="Pause" method="_on_ResumeButton_pressed"]
+
+[connection signal="pressed" from="Pause/VBoxContainer/RestartButton" to="Pause" method="_on_RestartButton_pressed"]
+
+[connection signal="pressed" from="Pause/VBoxContainer/LevelSelectButton" to="Pause" method="_on_LevelSelectButton_pressed"]
+
+[connection signal="pressed" from="Pause/VBoxContainer/QuitButton" to="Pause" method="_on_QuitButton_pressed"]
+
+

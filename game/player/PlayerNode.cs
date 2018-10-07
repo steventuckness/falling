@@ -226,4 +226,8 @@ public class PlayerNode : Entity {
             return this.implementation.WasRecordingDuringDeath;
         }
     }
+
+    public Recorder.FrameRecorder<PlayerRecorderFrame> CloneRecorder {
+        get => this.implementation.CloneRecorder;
+    }
 }

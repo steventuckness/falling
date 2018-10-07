@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://world/act/Act.cs" type="Script" id=1]
 [ext_resource path="res://engine/SolidTiles.cs" type="Script" id=2]
@@ -15,6 +15,8 @@
 [ext_resource path="res://world/spawn/Spawn.tscn" type="PackedScene" id=13]
 [ext_resource path="res://world/hazards/spikes/Tileset_Spikes.res" type="TileSet" id=14]
 [ext_resource path="res://world/hazards/DeathArea.cs" type="Script" id=15]
+[ext_resource path="res://ui/Pause.tscn" type="PackedScene" id=16]
+[ext_resource path="res://ui/Hud.tscn" type="PackedScene" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -26,15 +28,17 @@ extents = Vector2( 4, 4 )
 custom_solver_bias = 0.0
 extents = Vector2( 112, 2 )
 
-[node name="Level" type="Node2D" index="0"]
+[node name="Level" type="Node2D"]
 
 script = ExtResource( 1 )
 colors = 1
+maxCloneRecordingTimeInSec = 5
 cameraSpeed = 5.0
 respawnTime = 2.0
 
 [node name="SolidTiles" type="Node2D" parent="." index="0"]
 
+editor/display_folded = true
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true,
@@ -105,6 +109,7 @@ __meta__ = {
 
 [node name="Player" parent="." index="3" instance=ExtResource( 7 )]
 
+editor/display_folded = true
 position = Vector2( 44, 76 )
 
 [node name="CloneMenu" parent="Player" index="5" instance=ExtResource( 8 )]
@@ -113,6 +118,7 @@ position = Vector2( 44, 76 )
 
 [node name="CamLocks" type="Node2D" parent="." index="5"]
 
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -183,6 +189,8 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="spikes" type="Node" parent="." index="9"]
 
+editor/display_folded = true
+
 [node name="TileMap" type="TileMap" parent="spikes" index="0"]
 
 mode = 0
@@ -227,5 +235,9 @@ __meta__ = {
 
 shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="PauseCanvasLayer" parent="." index="10" instance=ExtResource( 16 )]
+
+[node name="Hud" parent="." index="11" instance=ExtResource( 17 )]
 
 

@@ -20,6 +20,8 @@ public class FrameRecorder<S> {
 
     private bool isRecording;
     private float Time;
+
+    private float maxTime = 5.0f; 
     private List<Frame<S>> Frames;
     private StartRecordingDel onRecordingStart;
     private StopRecordingDel onRecordingStop;
@@ -39,6 +41,7 @@ public class FrameRecorder<S> {
         if (IsRecording && 
             (  (HoldToRecord && !this.IsActionJustPressed(TriggerKey))
             || (!HoldToRecord && this.IsActionJustPressed(TriggerKey))
+            || this.Time >= this.maxTime
             )
         ) {
             StopRecording();
@@ -75,6 +78,14 @@ public class FrameRecorder<S> {
         Frames.Add(new Frame<S>(this.Time, this.GetState()));
     }
 
+    public float MaxTime {
+        set {
+            this.maxTime = value;
+        }
+        get => this.maxTime;
+    }
+
+    public float GetRecordCapacityUsedPerentage() => this.Time / this.maxTime;
 }
 
 }
