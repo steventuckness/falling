@@ -5,12 +5,12 @@ public class GameOver : Control
 {
     private VBoxContainer vBoxContainer;
     
-    private Godot.Array buttons;
+    private Godot.Collections.Array  buttons;
 
     public override void _Ready()
     {
         this.vBoxContainer = this.GetNode("VBoxContainer") as VBoxContainer;
-        this.buttons = new Godot.Array(); 
+        this.buttons = new Godot.Collections.Array(); 
 
         var children = this.vBoxContainer.GetChildren();
         for (int i = 0; i < children.Count; i++) {
