@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Falling", "Falling.csproj", "{7DD5F3BE-193D-473D-AB73-2496C7CF9CBB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Falling", "Falling.csproj", "{DB434373-1972-4F23-B6DC-9011C939D882}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,11 +9,11 @@ Global
 	Tools|Any CPU = Tools|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7DD5F3BE-193D-473D-AB73-2496C7CF9CBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7DD5F3BE-193D-473D-AB73-2496C7CF9CBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7DD5F3BE-193D-473D-AB73-2496C7CF9CBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7DD5F3BE-193D-473D-AB73-2496C7CF9CBB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7DD5F3BE-193D-473D-AB73-2496C7CF9CBB}.Tools|Any CPU.ActiveCfg = Tools|Any CPU
-		{7DD5F3BE-193D-473D-AB73-2496C7CF9CBB}.Tools|Any CPU.Build.0 = Tools|Any CPU
+		{DB434373-1972-4F23-B6DC-9011C939D882}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB434373-1972-4F23-B6DC-9011C939D882}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB434373-1972-4F23-B6DC-9011C939D882}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB434373-1972-4F23-B6DC-9011C939D882}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB434373-1972-4F23-B6DC-9011C939D882}.Tools|Any CPU.ActiveCfg = Tools|Any CPU
+		{DB434373-1972-4F23-B6DC-9011C939D882}.Tools|Any CPU.Build.0 = Tools|Any CPU
 	EndGlobalSection
 EndGlobal

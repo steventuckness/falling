@@ -5,7 +5,7 @@ public class Pause : Control
 {
     private VBoxContainer vBoxContainer;
     
-    private Godot.Array buttons;
+    private Godot.Collections.Array buttons;
     
     public override void _Ready() {
         Visible = false;
