@@ -18,6 +18,7 @@
 [ext_resource path="res://ui/Pause.tscn" type="PackedScene" id=16]
 [ext_resource path="res://ui/Hud.tscn" type="PackedScene" id=17]
 
+
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4 )
 
