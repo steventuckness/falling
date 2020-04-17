@@ -34,7 +34,7 @@ public class FinishOverlay : Node2D
 		int milliseconds;
 
 		hours = datimeTimeElapsed["hour"];
-		minutes = datimeTimeElapsed["minutes"];
+		minutes = datimeTimeElapsed["minute"];
 		seconds = datimeTimeElapsed["second"];
 		milliseconds = (int)timeElapsed % 1000; // get last 3 digits for more precision
 
