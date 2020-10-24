@@ -43,7 +43,6 @@ __meta__ = {
 }
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
-editor/display_folded = true
 position = Vector2( 34.3593, 246.346 )
 
 [node name="CloneMenu" parent="Player" instance=ExtResource( 5 )]
@@ -58,7 +57,6 @@ position = Vector2( 34, 235.05 )
 position = Vector2( 227.783, 251.676 )
 
 [node name="SolidTiles" type="Node2D" parent="."]
-editor/display_folded = true
 script = ExtResource( 9 )
 __meta__ = {
 "_edit_lock_": true
@@ -111,7 +109,6 @@ __meta__ = {
 }
 
 [node name="Detect" type="Area2D" parent="CamLocks/CamLock"]
-editor/display_folded = true
 position = Vector2( 35.0107, 245.975 )
 __meta__ = {
 "_edit_group_": true,
@@ -133,4 +130,3 @@ __meta__ = {
 [node name="PauseCanvasLayer" parent="." instance=ExtResource( 16 )]
 
 [node name="Hud" parent="." instance=ExtResource( 17 )]
-

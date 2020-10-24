@@ -39,7 +39,6 @@ __meta__ = {
 }
 
 [node name="SolidTiles" type="Node2D" parent="."]
-editor/display_folded = true
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true,
@@ -61,7 +60,6 @@ __meta__ = {
 [node name="InvisibleTiles" type="Node2D" parent="." groups=[
 "PhasedObject",
 ]]
-editor/display_folded = true
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true,
@@ -98,7 +96,6 @@ __meta__ = {
 }
 
 [node name="Player" parent="." instance=ExtResource( 7 )]
-editor/display_folded = true
 position = Vector2( 33.3503, 75.5427 )
 
 [node name="CloneMenu" parent="Player" instance=ExtResource( 8 )]
@@ -118,7 +115,6 @@ __meta__ = {
 }
 
 [node name="Detect" type="Area2D" parent="CamLocks/CamLock"]
-editor/display_folded = true
 position = Vector2( 32.785, 69.6456 )
 __meta__ = {
 "_edit_group_": true,
@@ -145,7 +141,6 @@ visible = false
 position = Vector2( 33.75, 75.54 )
 
 [node name="Spikes" type="Node2D" parent="."]
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -174,4 +169,3 @@ shape = SubResource( 2 )
 [node name="PauseCanvasLayer" parent="." instance=ExtResource( 16 )]
 
 [node name="Hud" parent="." instance=ExtResource( 17 )]
-
