@@ -1,0 +1,91 @@
+﻿<Project Sdk="Godot.NET.Sdk/3.2.3">
+  <PropertyGroup>
+    <ProjectGuid>{DB434373-1972-4F23-B6DC-9011C939D882}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Falling</RootNamespace>
+    <AssemblyName>Falling</AssemblyName>
+    <TargetFramework>net472</TargetFramework>
+    <!--The following properties were overriden during migration to prevent errors.
+    Enabling them may require other manual changes to the project and its files.-->
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Deterministic>false</Deterministic>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="engine\collision\BoxCollider.cs" />
+    <Compile Include="engine\collision\Collider.cs" />
+    <Compile Include="engine\collision\CollisionEngine.cs" />
+    <Compile Include="engine\collision\GridCollider.cs" />
+    <Compile Include="engine\Component.cs" />
+    <Compile Include="engine\components\MovingPlatform.cs" />
+    <Compile Include="engine\components\PlatformPush.cs" />
+    <Compile Include="engine\components\PlatformRider.cs" />
+    <Compile Include="engine\Debug.cs" />
+    <Compile Include="engine\Entity.cs" />
+    <Compile Include="engine\math\Interpolation.cs" />
+    <Compile Include="engine\math\SubPixelFloat.cs" />
+    <Compile Include="engine\Rect.cs" />
+    <Compile Include="engine\Scene.cs" />
+    <Compile Include="engine\SceneManager.cs" />
+    <Compile Include="engine\Solid.cs" />
+    <Compile Include="engine\SolidTiles.cs" />
+    <Compile Include="engine\TrailRenderer.cs" />
+    <Compile Include="player\clone\CloneOptions.cs" />
+    <Compile Include="player\Player.cs" />
+    <Compile Include="player\PlayerNode.cs" />
+    <Compile Include="player\PlayerClone.cs" />
+    <Compile Include="player\recorder\InputRecorder.cs" />
+    <Compile Include="player\recorder\KeyEntry.cs" />
+    <Compile Include="player\recorder\Recording.cs" />
+    <Compile Include="player\PlayerRecordedFrame.cs" />
+    <Compile Include="player\states\Dead.cs" />
+    <Compile Include="player\states\Falling.cs" />
+    <Compile Include="player\states\Gliding.cs" />
+    <Compile Include="player\states\Idle.cs" />
+    <Compile Include="player\states\Jumping.cs" />
+    <Compile Include="player\states\Respawn.cs" />
+    <Compile Include="player\states\Walking.cs" />
+    <Compile Include="player\states\Knockback.cs" />
+    <Compile Include="player\PlayerColor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="engine\state_machine\StateMachine.cs" />
+    <Compile Include="engine\state_machine\State.cs" />
+    <Compile Include="engine\math\Acceleration.cs" />
+    <Compile Include="engine\autoloads\ActManager.cs" />
+    <Compile Include="engine\recorder\Frame.cs" />
+    <Compile Include="engine\recorder\FramePlayer.cs" />
+    <Compile Include="engine\recorder\FrameRecorder.cs" />
+    <Compile Include="engine\recorder\Recording.cs" />
+    <Compile Include="ui\CloneMenu.cs" />
+    <Compile Include="ui\GameOver.cs" />
+    <Compile Include="ui\Hud.cs" />
+    <Compile Include="ui\LevelSelect.cs" />
+    <Compile Include="ui\LevelSelectCard.cs" />
+    <Compile Include="ui\Pause.cs" />
+    <Compile Include="ui\Start.cs" />
+    <Compile Include="world\act\Act.cs" />
+    <Compile Include="world\act\states\Play.cs" />
+    <Compile Include="world\act\states\ActRespawn.cs" />
+    <Compile Include="world\areas\forest\forest_act_01\ForestAct01.cs" />
+    <Compile Include="world\Cam.cs" />
+    <Compile Include="world\camera\CamLock.cs" />
+    <Compile Include="world\finishOverlay\FinishOverlay.cs" />
+    <Compile Include="world\finish\Finish.cs" />
+    <Compile Include="world\hazards\DeathArea.cs" />
+    <Compile Include="world\hazards\Spike.cs" />
+    <Compile Include="world\interactive\door\DoorBase.cs" />
+    <Compile Include="world\interactive\door\DoorSignalGate.cs" />
+    <Compile Include="world\interactive\door\IDoor.cs" />
+    <Compile Include="world\interactive\ISignal.cs" />
+    <Compile Include="world\interactive\switch\SwitchBase.cs" />
+    <Compile Include="world\interactive\switch\ISwitch.cs" />
+    <Compile Include="world\interactive\SignalGate.cs" />
+    <Compile Include="world\interactive\switch\TimedSwitch.cs" />
+    <Compile Include="world\interactive\switch\ToggleSwitch.cs" />
+    <Compile Include="world\MainScene.cs" />
+    <Compile Include="world\platform\Platform.cs" />
+  </ItemGroup>
+</Project>

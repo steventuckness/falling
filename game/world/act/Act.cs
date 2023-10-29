@@ -73,7 +73,7 @@ public class Act : Node {
 	}
 
 	public override void _Ready() {
-		this.startTime = OS.GetTicksMsec();
+		this.startTime = (long)OS.GetTicksMsec();
 		
 		// Get nodes
 		this.spawn = (Node2D)this.GetNode("Spawn");
@@ -159,7 +159,7 @@ public class Act : Node {
 	}
 	private void PlayerReachedFinish()
 	{
-		long timeElapsed = OS.GetTicksMsec() - this.startTime;
+		long timeElapsed = (long)OS.GetTicksMsec() - this.startTime;
 		this.finish.SetProcess(false);
 		this.finishOverlay.ShowOverlay(timeElapsed, clonesCreated);
 		GetTree().SetPause(true);
